@@ -6,7 +6,7 @@
 #    By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/14 11:30:00 by vpoirot           #+#    #+#              #
-#    Updated: 2023/11/16 14:08:01 by vpoirot          ###   ########.fr        #
+#    Updated: 2023/11/16 15:21:10 by vpoirot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,8 @@ FLAGS    := -Wall -Wextra -Werror #./MLX42/build/libmlx42.a -Iinclude -ldl -lglf
 SRCS        :=      src/main.c\
 						src/ft_printf.c\
 						src/parsing.c\
+						src/get_next_line/get_next_line.c\
+						src/get_next_line/get_next_line_utils.c\
                           
 OBJS        := $(SRCS:.c=.o)
 

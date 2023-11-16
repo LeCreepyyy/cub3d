@@ -1,39 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/16 15:19:12 by vpoirot          ###   ########.fr       */
+/*   Created: 2023/01/11 12:50:43 by vpoirot           #+#    #+#             */
+/*   Updated: 2023/03/24 13:26:52 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-# include <math.h>
-# include <unistd.h>
+# include <fcntl.h>
 # include <stdio.h>
+# include <string.h>
+# include <unistd.h>
 # include <stdlib.h>
-# include "../MLX42/include/MLX42/MLX42.h"
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
 
-/*
-wall_texture [0=NO, 1=SO, 2=WE, 3=EA]
-top_ground [0=F, 1=C] f = ground / c = top
-map_flat is same that so_long file
-*/
-typedef struct s_map
-{
-	char	**wall_texture;
-	char	**top_ground;
-	char	**map_flat;
-}	t_map;
-
-void	ft_exit(int code);
 char	*get_next_line(int fd);
-void	parsing(char *map_path);
-int		ft_printf(const char *str, ...);
+size_t	len_str(const char *str);
+void	*add_malloc(size_t	size, char	*str);
+char	*ft_strjoin(char const *s1, char const *s2);
+int		size_count(const char *str);
+char	*gnl_eof(char *stock);
+void	*ft_calloc(size_t nmemb, size_t size);
+int		findstop(char *stock);
 
 #endif
