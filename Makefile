@@ -6,15 +6,17 @@
 #    By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/14 11:30:00 by vpoirot           #+#    #+#              #
-#    Updated: 2023/11/14 11:32:28 by vpoirot          ###   ########.fr        #
+#    Updated: 2023/11/16 14:08:01 by vpoirot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME        := cub3d
 CC        := gcc
-FLAGS    := -Wall -Wextra -Werror ./MLX42/build/libmlx42.a -Iinclude -ldl -lglfw -pthread -lm
+FLAGS    := -Wall -Wextra -Werror #./MLX42/build/libmlx42.a -Iinclude -ldl -lglfw -pthread -lm
 
-SRCS        :=      src/main.c \
+SRCS        :=      src/main.c\
+						src/ft_printf.c\
+						src/parsing.c\
                           
 OBJS        := $(SRCS:.c=.o)
 
