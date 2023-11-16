@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/14 11:33:58 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/11/16 10:14:54 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <math.h>
 # include <unistd.h>
+# include <stdio.h>
 # include "../MLX42/include/MLX42/MLX42.h"
 
 #endif
