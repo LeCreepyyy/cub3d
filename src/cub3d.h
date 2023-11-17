@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/16 15:19:12 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/11/17 13:29:20 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <fcntl.h>
 # include "../MLX42/include/MLX42/MLX42.h"
 
 /*
@@ -31,7 +32,7 @@ typedef struct s_map
 	char	**map_flat;
 }	t_map;
 
-void	ft_exit(int code);
+void	ft_exit(char *err, int code);
 char	*get_next_line(int fd);
 void	parsing(char *map_path);
 int		ft_printf(const char *str, ...);
