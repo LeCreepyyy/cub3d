@@ -6,12 +6,15 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:13:15 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/17 14:08:37 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/11/17 14:17:20 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/*
+calculate the number of line in file
+*/
 int	file_len(char *path)
 {
 	int		fd;
@@ -73,5 +76,6 @@ void	parsing(char *map_path)
 	char	**ftab;
 
 	ftab = file_to_tab(map_path);
-	print_tab(ftab);
+	//verif map
+	//transform to 3 char**
 }
