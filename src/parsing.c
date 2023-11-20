@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:13:15 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/17 14:17:20 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/11/20 13:40:31 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	print_tab(char **tab)
 	i = 0;
 	while (tab[i])
 	{
-		ft_printf("%s\n", tab[i]);
+		ft_printf("%s", tab[i]);
 		i++;
 	}
 }
@@ -75,7 +75,10 @@ void	parsing(char *map_path)
 {
 	char	**ftab;
 
+	if (ft_strncmp(&map_path[ft_strlen(map_path) - 4], ".cub", 4) != 0)
+		ft_exit("Invalid extention", EXIT_FAILURE);
 	ftab = file_to_tab(map_path);
+	print_tab(ftab);
 	//verif map
 	//transform to 3 char**
 }
