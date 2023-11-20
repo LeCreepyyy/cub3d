@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:13:15 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/20 13:40:31 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/11/20 15:07:09 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	file_len(char *path)
 	}
 	free(line);
 	close(fd);
+	printf("len : %d\n", len);
 	return (len);
 }
 
@@ -41,12 +42,14 @@ char	**file_to_tab(char *path)
 {
 	int		i;
 	int		fd;
+	int		len;
 	char	**file;
 
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		ft_exit("Read map", EXIT_FAILURE);
-	file = malloc(sizeof(char *) * file_len(path) + 1);
+	len = file_len(path);
+	file = malloc((len + 1) * sizeof(char *));
 	if (!file)
 	{
 		close(fd);
@@ -54,8 +57,9 @@ char	**file_to_tab(char *path)
 	}
 	i = -1;
 	file[++i] = get_next_line(fd);
-	while (file[i] != NULL)
+	while (file[i] != NULL && i < (len - 1))
 		file[++i] = get_next_line(fd);
+	file[i] = NULL;
 	return (file);
 }
 
@@ -70,6 +74,20 @@ void	print_tab(char **tab)
 		i++;
 	}
 }
+/*
+void	checkmap(char **ftab)
+{
+	int		i;
+	char	**temp;
+
+	i = -1;
+	temp = {"NO", "SO", "WE", "EA", "", "F", "C"};
+	while (ftab[++i] && i < 7)
+	{
+		if (ft_strncmp(ftab[i], temp[i], 2) != 0)
+			ft_exit("File content invalid", EXIT_FAILURE);
+	}
+}*/
 
 void	parsing(char *map_path)
 {
@@ -81,4 +99,5 @@ void	parsing(char *map_path)
 	print_tab(ftab);
 	//verif map
 	//transform to 3 char**
+	free_tab(ftab);
 }

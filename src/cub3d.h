@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/20 13:39:00 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/11/20 14:38:49 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_map
 	char	**map_flat;
 }	t_map;
 
+void	free_tab(char **tab);
 int		ft_strlen(char *str);
 char	*get_next_line(int fd);
 void	parsing(char *map_path);

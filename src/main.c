@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:00:10 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/17 14:08:28 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/11/20 14:17:35 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	ft_exit(char *err, int code)
 {
 	if (err != NULL)
 		ft_printf("Error\n%s\n", err);
-	//system("leaks cub3d");
 	exit(code);
 }
 
