@@ -6,27 +6,21 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 13:36:29 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/20 15:04:31 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/11/22 10:21:19 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/*
-int	ms_strcmp(char *s1, char *s2)
+int	tab_len(char **tab)
 {
 	int	i;
 
 	i = 0;
-	if (!s1 || !s2)
-		return (-1);
-	while (s1[i] && s2[i] && s1[i] == s2[i])
+	while (tab[i])
 		i++;
-	if (s1[i] != s2[i])
-		return (1);
-	return (0);
+	return (i);
 }
-*/
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
@@ -62,4 +56,16 @@ int	ft_strlen(char *str)
 	while (str[i])
 		i++;
 	return (i);
+}
+
+void	print_tab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		ft_printf("%s", tab[i]);
+		i++;
+	}
 }

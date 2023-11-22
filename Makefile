@@ -6,13 +6,13 @@
 #    By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/14 11:30:00 by vpoirot           #+#    #+#              #
-#    Updated: 2023/11/20 15:07:31 by vpoirot          ###   ########.fr        #
+#    Updated: 2023/11/22 09:35:24 by vpoirot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME        := cub3d
 CC        := gcc
-FLAGS    := -Wall -Wextra -Werror #-fsanitize=address -g #./MLX42/build/libmlx42.a -Iinclude -ldl -lglfw -pthread -lm
+FLAGS    := -Wall -Wextra -Werror -fsanitize=address -g #./MLX42/build/libmlx42.a -Iinclude -ldl -lglfw -pthread -lm
 
 SRCS        :=      src/main.c\
 						src/ft_printf.c\
