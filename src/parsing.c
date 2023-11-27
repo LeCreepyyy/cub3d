@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:13:15 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/23 14:20:53 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/11/27 14:46:05 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,16 @@ void	checkmap(char **ftab)
 	y = 0;
 	while (ft_strncmp(ftab[y], "", 0))
 		y++;
-	if (ftab[y] == NULL || ftab[++y] == NULL)
-		ft_exit("Missing map 2D", EXIT_FAILURE);
+	x = y;
+	ft_printf("%s\n", ftab[y]);
+	if (x != (y - 4))
+		ft_exit("Sa marche po", EXIT_FAILURE);
 	x = -1;
+	while (ft_strncmp(ftab[++y], "", 0))
+		;
 	while (ftab[y] != NULL && (ftab[y][++x] != '\n' || ftab[y][++x] != 0))
 		if (ftab[y][x] != ' ' && ftab[y][x] != '1')
-			ft_exit("File content invalid", EXIT_FAILURE);
+			ft_exit(":File content invalid", EXIT_FAILURE);
 	isin = 0;
 	while (ftab[++y] != NULL && y != tab_len(ftab) - 1)
 	{
