@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:41:31 by bgaertne          #+#    #+#             */
-/*   Updated: 2023/11/04 16:08:54 by bgaertne         ###   ########.fr       */
+/*   Updated: 2023/11/28 19:03:12 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,6 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
-char	**ft_tabdup(char **src);
+char	**ft_tabdup(const char **src);
 
 #endif

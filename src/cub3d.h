@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/28 15:46:47 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/11/28 19:14:44 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include "../MLX42/include/MLX42/MLX42.h"
+//# include "../MLX42/include/MLX42/MLX42.h"
+# include "../TheLibft/base/libft.h"
+# include "../TheLibft/ft_printf/ft_printf.h"
+# include "../TheLibft/get_next_line/get_next_line.h"
 
 typedef struct s_data
 {
@@ -29,13 +32,9 @@ typedef struct s_data
 
 int		tab_len(char **tab);
 void	free_tab(char **tab);
-int		ft_strlen(char *str);
 void	print_tab(char **tab);
-char	*get_next_line(int fd);
 void	ft_exit(char *err, int code);
-int		ft_printf(const char *str, ...);
 void	parsing(char *map_path, t_data *data);
 void	parse_map(char **ftab, int y, t_data *data);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 #endif

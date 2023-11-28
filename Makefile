@@ -3,58 +3,56 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+         #
+#    By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/14 11:30:00 by vpoirot           #+#    #+#              #
-#    Updated: 2023/11/28 11:36:08 by vpoirot          ###   ########.fr        #
+#    Updated: 2023/11/28 19:18:17 by bgaertne         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME        := cub3d
-CC        := gcc
-FLAGS    := -Wall -Wextra -Werror -fsanitize=address -g #./MLX42/build/libmlx42.a -Iinclude -ldl -lglfw -pthread -lm
+NAME	=	cub3d
+LIBFT		= TheLibft/libft.a
+FLAGS	=	-Wall -Wextra -Werror -fsanitize=address -g #./MLX42/build/libmlx42.a -Iinclude -ldl -lglfw -pthread -lm
 
-SRCS        :=      src/main.c\
-						src/ft_printf.c\
-						src/parsing.c\
-						src/get_next_line/get_next_line.c\
-						src/get_next_line/get_next_line_utils.c\
-						src/utils.c\
-						src/parsing_utils.c\
-                          
-OBJS        := $(SRCS:.c=.o)
+_RED	=	\033[01;31m
+_GREEN	=	\033[01;32m
+_CYAN	=	\033[01;36m
+_YELLOW	=	\033[01;33m
+_BOLD	=	\033[1m
+_END	=	\033[00m
 
-.c.o:
-	@${CC} ${FLAGS} -c $< -o ${<:.c=.o}
+SRCS	=	src/main.c\
+			src/parsing.c\
+			src/utils.c\
+			src/parsing_utils.c\
 
+OBJS	=	${SRCS:.c=.o}
 
-CLR_RMV		:= \033[0m
-RED		    := \033[1;31m
-GREEN		:= \033[1;32m
-YELLOW		:= \033[1;33m
-BLUE		:= \033[1;34m
-CYAN 		:= \033[1;36m
-RM		    := rm -f
+all: $(LIBFT) $(NAME)
+	@echo ""
+	@echo "$(_CYAN)$(_BOLD)[Makefile]$(_END) $(_BOLD) $(_GREEN)Project $(NAME) ready$(_END)"
 
-${NAME}:	${OBJS}
-	@echo "$(GREEN)Compilation ${CLR_RMV}of ${YELLOW}$(NAME) ${CLR_RMV}..."
-	@${CC} ${FLAGS} -o ${NAME} ${OBJS}
-	@echo "$(GREEN)$(NAME) created[0m ✔️"
+$(LIBFT):
+	@cd TheLibft && $(MAKE) --no-print-directory
 
-all:		${NAME}
+%.o: %.c
+	@gcc -Wall -Werror -Wextra -c $< -o $@
 
-bonus:		all
+$(NAME): $(OBJS)
+	@gcc $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+	@echo "$(_CYAN)$(_BOLD)[Makefile]$(_END) $(_BOLD)$(NAME) $(_GREEN)created$(_END)"
 
 clean:
-	@ ${RM} *.o */*.o */*/*.o
-	@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)objs ✔️"
+	@rm -f $(OBJS)
+	@cd TheLibft && $(MAKE) --no-print-directory clean
+	@echo "$(_CYAN)$(_BOLD)[Makefile]$(_END) $(_BOLD)$(NAME) is now $(_YELLOW)clean$(_END)"
 
-fclean:		clean
-	@ ${RM} ${NAME}
-	@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)binary ✔️"
+fclean: clean
+	@rm -f $(NAME)
+	@rm -f TheLibft/libft.a
+	@echo "$(_CYAN)$(_BOLD)[Makefile]$(_END) $(_BOLD)libft.a $(_RED)deleted$(_END)"
+	@echo "$(_CYAN)$(_BOLD)[Makefile]$(_END) $(_BOLD)$(NAME) $(_RED)deleted$(_END)"
 
-re:			fclean all
+re: clean all
 
-.PHONY:		all clean fclean re
-
-
+.PHONY: all, clean, fclean, re
