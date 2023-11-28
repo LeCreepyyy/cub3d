@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/28 11:34:26 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/11/28 14:20:10 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@
 # include <fcntl.h>
 # include "../MLX42/include/MLX42/MLX42.h"
 
-typedef struct s_map
+typedef struct s_data
 {
 	char	**textures;
 	char	**map_flat;
 	int		**player_pos;
-}	t_map;
+}	t_data;
 
 int		tab_len(char **tab);
 void	free_tab(char **tab);

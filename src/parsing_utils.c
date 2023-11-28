@@ -3,30 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 11:20:42 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/28 11:36:56 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/11/28 15:38:46 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	parse_map(char **ftab, int y, t_map *s_map)
+void	parse_map(char **ftab, int y, t_data *data)
 {
 	int	x;
-	int	isin;
 
 	x = -1;
-	(void)s_map;
+	while (ftab[y][++x])
+		if (ftab[y][x] == '\t')
+			ft_exit("Invalid character", EXIT_FAILURE);
+	x = -1;
 	while (ftab[y] != NULL && (ftab[y][++x] != '\n' || ftab[y][++x] != 0))
 		if (ftab[y][x] != ' ' && ftab[y][x] != '1')
 			ft_exit(":File content invalid", EXIT_FAILURE);
-	isin = 0;
 	while (ftab[++y] != NULL && y != tab_len(ftab) - 1)
 	{
 		x = 0;
-		while (ftab[y][x] == ' ' || ftab[y][x] == '\t')
+		while (ftab[y][x] == ' ')
 			x++;
 		if (ftab[y][x] != '1')
 			ft_exit("File content invalid", EXIT_FAILURE);
@@ -42,12 +43,18 @@ void	parse_map(char **ftab, int y, t_map *s_map)
 				&& ftab[y][x] != 'S' && ftab[y][x] != 'W' && ftab[y][x] != 'E'
 				&& ftab[y][x] != ' ')
 				ft_exit("Map content invalid", EXIT_FAILURE);
-			if (isin == 0 && (ftab[y][x] == 'S' || ftab[y][x] == 'W'
-				|| ftab[y][x] == 'E' || ftab[y][x] == 'N'))
-				isin = 1;
-			else if (isin == 1 && (ftab[y][x] == 'S' || ftab[y][x] == 'W'
-				|| ftab[y][x] == 'E' || ftab[y][x] == 'N'))
-				ft_exit("too many starting point", EXIT_FAILURE);
+			if (ftab[y][x] == 'S' || ftab[y][x] == 'W'
+				|| ftab[y][x] == 'E' || ftab[y][x] == 'N')
+			{
+				if (data->player_pos[0])
+					ft_exit("too many starting point", EXIT_FAILURE);
+				else
+				{
+					data->player_pos[0] = ftab[y][x];
+					data->player_pos[1] = y;
+					data->player_pos[2] = x;
+				}
+			}
 			x++;
 		}
 	}

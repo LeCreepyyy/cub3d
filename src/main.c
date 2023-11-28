@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:00:10 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/28 11:34:46 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/11/28 14:43:48 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	init_data(t_data *data)
+{
+	data->map_flat = NULL;
+	data->textures = NULL;
+	data->player_pos = [0, 0, 0];
+}
 
 void	ft_exit(char *err, int code)
 {
@@ -21,11 +28,12 @@ void	ft_exit(char *err, int code)
 
 int	main(int argc, char **argv)
 {
-	t_map	s_map;
+	t_map	data;
 
 	if (argc != 2)
 		ft_exit("Missing arg", EXIT_FAILURE);
-	parsing(argv[1], &s_map);
+	init_data(&data);
+	parsing(argv[1], &data);
 	ft_printf("Map ok\n");
 	ft_exit(NULL, EXIT_SUCCESS);
 }
