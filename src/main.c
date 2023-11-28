@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:00:10 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/28 14:43:48 by bgaertne         ###   ########.fr       */
+/*   Updated: 2023/11/28 15:49:50 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ void	init_data(t_data *data)
 {
 	data->map_flat = NULL;
 	data->textures = NULL;
-	data->player_pos = [0, 0, 0];
+	data->player_pos = malloc(sizeof(int) * 3);
+	data->player_pos[0] = 0;
+	data->player_pos[1] = 0;
+	data->player_pos[2] = 0;
 }
 
 void	ft_exit(char *err, int code)
@@ -28,7 +31,7 @@ void	ft_exit(char *err, int code)
 
 int	main(int argc, char **argv)
 {
-	t_map	data;
+	t_data	data;
 
 	if (argc != 2)
 		ft_exit("Missing arg", EXIT_FAILURE);

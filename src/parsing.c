@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:13:15 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/28 11:35:45 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/11/28 15:40:56 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,46 @@ char	**file_to_tab(char *path)
 	return (file);
 }
 
-void	checkmap(char **ftab, t_map *s_map)
+void	checkrgb(char *line)
 {
-	int		y;
+	// int	i;
+	// int	rgb;
 
-	y = 0;
-	while (ft_strncmp(ftab[y], "", 0))
-		y++;
-	parse_map(ftab, 10, s_map);
+	// i = 0;
+	// while (line[i] != NULL)
+	// 	;
+	(void)line;
 }
 
-void	parsing(char *map_path, t_map *s_map)
+void	checkmap(char **ftab, t_data *data)
+{
+	int		y;
+	int		len;
+
+	y = -1;
+	len = 0;
+	while (ftab[++y] != NULL && len != 6)
+	{
+		if (ft_strncmp(ftab[y], "NO", 2) == 0
+			|| ft_strncmp(ftab[y], "SO", 2) == 0
+			|| ft_strncmp(ftab[y], "WE", 2) == 0
+			|| ft_strncmp(ftab[y], "EA", 2) == 0
+			|| ftab[y][0] == 'F' || ftab[y][0] == 'C')
+		{
+			if (ftab[y][0] == 'F' || ftab[y][0] == 'C')
+				checkrgb(ftab[y]);
+			else if (ft_strncmp(&ftab[y][ft_strlen(ftab[y]) - 5]
+				, ".png", 4) != 0)
+				ft_exit("Given image's format is not valid", EXIT_FAILURE);
+			len++;
+		}
+	}
+	if (ftab[y++] == NULL)
+		ft_exit("Missing information", EXIT_FAILURE);
+	parse_map(ftab, 10, data);
+}
+
+void	parsing(char *map_path, t_data *data)
 {
 	char	**ftab;
 
@@ -87,7 +116,7 @@ void	parsing(char *map_path, t_map *s_map)
 		ft_exit("Invalid extention", EXIT_FAILURE);
 	ftab = file_to_tab(map_path);
 	// print_tab(ftab);
-	checkmap(ftab, s_map);
+	checkmap(ftab, data);
 	// transform to 3 char**
 	free_tab(ftab);
 }

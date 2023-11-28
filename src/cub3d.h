@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/28 14:20:10 by bgaertne         ###   ########.fr       */
+/*   Updated: 2023/11/28 15:46:47 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_data
 {
 	char	**textures;
 	char	**map_flat;
-	int		**player_pos;
+	int		*player_pos;
 }	t_data;
 
 int		tab_len(char **tab);
@@ -34,8 +34,8 @@ void	print_tab(char **tab);
 char	*get_next_line(int fd);
 void	ft_exit(char *err, int code);
 int		ft_printf(const char *str, ...);
-void	parsing(char *map_path, t_map *s_map);
-void	parse_map(char **ftab, int y, t_map *s_map);
+void	parsing(char *map_path, t_data *data);
+void	parse_map(char **ftab, int y, t_data *data);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 #endif
