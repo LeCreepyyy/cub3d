@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: creepy <creepy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:13:15 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/28 15:40:56 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/11/28 19:47:45 by creepy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,18 @@ char	**file_to_tab(char *path)
 
 void	checkrgb(char *line)
 {
-	// int	i;
-	// int	rgb;
+	int	i;
+	char	**rgb;
 
-	// i = 0;
-	// while (line[i] != NULL)
-	// 	;
-	(void)line;
+	i = 1;
+	while (line[i] == ' ')
+		i++;
+	rgb = ft_split(&line[i], ',');
+	i = -1;
+	while (rgb[++i] != NULL)
+		if (ft_atoi(rgb[i]) < 0 || ft_atoi(rgb[i]) > 255)
+			ft_exit("RGB false", EXIT_FAILURE);
+	free_tab(rgb);
 }
 
 void	checkmap(char **ftab, t_data *data)
