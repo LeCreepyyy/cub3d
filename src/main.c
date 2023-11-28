@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:00:10 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/23 11:13:43 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/11/28 11:34:46 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ void	ft_exit(char *err, int code)
 
 int	main(int argc, char **argv)
 {
+	t_map	s_map;
+
 	if (argc != 2)
 		ft_exit("Missing arg", EXIT_FAILURE);
-	parsing(argv[1]);
+	parsing(argv[1], &s_map);
 	ft_printf("Map ok\n");
 	ft_exit(NULL, EXIT_SUCCESS);
 }

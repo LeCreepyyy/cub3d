@@ -6,7 +6,7 @@
 #    By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/14 11:30:00 by vpoirot           #+#    #+#              #
-#    Updated: 2023/11/22 09:35:24 by vpoirot          ###   ########.fr        #
+#    Updated: 2023/11/28 11:36:08 by vpoirot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS        :=      src/main.c\
 						src/get_next_line/get_next_line.c\
 						src/get_next_line/get_next_line_utils.c\
 						src/utils.c\
+						src/parsing_utils.c\
                           
 OBJS        := $(SRCS:.c=.o)
 

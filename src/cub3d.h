@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/22 10:27:44 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/11/28 11:34:26 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,11 @@
 # include <fcntl.h>
 # include "../MLX42/include/MLX42/MLX42.h"
 
-/*
-wall_texture [0=NO, 1=SO, 2=WE, 3=EA]
-top_ground [0=F, 1=C] f = ground / c = top
-map_flat is same that so_long file
-*/
 typedef struct s_map
 {
-	char	**wall_texture;
-	char	**top_ground;
+	char	**textures;
 	char	**map_flat;
+	int		**player_pos;
 }	t_map;
 
 int		tab_len(char **tab);
@@ -37,9 +32,10 @@ void	free_tab(char **tab);
 int		ft_strlen(char *str);
 void	print_tab(char **tab);
 char	*get_next_line(int fd);
-void	parsing(char *map_path);
 void	ft_exit(char *err, int code);
 int		ft_printf(const char *str, ...);
+void	parsing(char *map_path, t_map *s_map);
+void	parse_map(char **ftab, int y, t_map *s_map);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 #endif

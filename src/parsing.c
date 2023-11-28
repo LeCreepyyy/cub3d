@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:13:15 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/27 14:46:05 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/11/28 11:35:45 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,63 +69,17 @@ char	**file_to_tab(char *path)
 	return (file);
 }
 
-void	checkmap(char **ftab)
+void	checkmap(char **ftab, t_map *s_map)
 {
 	int		y;
-	int		x;
-	int		isin;
 
 	y = 0;
 	while (ft_strncmp(ftab[y], "", 0))
 		y++;
-	x = y;
-	ft_printf("%s\n", ftab[y]);
-	if (x != (y - 4))
-		ft_exit("Sa marche po", EXIT_FAILURE);
-	x = -1;
-	while (ft_strncmp(ftab[++y], "", 0))
-		;
-	while (ftab[y] != NULL && (ftab[y][++x] != '\n' || ftab[y][++x] != 0))
-		if (ftab[y][x] != ' ' && ftab[y][x] != '1')
-			ft_exit(":File content invalid", EXIT_FAILURE);
-	isin = 0;
-	while (ftab[++y] != NULL && y != tab_len(ftab) - 1)
-	{
-		x = 0;
-		while (ftab[y][x] == ' ' || ftab[y][x] == '\t')
-			x++;
-		if (ftab[y][x] != '1')
-			ft_exit("File content invalid", EXIT_FAILURE);
-		while (ftab[y][x] != '\n' && ftab[y][x] != 0)
-		{
-			if (ftab[y][x] == ' ' && ((ftab[y -1][x] != '1'
-				&& ftab[y -1][x] != ' ') || (ftab[y +1][x] != '1'
-				&& ftab[y +1][x] != ' ') || (ftab[y][x -1] != '1'
-				&& ftab[y][x -1] != ' ') || (ftab[y][x +1] != '1'
-				&& ftab[y][x +1] != ' ')))
-				ft_exit("Map invalid", EXIT_FAILURE);
-			else if (ftab[y][x] != '1' && ftab[y][x] != '0' && ftab[y][x] != 'N'
-				&& ftab[y][x] != 'S' && ftab[y][x] != 'W' && ftab[y][x] != 'E'
-				&& ftab[y][x] != ' ')
-				ft_exit("Map content invalid", EXIT_FAILURE);
-			if (isin == 0 && (ftab[y][x] == 'S' || ftab[y][x] == 'W'
-				|| ftab[y][x] == 'E' || ftab[y][x] == 'N'))
-				isin = 1;
-			else if (isin == 1 && (ftab[y][x] == 'S' || ftab[y][x] == 'W'
-				|| ftab[y][x] == 'E' || ftab[y][x] == 'N'))
-				ft_exit("too many starting point", EXIT_FAILURE);
-			x++;
-		}
-	}
-	if (ftab[y] == NULL)
-		ft_exit("File content invalid", EXIT_FAILURE);
-	x = -1;
-	while (ftab[y] != NULL && ftab[y][++x] != '\n' && ftab[y][++x] != 0)
-		if (ftab[y][x] != ' ' && ftab[y][x] != '1')
-			ft_exit("File content invalid", EXIT_FAILURE);
+	parse_map(ftab, 10, s_map);
 }
 
-void	parsing(char *map_path)
+void	parsing(char *map_path, t_map *s_map)
 {
 	char	**ftab;
 
@@ -133,7 +87,7 @@ void	parsing(char *map_path)
 		ft_exit("Invalid extention", EXIT_FAILURE);
 	ftab = file_to_tab(map_path);
 	// print_tab(ftab);
-	checkmap(ftab);
+	checkmap(ftab, s_map);
 	// transform to 3 char**
 	free_tab(ftab);
 }
