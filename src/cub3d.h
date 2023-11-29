@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/29 16:41:37 by bgaertne         ###   ########.fr       */
+/*   Updated: 2023/11/29 18:07:01 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 
 # define WHITE 0xFFFFFF
 # define ORANGE 0xFFA500
+# define BLUE 0x87CEFA
+# define GREEN 0x7CFC00
 
 typedef struct s_img
 {
