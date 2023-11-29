@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   tab_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: creepy <creepy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 13:36:29 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/29 10:58:13 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/11/29 17:50:07 by creepy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ char	*get_texture(char c, t_data *data)
 			j = 2;
 			while (data->textures[i][j] == ' ')
 				j++;
-			return (ft_strdup(&data->textures[i][j]));
+			data->textures[i][ft_strlen(data->textures[i]) - 1] = 0;
+			return (&data->textures[i][j]);
 		}
 		i++;
 	}
