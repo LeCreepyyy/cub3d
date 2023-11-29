@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: creepy <creepy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 11:20:42 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/29 13:18:02 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/11/29 17:14:02 by creepy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	parse_map(char **ftab, int y, t_data *data)
 		while (ftab[y][x] == ' ')
 			x++;
 		if (ftab[y][x] != '1')
-			ft_exit(":File content invalid", EXIT_FAILURE);
+			ft_exit("File content invalid", EXIT_FAILURE);
 		while (ftab[y][x] != '\n' && ftab[y][x] != 0)
 		{
 			check(data, ftab, y, x);
@@ -70,7 +70,7 @@ void	parse_map(char **ftab, int y, t_data *data)
 	}
 	x = -1;
 	while (ftab[y] != NULL && ftab[y][++x] != '\n' && ftab[y][++x] != 0)
-		if (ftab[y][x] != ' ' && ftab[y][x] != '1')
+		if (ftab[y][x] != ' ' && ftab[y][x] != '1' && ftab[y][x] != '\n')
 			ft_exit("File content invalid", EXIT_FAILURE);
 }
 
