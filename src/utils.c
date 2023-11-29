@@ -3,14 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 13:36:29 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/28 19:13:15 by bgaertne         ###   ########.fr       */
+/*   Updated: 2023/11/29 10:58:13 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+char	*get_texture(char c, t_data *data)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (data->textures[i] != NULL)
+	{
+		if (c == data->textures[i][0])
+		{
+			j = 2;
+			while (data->textures[i][j] == ' ')
+				j++;
+			return (ft_strdup(&data->textures[i][j]));
+		}
+		i++;
+	}
+	return (NULL);
+}
 
 int	tab_len(char **tab)
 {

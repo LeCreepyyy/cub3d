@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/28 19:14:44 by bgaertne         ###   ########.fr       */
+/*   Updated: 2023/11/29 10:56:11 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int		tab_len(char **tab);
 void	free_tab(char **tab);
 void	print_tab(char **tab);
 void	ft_exit(char *err, int code);
+char	*get_texture(char c, t_data *data);
 void	parsing(char *map_path, t_data *data);
 void	parse_map(char **ftab, int y, t_data *data);
 
