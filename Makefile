@@ -6,7 +6,7 @@
 #    By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/14 11:30:00 by vpoirot           #+#    #+#              #
-#    Updated: 2023/11/29 13:03:16 by vpoirot          ###   ########.fr        #
+#    Updated: 2023/11/29 13:21:26 by vpoirot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ _END	=	\033[00m
 
 SRCS	=	src/main.c\
 			src/parsing.c\
-			src/utils.c\
+			src/tab_utils.c\
 			src/parsing_utils.c\
 
 OBJS	=	${SRCS:.c=.o}
