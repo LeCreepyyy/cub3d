@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:00:10 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/28 15:49:50 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/11/29 10:13:14 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 void	init_data(t_data *data)
 {
 	data->map_flat = NULL;
-	data->textures = NULL;
+	data->textures = ft_calloc(sizeof(char *), 7);
+	if (data->textures == NULL)
+		ft_exit("malloc", EXIT_FAILURE);
 	data->player_pos = malloc(sizeof(int) * 3);
 	data->player_pos[0] = 0;
 	data->player_pos[1] = 0;

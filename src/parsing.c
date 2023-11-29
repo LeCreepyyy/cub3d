@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: creepy <creepy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:13:15 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/28 19:47:45 by creepy           ###   ########.fr       */
+/*   Updated: 2023/11/29 10:18:17 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char	**file_to_tab(char *path)
 
 void	checkrgb(char *line)
 {
-	int	i;
+	int		i;
 	char	**rgb;
 
 	i = 1;
@@ -105,12 +105,15 @@ void	checkmap(char **ftab, t_data *data)
 			else if (ft_strncmp(&ftab[y][ft_strlen(ftab[y]) - 5]
 				, ".png", 4) != 0)
 				ft_exit("Given image's format is not valid", EXIT_FAILURE);
+			data->textures[len] = ft_strdup(ftab[y]);
 			len++;
 		}
 	}
-	if (ftab[y++] == NULL)
+	while (ftab[y] != NULL && ftab[y][0] == '\n')
+		y++;
+	if (ftab[y] == NULL)
 		ft_exit("Missing information", EXIT_FAILURE);
-	parse_map(ftab, 10, data);
+	parse_map(ftab, y, data);
 }
 
 void	parsing(char *map_path, t_data *data)
@@ -120,8 +123,7 @@ void	parsing(char *map_path, t_data *data)
 	if (ft_strncmp(&map_path[ft_strlen(map_path) - 4], ".cub", 4) != 0)
 		ft_exit("Invalid extention", EXIT_FAILURE);
 	ftab = file_to_tab(map_path);
-	// print_tab(ftab);
 	checkmap(ftab, data);
-	// transform to 3 char**
+	//print_tab(data->textures);
 	free_tab(ftab);
 }
