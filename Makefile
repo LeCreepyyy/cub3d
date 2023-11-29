@@ -6,7 +6,7 @@
 #    By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/14 11:30:00 by vpoirot           #+#    #+#              #
-#    Updated: 2023/11/29 13:21:26 by vpoirot          ###   ########.fr        #
+#    Updated: 2023/11/29 14:02:57 by vpoirot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRCS	=	src/main.c\
 			src/parsing.c\
 			src/tab_utils.c\
 			src/parsing_utils.c\
+			src/setup_mlx.c\
 
 OBJS	=	${SRCS:.c=.o}
 
@@ -39,7 +40,7 @@ $(LIBFT):
 	@gcc -Wall -Werror -Wextra -c $< -o $@
 
 $(NAME): $(OBJS)
-	@gcc $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+	@gcc $(OBJS) $(FLAGS) $(LIBFT) -o $(NAME)
 	@echo "$(_CYAN)$(_BOLD)[Makefile]$(_END) $(_BOLD)$(NAME) $(_GREEN)created$(_END)"
 
 clean:

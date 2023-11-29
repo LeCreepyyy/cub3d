@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:00:10 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/29 13:19:43 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/11/29 15:03:36 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ int	main(int argc, char **argv)
 		ft_exit("Missing arg", EXIT_FAILURE);
 	init_data(&data);
 	parsing(argv[1], &data);
+	setup_mlx(&data);
 	ft_exit(NULL, EXIT_SUCCESS);
 }

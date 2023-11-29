@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/29 13:03:08 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/11/29 15:07:38 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,16 @@
 # include "../TheLibft/ft_printf/ft_printf.h"
 # include "../TheLibft/get_next_line/get_next_line.h"
 
+# define MP_PLAYER 25
+# define MP_TILE 50
+
 typedef struct s_data
 {
-	char	**textures;
-	char	**map_flat;
-	int		*player_pos;
+	char		**textures;
+	char		**map_flat;
+	int			*player_pos;
+	mlx_t		*mlx_ptr;
+	mlx_image_t	*img;
 }	t_data;
 
 // main.c
@@ -46,5 +51,8 @@ void	parsing(char *map_path, t_data *data);
 void	parse_map(char **ftab, int y, t_data *data);
 void	store_map(char **ftab, int y, t_data *data);
 int		skip_empty_lines(char **ftab, int y);
+
+// setup_mlx.c
+void	setup_mlx(t_data *data);
 
 #endif
