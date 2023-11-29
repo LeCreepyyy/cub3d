@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 11:20:42 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/28 15:50:32 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/11/29 10:55:00 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,6 @@ void	parse_map(char **ftab, int y, t_data *data)
 {
 	int	x;
 
-	x = -1;
-	while (ftab[y][++x])
-		if (ftab[y][x] == '\t')
-			ft_exit("Invalid character", EXIT_FAILURE);
 	x = -1;
 	while (ftab[y] != NULL && (ftab[y][++x] != '\n' || ftab[y][++x] != 0))
 		if (ftab[y][x] != ' ' && ftab[y][x] != '1')
@@ -62,4 +58,18 @@ void	parse_map(char **ftab, int y, t_data *data)
 	while (ftab[y] != NULL && ftab[y][++x] != '\n' && ftab[y][++x] != 0)
 		if (ftab[y][x] != ' ' && ftab[y][x] != '1')
 			ft_exit("File content invalid", EXIT_FAILURE);
+}
+
+void	store_map(char **ftab, int y, t_data *data)
+{
+	int w;
+
+	w = 0;
+	while (ftab[y + w])
+		w++;
+	data->map_flat = ft_calloc(sizeof(char *), w + 1);
+	w = -1;
+	while (ftab[y])
+		data->map_flat[++w] = ft_strdup(ftab[y++]);
+	print_tab(data->map_flat);
 }
