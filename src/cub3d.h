@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/29 15:07:38 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/11/29 16:41:37 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,37 @@
 # include "../TheLibft/get_next_line/get_next_line.h"
 
 # define MP_PLAYER 25
-# define MP_TILE 50
+# define MP_WALL 50
+# define TEXTURE_H 50
+# define TEXTURE_W 50
+
+# define WHITE 0xFFFFFF
+# define ORANGE 0xFFA500
+
+typedef struct s_img
+{
+	mlx_texture_t	*wall_north_texture;
+	mlx_image_t		*wall_north;
+	mlx_texture_t	*wall_south_texture;
+	mlx_image_t		*wall_south;
+	mlx_texture_t	*wall_east_texture;
+	mlx_image_t		*wall_east;
+	mlx_texture_t	*wall_west_texture;
+	mlx_image_t		*wall_west;
+	mlx_image_t		*floor;
+	mlx_image_t		*ceiling;
+	mlx_image_t		*mp_player;
+	mlx_image_t		*mp_wall;
+}	t_img;
+
 
 typedef struct s_data
 {
-	char		**textures;
-	char		**map_flat;
-	int			*player_pos;
-	mlx_t		*mlx_ptr;
-	mlx_image_t	*img;
+	char			**textures;
+	char			**map_flat;
+	int				*player_pos;
+	mlx_t			*mlx_ptr;
+	struct s_img	imgs;
 }	t_data;
 
 // main.c
