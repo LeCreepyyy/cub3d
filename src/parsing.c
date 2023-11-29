@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:13:15 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/29 10:56:02 by bgaertne         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:35:39 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,10 +109,7 @@ void	checkmap(char **ftab, t_data *data)
 			len++;
 		}
 	}
-	while (ftab[y] != NULL && ftab[y][0] == '\n')
-		y++;
-	if (ftab[y] == NULL)
-		ft_exit("Missing information", EXIT_FAILURE);
+	y = skip_empty_lines(ftab, y);
 	parse_map(ftab, y, data);
 	store_map(ftab, y, data);
 }
