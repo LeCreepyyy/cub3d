@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+         #
+#    By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/14 11:30:00 by vpoirot           #+#    #+#              #
-#    Updated: 2023/11/28 19:18:17 by bgaertne         ###   ########.fr        #
+#    Updated: 2023/11/29 13:03:16 by vpoirot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	cub3d
 LIBFT		= TheLibft/libft.a
-FLAGS	=	-Wall -Wextra -Werror -fsanitize=address -g #./MLX42/build/libmlx42.a -Iinclude -ldl -lglfw -pthread -lm
+FLAGS	=	-Wall -Wextra -Werror -fsanitize=address -g ./MLX42/build/libmlx42.a -Iinclude -ldl -lglfw -pthread -lm
 
 _RED	=	\033[01;31m
 _GREEN	=	\033[01;32m

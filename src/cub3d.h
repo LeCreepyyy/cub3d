@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/29 12:37:19 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/11/29 13:03:08 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
-//# include "../MLX42/include/MLX42/MLX42.h"
+# include "../MLX42/include/MLX42/MLX42.h"
 # include "../TheLibft/base/libft.h"
 # include "../TheLibft/ft_printf/ft_printf.h"
 # include "../TheLibft/get_next_line/get_next_line.h"

@@ -6,13 +6,11 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 11:20:42 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/29 13:09:33 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/11/29 13:14:30 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-// vroum
 
 int	skip_empty_lines(char **ftab, int y)
 {
