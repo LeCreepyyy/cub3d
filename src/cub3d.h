@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/30 10:39:50 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/11/30 11:31:38 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,22 @@
 # define TEXTURE_H 50
 # define TEXTURE_W 50
 
-# define WHITE 0xFFFFFF
-# define ORANGE 0xFFA500
-# define BLUE 0x87CEFA
-# define GREEN 0x7CFC00
+struct s_rgba
+{
+	uint8_t	r;
+	uint8_t	g;
+	uint8_t	b;
+	uint8_t	a;
+};
 
-typedef struct s_img
+struct s_colors
+{
+	struct s_rgba	red;
+	struct s_rgba	dark_blue;
+	struct s_rgba	light_blue;
+};
+
+struct s_img
 {
 	mlx_texture_t	*wall_north_texture;
 	mlx_image_t		*wall_north;
@@ -48,8 +58,7 @@ typedef struct s_img
 	mlx_image_t		*mp_player;
 	mlx_image_t		*mp_wall;
 	mlx_image_t		*mp_floor;
-}	t_img;
-
+};
 
 typedef struct s_data
 {
@@ -58,9 +67,12 @@ typedef struct s_data
 	int				*player_pos;
 	mlx_t			*mlx_ptr;
 	struct s_img	imgs;
-}	t_data;
+	struct s_colors	colors;
+}					t_data;
 
 // main.c
+void	init_data(t_data *data);
+void	init_colors(t_data *data);
 void	ft_exit(char *err, int code);
 
 // utils.c
