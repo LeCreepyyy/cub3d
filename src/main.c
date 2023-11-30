@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:00:10 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/29 16:25:56 by bgaertne         ###   ########.fr       */
+/*   Updated: 2023/11/30 11:31:19 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,23 @@ void	init_data(t_data *data)
 	data->imgs.ceiling = NULL;
 	data->imgs.mp_player = NULL;
 	data->imgs.mp_wall = NULL;
+	init_colors(data);
+}
+
+void	init_colors(t_data *data)
+{
+	data->colors.red.r = 164;
+	data->colors.red.g = 36;
+	data->colors.red.b = 36;
+	data->colors.red.a = 255;
+	data->colors.dark_blue.r = 16;
+	data->colors.dark_blue.g = 52;
+	data->colors.dark_blue.b = 166;
+	data->colors.dark_blue.a = 255;
+	data->colors.light_blue.r = 169;
+	data->colors.light_blue.g = 234;
+	data->colors.light_blue.b = 254;
+	data->colors.light_blue.a = 255;
 }
 
 void	ft_exit(char *err, int code)
