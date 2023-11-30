@@ -3,25 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   setup_mlx.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:59:32 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/29 18:13:25 by bgaertne         ###   ########.fr       */
+/*   Updated: 2023/11/30 10:53:32 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// void	print_square(int x, int y, mlx_image_t i, t_data *data)
-// {
-// 	mlx_image_to_window(data->mlx_ptr, data->img, x, y);
-// }
+void	minimap(t_data *data)
+{
+	int	y;
+	int	x;
 
-// void	minimap(t_data *data)
-// {
-// 	print_square(0, 0, NULL, data);
-// 	print_square(MP_WALL, 0, NULL, data);
-// }
+	y = -1;
+	while (data->map_flat[++y] != NULL)
+	{
+		x = -1;
+		while (data->map_flat[y][++x] != 0)
+		{
+			if (data->map_flat[y][x] == '1')
+				mlx_image_to_window(data->mlx_ptr, data->imgs.mp_wall, x * MP_WALL, y * MP_WALL);
+			else if (data->map_flat[y][x] != ' ' && data->map_flat[y][x] != '\n')
+				mlx_image_to_window(data->mlx_ptr, data->imgs.mp_floor, x * MP_WALL, y * MP_WALL);
+		}
+	}
+}
+
+void	*px_memset(void *str, uint8_t r, uint8_t g, uint8_t b, uint8_t a, size_t len)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < len)
+	{
+		if (i % 4 == 0)
+			((uint8_t *)str)[i] = r;
+		if (i % 4 == 1)
+			((uint8_t *)str)[i] = g;
+		if (i % 4 == 2)
+			((uint8_t *)str)[i] = b;
+		if (i % 4 == 3)
+			((uint8_t *)str)[i] = a;
+		i++;
+	}
+	return (str);
+}
 
 void	setup_imgs(t_data *data)
 {
@@ -34,29 +62,18 @@ void	setup_imgs(t_data *data)
 	data->imgs.wall_west_texture = mlx_load_png(get_texture('W', data));
 	data->imgs.wall_west = mlx_texture_to_image(data->mlx_ptr, data->imgs.wall_west_texture);
 	data->imgs.mp_wall = mlx_new_image(data->mlx_ptr, MP_WALL, MP_WALL);
-	ft_memset(data->imgs.mp_wall->pixels, WHITE, MP_WALL * MP_WALL * sizeof(int32_t));
+	px_memset(data->imgs.mp_wall->pixels, 16, 52, 166, 255, MP_WALL * MP_WALL * sizeof(int));
+	data->imgs.mp_floor = mlx_new_image(data->mlx_ptr, MP_WALL, MP_WALL);
+	px_memset(data->imgs.mp_floor->pixels, 169, 234, 254, 255, MP_WALL * MP_WALL * sizeof(int));
 	data->imgs.mp_player = mlx_new_image(data->mlx_ptr, MP_PLAYER, MP_PLAYER);
-	ft_memset(data->imgs.mp_player->pixels, ORANGE, MP_PLAYER * MP_PLAYER * sizeof(int32_t));
-	// taille des images de sol et plafond ? ->
-	data->imgs.floor = mlx_new_image(data->mlx_ptr, MP_WALL, MP_WALL);
-	ft_memset(data->imgs.floor->pixels, GREEN, MP_WALL * MP_WALL * sizeof(int32_t));
-	data->imgs.ceiling = mlx_new_image(data->mlx_ptr, MP_WALL, MP_WALL);
-	ft_memset(data->imgs.ceiling->pixels, BLUE, MP_WALL * MP_WALL * sizeof(int32_t));
+	px_memset(data->imgs.mp_player->pixels, 164, 36, 36, 255, MP_PLAYER * MP_PLAYER * sizeof(int));
 }
 
 void	setup_mlx(t_data *data)
 {
 	//data->mlx_ptr = mlx_init(1480, 1024, "cub3d", false);
-	data->mlx_ptr = mlx_init(600, 480, "cub3d - VM", false);
+	data->mlx_ptr = mlx_init(1680, 1024, "Qbe 3D", false);
 	setup_imgs(data);
-	mlx_image_to_window(data->mlx_ptr, data->imgs.wall_north, 0, 0);
-	mlx_image_to_window(data->mlx_ptr, data->imgs.wall_south, 50, 50);
-	mlx_image_to_window(data->mlx_ptr, data->imgs.wall_east, 100, 100);
-	mlx_image_to_window(data->mlx_ptr, data->imgs.wall_west, 150, 150);
-	mlx_image_to_window(data->mlx_ptr, data->imgs.mp_player, 200, 200);
-	mlx_image_to_window(data->mlx_ptr, data->imgs.mp_wall, 250, 250);
-	mlx_image_to_window(data->mlx_ptr, data->imgs.floor, 300, 300);
-	mlx_image_to_window(data->mlx_ptr, data->imgs.ceiling, 350, 350);
-	//minimap(data);
+	minimap(data);
 	mlx_loop(data->mlx_ptr);
 }
