@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup_mlx.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:59:32 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/30 11:36:07 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/11/30 14:14:26 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,6 @@ void	ft_hook(mlx_key_data_t keydata, void *param)
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_D))
 		data->imgs.mp_player->instances[0].x += 7;
 }
-
-// void	ft_hook(mlx_key_data_t keydata, void *param)
-// {
-// 	t_data	*data;
-
-// 	data = (t_data *)param;
-// 	if (keydata.action != MLX_PRESS)
-// 		return ;
-// 	if (keydata.key == MLX_KEY_ESCAPE || keydata.key == MLX_KEY_Q)
-// 		mlx_close_window(data->mlx_ptr);
-// 	if (keydata.key == MLX_KEY_UP || keydata.key == MLX_KEY_W)
-// 		data->imgs.mp_player->instances[0].y -= 10;
-// 	if (keydata.key == MLX_KEY_DOWN || keydata.key == MLX_KEY_S)
-// 		data->imgs.mp_player->instances[0].y += 10;
-// 	if (keydata.key == MLX_KEY_LEFT || keydata.key == MLX_KEY_A)
-// 		data->imgs.mp_player->instances[0].x -= 10;
-// 	if (keydata.key == MLX_KEY_RIGHT || keydata.key == MLX_KEY_D)
-// 		data->imgs.mp_player->instances[0].x += 10;
-// }
 
 void	minimap(t_data *data)
 {
