@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:59:32 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/30 14:14:26 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/12/04 15:14:25 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,44 @@
 
 void	ft_hook(mlx_key_data_t keydata, void *param)
 {
-	t_data	*data;
+	double			speed;
+	double			rotspeed;
+	t_data			*data;
+	static double	dirX = -1;
+	static double	dirY = 0;
 
 	data = param;
 	(void)keydata;
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_ESCAPE))
+	speed = 4.0;
+	rotspeed = 2.0;
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_LEFT_SHIFT))
+		speed = 7;
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_ESCAPE)
+		|| mlx_is_key_down(data->mlx_ptr, MLX_KEY_Q))
 		mlx_close_window(data->mlx_ptr);
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_W))
-		data->imgs.mp_player->instances[0].y -= 7;
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_S))
-		data->imgs.mp_player->instances[0].y += 7;
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_A))
-		data->imgs.mp_player->instances[0].x -= 7;
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_D))
-		data->imgs.mp_player->instances[0].x += 7;
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_UP))
+	{
+		data->imgs.mp_player->instances[0].x += dirX * speed;
+		data->imgs.mp_player->instances[0].y += dirY * speed;
+	}
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_DOWN))
+	{
+		data->imgs.mp_player->instances[0].x -= dirX * speed;
+		data->imgs.mp_player->instances[0].y -= dirY * speed;
+	}
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_RIGHT))
+	{
+		double	oldX = dirX;
+		dirX = dirX * cos(-rotspeed) - dirY * sin(-rotspeed);
+		dirY = oldX * sin(-rotspeed) + dirY * cos(-rotspeed);
+	}
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_LEFT))
+	{
+		double	oldX = dirX;
+		dirX = dirX * cos(-rotspeed) - dirY * sin(-rotspeed);
+		dirY = oldX * sin(-rotspeed) + dirY * cos(-rotspeed);
+	}
+	speed = 4;
 }
 
 void	minimap(t_data *data)
@@ -50,6 +74,7 @@ void	minimap(t_data *data)
 					x * MP_WALL, y * MP_WALL);
 		}
 	}
+	mlx_image_to_window(data->mlx_ptr, data->imgs.mp_player, 1146, 487);
 }
 
 void	*px_memset(void *str, struct s_rgba color, size_t len)
@@ -102,7 +127,6 @@ void	setup_mlx(t_data *data)
 	data->mlx_ptr = mlx_init(1680, 1024, "Qbe 3D", false);
 	setup_imgs(data);
 	minimap(data);
-	mlx_image_to_window(data->mlx_ptr, data->imgs.mp_player, 200, 200);
 	mlx_key_hook(data->mlx_ptr, ft_hook, data);
 	mlx_loop(data->mlx_ptr);
 }
