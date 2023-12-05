@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/30 11:31:38 by bgaertne         ###   ########.fr       */
+/*   Updated: 2023/12/05 10:37:09 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include "../TheLibft/ft_printf/ft_printf.h"
 # include "../TheLibft/get_next_line/get_next_line.h"
 
-# define MP_PLAYER 25
+# define MP_PLAYER 20
 # define MP_WALL 50
 # define TEXTURE_H 50
 # define TEXTURE_W 50
@@ -41,6 +41,7 @@ struct s_colors
 	struct s_rgba	red;
 	struct s_rgba	dark_blue;
 	struct s_rgba	light_blue;
+	struct s_rgba	lime;
 };
 
 struct s_img
