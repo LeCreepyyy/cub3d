@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:00:10 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/30 11:31:19 by bgaertne         ###   ########.fr       */
+/*   Updated: 2023/12/05 10:30:34 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ void	init_colors(t_data *data)
 	data->colors.red.g = 36;
 	data->colors.red.b = 36;
 	data->colors.red.a = 255;
+	data->colors.lime.r = 104;
+	data->colors.lime.g = 255;
+	data->colors.lime.b = 4;
+	data->colors.lime.a = 255;
 	data->colors.dark_blue.r = 16;
 	data->colors.dark_blue.g = 52;
 	data->colors.dark_blue.b = 166;

@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/30 14:34:22 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/12/05 10:37:09 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ struct s_colors
 	struct s_rgba	red;
 	struct s_rgba	dark_blue;
 	struct s_rgba	light_blue;
+	struct s_rgba	lime;
 };
 
 struct s_img
