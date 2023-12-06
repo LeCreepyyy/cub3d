@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:59:32 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/12/05 15:37:04 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/12/06 13:32:21 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,62 @@ int	is_wall(t_data *data, int y, int x)
 	return (1);
 }
 
+void	ft_hook(mlx_key_data_t keydata, void *param)
+{
+	double			speed;
+	double			rotspeed;
+	t_data			*data;
+	static double	dirX = -1;
+	static double	dirY = 0;
+
+	data = param;
+	(void)keydata;
+	speed = 4.0;
+	rotspeed = 0.02;
+	data->player.pos_x = data->imgs.mp_player->instances[0].x;
+	data->player.pos_y = data->imgs.mp_player->instances[0].y;
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_LEFT_SHIFT))
+		speed = 7;
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_ESCAPE)
+		|| mlx_is_key_down(data->mlx_ptr, MLX_KEY_Q))
+		mlx_close_window(data->mlx_ptr);
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_UP))
+	{
+		if (is_wall(data, data->imgs.mp_player->instances[0].y, data->imgs.mp_player->instances[0].x + dirX * speed))
+			data->player.pos_x += dirX * speed;
+		if (is_wall(data, data->imgs.mp_player->instances[0].y + dirY * speed, data->imgs.mp_player->instances[0].x))
+			data->player.pos_y += dirY * speed;
+	}
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_DOWN))
+	{
+		if (is_wall(data, data->imgs.mp_player->instances[0].y, data->imgs.mp_player->instances[0].x - dirX * speed))
+			data->player.pos_x -= dirX * speed;
+		if (is_wall(data, data->imgs.mp_player->instances[0].y - dirY * speed, data->imgs.mp_player->instances[0].x))
+			data->player.pos_y -= dirY * speed;
+	}
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_RIGHT))
+	{
+		double	oldX = dirX;
+		dirX = dirX * cos(-rotspeed) - dirY * sin(-rotspeed);
+		dirY = oldX * sin(-rotspeed) + dirY * cos(-rotspeed);
+	}
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_LEFT))
+	{
+		double	oldX = dirX;
+		dirX = dirX * cos(rotspeed) - dirY * sin(rotspeed);
+		dirY = oldX * sin(rotspeed) + dirY * cos(rotspeed);
+	}
+	data->imgs.mp_player->instances[0].x = round(data->player.pos_x);
+	data->imgs.mp_player->instances[0].y = round(data->player.pos_y);
+	speed = 4.0;
+}
+
 // void	ft_hook(mlx_key_data_t keydata, void *param)
 // {
-// 	double			speed;
-// 	double			rotspeed;
-// 	t_data			*data;
-// 	static double	dirX = -1;
-// 	static double	dirY = 0;
+// 	int					speed;
+// 	double				rotspeed;
+// 	t_data				*data;
+// 	static double		dir = 0;
 
 // 	data = param;
 // 	(void)keydata;
@@ -41,79 +90,33 @@ int	is_wall(t_data *data, int y, int x)
 // 		mlx_close_window(data->mlx_ptr);
 // 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_UP))
 // 	{
-// 		if (is_wall(data, data->imgs.mp_player->instances[0].y, data->imgs.mp_player->instances[0].x + dirX * speed))
-// 			data->imgs.mp_player->instances[0].x += dirX * speed;
-// 		if (is_wall(data, data->imgs.mp_player->instances[0].y + dirY * speed, data->imgs.mp_player->instances[0].x))
-// 			data->imgs.mp_player->instances[0].y += dirY * speed;
+// 		if (is_wall(data, data->imgs.mp_player->instances[0].y, data->imgs.mp_player->instances[0].x - speed * sin(dir)))
+// 			data->imgs.mp_player->instances[0].x -= speed * sin(dir);
+// 		if (is_wall(data, data->imgs.mp_player->instances[0].y - speed * cos(dir), data->imgs.mp_player->instances[0].x))
+// 			data->imgs.mp_player->instances[0].y -= speed * cos(dir);
 // 	}
 // 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_DOWN))
 // 	{
-// 		if (is_wall(data, data->imgs.mp_player->instances[0].y, data->imgs.mp_player->instances[0].x - dirX * speed))
-// 			data->imgs.mp_player->instances[0].x -= dirX * speed;
-// 		if (is_wall(data, data->imgs.mp_player->instances[0].y - dirY * speed, data->imgs.mp_player->instances[0].x))
-// 			data->imgs.mp_player->instances[0].y -= dirY * speed;
-// 	}
-// 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_RIGHT))
-// 	{
-// 		double	oldX = dirX;
-// 		dirX = dirX * cos(-rotspeed) - dirY * sin(-rotspeed);
-// 		dirY = oldX * sin(-rotspeed) + dirY * cos(-rotspeed);
+// 		if (is_wall(data, data->imgs.mp_player->instances[0].y, data->imgs.mp_player->instances[0].x + speed * sin(dir)))
+// 			data->imgs.mp_player->instances[0].x += speed * sin(dir);
+// 		if (is_wall(data, data->imgs.mp_player->instances[0].y + speed * cos(dir), data->imgs.mp_player->instances[0].x))
+// 			data->imgs.mp_player->instances[0].y += speed * cos(dir);
 // 	}
 // 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_LEFT))
 // 	{
-// 		double	oldX = dirX;
-// 		dirX = dirX * cos(rotspeed) - dirY * sin(rotspeed);
-// 		dirY = oldX * sin(rotspeed) + dirY * cos(rotspeed);
+// 		if (dir == 360)
+// 			dir = 0;
+// 		dir += rotspeed;
 // 	}
+// 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_RIGHT))
+// 	{
+// 		if (dir <= 0)
+// 			dir = 360;
+// 		dir -= rotspeed;
+// 	}
+// 	//printf("%f\n", dir);
 // 	speed = 4;
 // }
-
-void	ft_hook(mlx_key_data_t keydata, void *param)
-{
-	int					speed;
-	double				rotspeed;
-	t_data				*data;
-	static double		dir = 0;
-
-	data = param;
-	(void)keydata;
-	speed = 4.0;
-	rotspeed = 0.02;
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_LEFT_SHIFT))
-		speed = 7;
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_ESCAPE)
-		|| mlx_is_key_down(data->mlx_ptr, MLX_KEY_Q))
-		mlx_close_window(data->mlx_ptr);
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_DOWN))
-	{
-		if (is_wall(data, data->imgs.mp_player->instances[0].y, data->imgs.mp_player->instances[0].x + speed * sin(dir)))
-			data->imgs.mp_player->instances[0].x += speed * sin(dir);
-		if (is_wall(data, data->imgs.mp_player->instances[0].y + speed * cos(dir), data->imgs.mp_player->instances[0].x))
-			data->imgs.mp_player->instances[0].y += speed * cos(dir);
-	}
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_UP))
-	{
-		if (is_wall(data, data->imgs.mp_player->instances[0].y, data->imgs.mp_player->instances[0].x - speed * sin(dir)))
-			data->imgs.mp_player->instances[0].x -= speed * sin(dir);
-		if (is_wall(data, data->imgs.mp_player->instances[0].y - speed * cos(dir), data->imgs.mp_player->instances[0].x))
-			data->imgs.mp_player->instances[0].y -= speed * cos(dir);
-	}
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_LEFT))
-	{
-		if (dir == 360)
-			dir = 0;
-		dir += rotspeed;
-	}
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_RIGHT))
-	{
-		if (dir <= 0)
-			dir = 360;
-		dir -= rotspeed;
-		ray_gun(200, 200, dir, data);
-	}
-	//printf("%f\n", dir);
-	speed = 4;
-}
 
 void	minimap(t_data *data)
 {

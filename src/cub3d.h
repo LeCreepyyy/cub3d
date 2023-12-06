@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/12/05 15:30:28 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/12/06 11:17:05 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,12 @@ struct s_img
 	mlx_image_t		*mp_ray;
 };
 
+struct s_player
+{
+	double	pos_x;
+	double	pos_y;
+};
+
 typedef struct s_data
 {
 	char			**textures;
@@ -70,6 +76,7 @@ typedef struct s_data
 	mlx_t			*mlx_ptr;
 	struct s_img	imgs;
 	struct s_colors	colors;
+	struct s_player	player;
 }					t_data;
 
 // main.c
