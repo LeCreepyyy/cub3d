@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: creepy <creepy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 11:20:42 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/29 17:14:02 by creepy           ###   ########.fr       */
+/*   Updated: 2023/12/12 10:31:11 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	check(t_data *data, char **ftab, int y, int x)
 		else
 		{
 			data->player_pos[0] = ftab[y][x];
-			data->player_pos[1] = y;
-			data->player_pos[2] = x;
+			data->player_pos[1] = x;
+			data->player_pos[2] = y - data->player_pos[2];
 		}
 	}
 }
@@ -52,6 +52,7 @@ void	parse_map(char **ftab, int y, t_data *data)
 	int	x;
 
 	x = -1;
+	data->player_pos[2] = y;
 	while (ftab[y] != NULL && (ftab[y][++x] != '\n' || ftab[y][++x] != 0))
 		if (ftab[y][x] != ' ' && ftab[y][x] != '1')
 			ft_exit("File content invalid", EXIT_FAILURE);
