@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/12/06 11:17:05 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/12/12 10:50:55 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,8 @@ int		skip_empty_lines(char **ftab, int y);
 
 // setup_mlx.c
 void	setup_mlx(t_data *data);
+
+// shift_handler.c
+void	ft_shift_handle(t_data *data, double rotspeed, double speed);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/14 11:30:00 by vpoirot           #+#    #+#              #
-#    Updated: 2023/11/29 14:02:57 by vpoirot          ###   ########.fr        #
+#    Updated: 2023/12/12 10:51:42 by vpoirot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS	=	src/main.c\
 			src/tab_utils.c\
 			src/parsing_utils.c\
 			src/setup_mlx.c\
+			src/shift_handler.c\
 
 OBJS	=	${SRCS:.c=.o}
 
