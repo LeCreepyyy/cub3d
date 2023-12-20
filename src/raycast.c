@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:02:43 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/12/20 10:42:57 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/12/20 11:10:03 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ int	raygun(t_data *data, double pos_x, double pos_y, double dir_x, double dir_y)
 	len = 0;
 	while (len < 100)
 	{
-		mlx_put_pixel(data->imgs.mp_ray, data->imgs.mp_player->instances[0].x, data->imgs.mp_player->instances[0].y, 0x08);
-		// mlx_put_pixel(data->imgs.mp_ray, round(pos_x), round(pos_y), 0x08);
-		// mlx_put_pixel(data->imgs.mp_ray, round(pos_x) + 1, round(pos_y), 0x08);
-		// mlx_put_pixel(data->imgs.mp_ray, round(pos_x) + 2, round(pos_y), 0x08);
+		mlx_put_pixel(data->imgs.mp_ray, round(pos_x), round(pos_y), 0x0000FF00);
 		pos_x += dir_x;
 		pos_y += dir_y;
 		len++;
