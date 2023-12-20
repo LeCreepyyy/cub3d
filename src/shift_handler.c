@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_hook.c                                          :+:      :+:    :+:   */
+/*   shift_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 10:35:09 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/12/12 10:50:34 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/12/20 10:37:00 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ void	ft_shift_handle(t_data *data, double rotspeed, double speed)
 		ft_rotate_point(&dir_x, &dir_y, rotspeed);
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_LEFT))
 		ft_rotate_point(&dir_x, &dir_y, -rotspeed);
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_E))
+		raygun(data, data->player.pos_x, data->player.pos_y, dir_x, dir_y);
 }
 
 /*

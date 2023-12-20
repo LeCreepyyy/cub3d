@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:02:43 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/12/19 15:38:09 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/12/20 10:42:57 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,20 @@
 
  * @return renvois le nombre de pixel place pour tracer le rayon
 */
-int	raygun(t_data *data, int pos_x, int pos_y, double dir_x, double dir_y)
+int	raygun(t_data *data, double pos_x, double pos_y, double dir_x, double dir_y)
 {
-	(void)pos_x;
-	(void)pos_y;
-	(void)dir_x;
-	(void)dir_y;
+	int	len;
 
-	return (12);
+	len = 0;
+	while (len < 100)
+	{
+		mlx_put_pixel(data->imgs.mp_ray, data->imgs.mp_player->instances[0].x, data->imgs.mp_player->instances[0].y, 0x08);
+		// mlx_put_pixel(data->imgs.mp_ray, round(pos_x), round(pos_y), 0x08);
+		// mlx_put_pixel(data->imgs.mp_ray, round(pos_x) + 1, round(pos_y), 0x08);
+		// mlx_put_pixel(data->imgs.mp_ray, round(pos_x) + 2, round(pos_y), 0x08);
+		pos_x += dir_x;
+		pos_y += dir_y;
+		len++;
+	}
+	return (len);
 }

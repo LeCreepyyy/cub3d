@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/12/12 10:50:55 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/12/20 10:34:41 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,9 @@ void	setup_mlx(t_data *data);
 
 // shift_handler.c
 void	ft_shift_handle(t_data *data, double rotspeed, double speed);
+
+// raycast.c
+int		raygun(t_data *data, double pos_x, double pos_y,
+			double dir_x, double dir_y);
 
 #endif
