@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: creepy <creepy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:02:43 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/12/21 14:40:48 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/12/21 20:22:58 by creepy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	raygun(t_data *data, double pos_x, double pos_y, double dir_x, double dir_y)
 	);
 	while (len <= 45)
 	{
-		printf("%d\n", len);
 		mlx_put_pixel(data->imgs.mp_ray, 35, len, color);
 		mlx_put_pixel(data->imgs.mp_ray, 36, len, color);
 		mlx_put_pixel(data->imgs.mp_ray, 37, len, color);
