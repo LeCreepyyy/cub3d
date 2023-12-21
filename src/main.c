@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:00:10 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/12/05 10:30:34 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/12/12 10:10:25 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,9 @@ int	main(int argc, char **argv)
 		ft_exit("Missing arg", EXIT_FAILURE);
 	init_data(&data);
 	parsing(argv[1], &data);
+	if (data.player_pos[0] == 0 || data.player_pos[1] == 0
+		|| data.player_pos[2] == 0)
+		ft_exit("Missing player info", EXIT_FAILURE);
 	setup_mlx(&data);
 	ft_exit(NULL, EXIT_SUCCESS);
 }
