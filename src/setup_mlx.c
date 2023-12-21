@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup_mlx.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: creepy <creepy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:59:32 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/12/12 10:50:38 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/12/21 20:51:21 by creepy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	minimap(t_data *data)
 	}
 	mlx_image_to_window(data->mlx_ptr, data->imgs.mp_player,
 		data->player_pos[1] * MP_WALL, data->player_pos[2] * MP_WALL);
+	mlx_image_to_window(data->mlx_ptr, data->imgs.mp_ray, 0, 0);
 }
 
 void	*px_memset(void *str, struct s_rgba color, size_t len)
@@ -99,9 +100,7 @@ void	setup_imgs(t_data *data)
 	data->imgs.mp_player = mlx_new_image(data->mlx_ptr, MP_PLAYER, MP_PLAYER);
 	px_memset(data->imgs.mp_player->pixels, data->colors.red,
 		MP_PLAYER * MP_PLAYER * sizeof(int));
-	data->imgs.mp_ray = mlx_new_image(data->mlx_ptr, 500, 500);
-	px_memset(data->imgs.mp_ray->pixels, data->colors.lime,
-		(MP_PLAYER / 2) * (MP_PLAYER / 2) * sizeof(int));
+	data->imgs.mp_ray = mlx_new_image(data->mlx_ptr, 1500, 1500);
 }
 
 void	setup_mlx(t_data *data)

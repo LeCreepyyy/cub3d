@@ -6,7 +6,7 @@
 /*   By: creepy <creepy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:02:43 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/12/21 20:22:58 by creepy           ###   ########.fr       */
+/*   Updated: 2023/12/21 21:01:27 by creepy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,31 +34,16 @@ int	raygun(t_data *data, double pos_x, double pos_y, double dir_x, double dir_y)
 {
 	int	len;
 
-	len = 35;
+	len = 0;
 	uint32_t color = ft_pixel(
 		rand() % 0xFF, // R
 		rand() % 0xFF, // G
 		rand() % 0xFF, // B
 		rand() % 0xFF  // A
 	);
-	while (len <= 45)
+	while (len < 100)
 	{
-		mlx_put_pixel(data->imgs.mp_ray, 35, len, color);
-		mlx_put_pixel(data->imgs.mp_ray, 36, len, color);
-		mlx_put_pixel(data->imgs.mp_ray, 37, len, color);
-		mlx_put_pixel(data->imgs.mp_ray, 38, len, color);
-		mlx_put_pixel(data->imgs.mp_ray, 39, len, color);
-		mlx_put_pixel(data->imgs.mp_ray, 40, len, color);
-		mlx_put_pixel(data->imgs.mp_ray, 41, len, color);
-		mlx_put_pixel(data->imgs.mp_ray, 42, len, color);
-		mlx_put_pixel(data->imgs.mp_ray, 43, len, color);
-		mlx_put_pixel(data->imgs.mp_ray, 44, len, color);
-		mlx_put_pixel(data->imgs.mp_ray, 45, len, color);
-		len++;
-	}
-	while (len > 100)
-	{
-		mlx_put_pixel(data->imgs.mp_ray, round(pos_x), round(pos_y), 0x0000FF00);
+		mlx_put_pixel(data->imgs.mp_ray, round(pos_x), round(pos_y), color);
 		pos_x += dir_x;
 		pos_y += dir_y;
 		len++;
