@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shift_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: creepy <creepy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 10:35:09 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/12/20 10:37:00 by vpoirot          ###   ########.fr       */
+/*   Updated: 2023/12/25 15:01:15 by creepy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	ft_shift_handle(t_data *data, double rotspeed, double speed)
 	static double	dir_y = 0;
 
 	player_start(data, &dir_x, &dir_y);
+	raygun(data, data->player.pos_x, data->player.pos_y, dir_x, dir_y);
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_W))
 		ft_next_pos(data, dir_x, dir_y, speed);
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_S))
