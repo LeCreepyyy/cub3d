@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup_mlx.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: creepy <creepy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:59:32 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/12/21 20:51:21 by creepy           ###   ########.fr       */
+/*   Updated: 2023/12/27 20:30:02 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	setup_imgs(t_data *data)
 	data->imgs.mp_player = mlx_new_image(data->mlx_ptr, MP_PLAYER, MP_PLAYER);
 	px_memset(data->imgs.mp_player->pixels, data->colors.red,
 		MP_PLAYER * MP_PLAYER * sizeof(int));
-	data->imgs.mp_ray = mlx_new_image(data->mlx_ptr, 1500, 1500);
+	data->imgs.mp_ray = mlx_new_image(data->mlx_ptr, 1680, 1024);
 }
 
 void	setup_mlx(t_data *data)
