@@ -6,7 +6,7 @@
 /*   By: creepy <creepy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:02:43 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/12/25 14:21:29 by creepy           ###   ########.fr       */
+/*   Updated: 2023/12/28 14:20:43 by creepy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,18 @@ int	raygun(t_data *data, double pos_x, double pos_y, double dir_x, double dir_y)
 		len++;
 	}
 	return (len);
+}
+
+int	*ray_view(t_data *data, double pos_x, double pos_y, double dir_x, double dir_y)
+{
+	static int pass = 0;
+	if (pass == 1)
+		mlx_delete_image(data->mlx_ptr, data->imgs.mp_ray);
+	data->imgs.mp_ray = mlx_new_image(data->mlx_ptr, 1500, 1500);
+	mlx_image_to_window(data->mlx_ptr, data->imgs.mp_player,
+	data->player_pos[1] * MP_WALL, data->player_pos[2] * MP_WALL);
+	mlx_image_to_window(data->mlx_ptr, data->imgs.mp_ray, 0, 0);
+	raygun(data, pos_x, pos_y, dir_x, dir_y);
+	pass = 1;
+	return (NULL);
 }
