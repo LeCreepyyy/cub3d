@@ -6,7 +6,7 @@
 /*   By: creepy <creepy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/12/25 14:11:22 by creepy           ###   ########.fr       */
+/*   Updated: 2023/12/28 14:15:41 by creepy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ void	ft_shift_handle(t_data *data, double rotspeed, double speed);
 
 // raycast.c
 int		raygun(t_data *data, double pos_x, double pos_y,
+			double dir_x, double dir_y);
+int	*ray_view(t_data *data, double pos_x, double pos_y,
 			double dir_x, double dir_y);
 
 #endif
