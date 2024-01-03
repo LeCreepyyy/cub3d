@@ -6,7 +6,7 @@
 /*   By: creepy <creepy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:02:43 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/12/28 14:20:43 by creepy           ###   ########.fr       */
+/*   Updated: 2023/12/29 16:50:41 by creepy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	*ray_view(t_data *data, double pos_x, double pos_y, double dir_x, double dir
 	static int pass = 0;
 	if (pass == 1)
 		mlx_delete_image(data->mlx_ptr, data->imgs.mp_ray);
-	data->imgs.mp_ray = mlx_new_image(data->mlx_ptr, 1500, 1500);
+	data->imgs.mp_ray = mlx_new_image(data->mlx_ptr, 1680, 1024);
 	mlx_image_to_window(data->mlx_ptr, data->imgs.mp_player,
 	data->player_pos[1] * MP_WALL, data->player_pos[2] * MP_WALL);
 	mlx_image_to_window(data->mlx_ptr, data->imgs.mp_ray, 0, 0);

@@ -6,7 +6,7 @@
 /*   By: creepy <creepy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 10:35:09 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/12/28 14:16:09 by creepy           ###   ########.fr       */
+/*   Updated: 2024/01/02 12:15:20 by creepy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,19 @@ void	player_start(t_data *data, double *dir_x, double *dir_y)
 	data->player_pos[0] = 'O';
 }
 
+int	pos_mouse(t_data *data)
+{
+	int mouse_x = 0;
+	int mouse_y = 0;
+
+	mlx_get_mouse_pos(data->mlx_ptr, &mouse_x, &mouse_y);
+	if (mouse_x <= 150)
+		return (1);
+	else if (mouse_x >= 600)
+		return (2);
+	return (0);
+}
+
 void	ft_shift_handle(t_data *data, double rotspeed, double speed)
 {
 	static double	dir_x = -1;
@@ -74,10 +87,12 @@ void	ft_shift_handle(t_data *data, double rotspeed, double speed)
 		ft_next_pos(data, dir_x, dir_y, speed);
 		ft_rotate_point(&dir_x, &dir_y, -7.9);
 	}
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_RIGHT))
+	if (pos_mouse(data) == 2 || mlx_is_key_down(data->mlx_ptr, MLX_KEY_RIGHT))
 		ft_rotate_point(&dir_x, &dir_y, rotspeed);
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_LEFT))
+	if (pos_mouse(data) == 1 || mlx_is_key_down(data->mlx_ptr, MLX_KEY_LEFT))
 		ft_rotate_point(&dir_x, &dir_y, -rotspeed);
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_E))
+		pos_mouse(data);
 }
 
 /*
