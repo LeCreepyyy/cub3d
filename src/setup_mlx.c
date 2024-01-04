@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:59:32 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/03 11:17:40 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/04 11:07:15 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,27 @@ void	setup_imgs(t_data *data)
 	data->imgs.mp_ray = mlx_new_image(data->mlx_ptr, 1680, 1024);
 }
 
+void	ft_loop(void *param)
+{
+	t_data	*data;
+
+	data = param;
+	if (pos_mouse(data) == 2)
+	{
+		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, 0.05);
+		ray_view(data, data->player.pos_x, data->player.pos_y, data->player.dir_x, data->player.dir_y);
+	}
+	if (pos_mouse(data) == 1)
+	{
+		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, -0.05);
+		ray_view(data, data->player.pos_x, data->player.pos_y, data->player.dir_x, data->player.dir_y);
+	}
+	mlx_set_mouse_pos(data->mlx_ptr, WIDTH / 2, HEIGHT / 2);
+}
+
 void	setup_mlx(t_data *data)
 {
-	data->mlx_ptr = mlx_init(1680, 1024, "Qbe 3D", false);
+	data->mlx_ptr = mlx_init(WIDTH, HEIGHT, "Qbe 3D", false);
 	setup_imgs(data);
 	minimap(data);
 	if (data->player_pos[0] == 'N')
@@ -114,6 +132,10 @@ void	setup_mlx(t_data *data)
 		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, 7.9 * 2);
 	else if (data->player_pos[0] == 'S')
 		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, -7.9);
+	data->player.pos_x = data->imgs.mp_player->instances[0].x;
+	data->player.pos_y = data->imgs.mp_player->instances[0].y;
+	mlx_set_mouse_pos(data->mlx_ptr, WIDTH / 2, HEIGHT / 2);
 	mlx_key_hook(data->mlx_ptr, ft_hook, data);
+	mlx_loop_hook(data->mlx_ptr, ft_loop, data);
 	mlx_loop(data->mlx_ptr);
 }
