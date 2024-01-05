@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:00:10 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/03 11:05:49 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/05 10:50:39 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	init_data(t_data *data)
 	data->imgs.ceiling = NULL;
 	data->imgs.mp_player = NULL;
 	data->imgs.mp_wall = NULL;
-	data->fov = 80;
 	data->player.dir_x = -1;
 	data->player.dir_y = 0;
 	init_colors(data);

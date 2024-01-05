@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:02:43 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/04 09:42:58 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/05 11:30:44 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	raygun(t_data *data, double pos_x, double pos_y, double dir_x, double dir_y)
 	len = 0;
 	while (ray_wall(data, (pos_y + dir_y) + MP_PLAYER / 2, (pos_x + dir_x) + MP_PLAYER / 2))
 	{
-		mlx_put_pixel(data->imgs.mp_ray, round(pos_x) + MP_PLAYER / 2, round(pos_y) + MP_PLAYER / 2, 1331897026);
+		mlx_put_pixel(data->imgs.mp_ray, round(pos_x) + MP_PLAYER / 2, round(pos_y) + MP_PLAYER / 2, 1436);
 		pos_x += dir_x;
 		pos_y += dir_y;
 		len++;
@@ -47,17 +47,44 @@ int	raygun(t_data *data, double pos_x, double pos_y, double dir_x, double dir_y)
 	return (len);
 }
 
-int	*ray_view(t_data *data, double pos_x, double pos_y, double dir_x, double dir_y)
+void	pewpewpew(t_data *data, int **array)
 {
+	int		limit;
+	double	dir_x;
+	double	dir_y;
+
+	(void)array;
+	limit = -1;
+	dir_x = data->player.dir_x;
+	dir_y = data->player.dir_y;
+	while (++limit < WIDTH / 2)
+	{
+		ft_rotate_point(&dir_x, &dir_y, 0.0009);
+		raygun(data, data->player.pos_x, data->player.pos_y, dir_x, dir_y);
+	}
+	limit = -1;
+	dir_x = data->player.dir_x;
+	dir_y = data->player.dir_y;
+	while (++limit < WIDTH / 2)
+	{
+		ft_rotate_point(&dir_x, &dir_y, -0.0009);
+		raygun(data, data->player.pos_x, data->player.pos_y, dir_x, dir_y);
+	}
+}
+
+int	*ray_view(t_data *data)
+{
+	int			*array;
 	static int	pass = 0;
 
+	array = NULL;
 	if (pass == 1)
 		mlx_delete_image(data->mlx_ptr, data->imgs.mp_ray);
 	data->imgs.mp_ray = mlx_new_image(data->mlx_ptr, 1680, 1024);
 	mlx_image_to_window(data->mlx_ptr, data->imgs.mp_player,
 		data->player_pos[1] * MP_WALL, data->player_pos[2] * MP_WALL);
 	mlx_image_to_window(data->mlx_ptr, data->imgs.mp_ray, 0, 0);
-	raygun(data, pos_x, pos_y, dir_x, dir_y);
+	pewpewpew(data, &array);
 	pass = 1;
 	return (NULL);
 }

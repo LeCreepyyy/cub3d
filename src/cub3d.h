@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/04 10:44:31 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/05 10:50:46 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ typedef struct s_data
 	char			**textures;
 	char			**map_flat;
 	int				*player_pos;
-	int				fov;
 	mlx_t			*mlx_ptr;
 	struct s_img	imgs;
 	struct s_colors	colors;
@@ -115,7 +114,6 @@ int		pos_mouse(t_data *data);
 // raycast.c
 int		raygun(t_data *data, double pos_x, double pos_y,
 			double dir_x, double dir_y);
-int	*ray_view(t_data *data, double pos_x, double pos_y,
-			double dir_x, double dir_y);
+int		*ray_view(t_data *data);
 
 #endif
