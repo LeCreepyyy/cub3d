@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:59:32 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/04 11:07:15 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/05 09:53:23 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,17 @@ void	ft_loop(void *param)
 		ray_view(data, data->player.pos_x, data->player.pos_y, data->player.dir_x, data->player.dir_y);
 	}
 	mlx_set_mouse_pos(data->mlx_ptr, WIDTH / 2, HEIGHT / 2);
+}
+
+void	mouse_key(mouse_key_t button, action_t action, modifier_key_t mods, void *param)
+{
+	t_data	*data;
+
+	data = param;
+	(void)button;
+	(void)action;
+	(void)mods;
+	printf("ziz%d\n", data->fov);
 }
 
 void	setup_mlx(t_data *data)
