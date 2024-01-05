@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shift_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: creepy <creepy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 10:35:09 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/12/28 14:16:09 by creepy           ###   ########.fr       */
+/*   Updated: 2024/01/04 13:16:01 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,87 +40,73 @@ void	ft_rotate_point(double *dir_x, double *dir_y, double rotspeed)
 	*dir_y = old_x * sin(rotspeed) + *dir_y * cos(rotspeed);
 }
 
-void	player_start(t_data *data, double *dir_x, double *dir_y)
+int	pos_mouse(t_data *data)
 {
-	if (data->player_pos[0] == 'N')
-		ft_rotate_point(dir_x, dir_y, 7.9);
-	else if (data->player_pos[0] == 'E')
-		ft_rotate_point(dir_x, dir_y, 7.9 * 2);
-	else if (data->player_pos[0] == 'S')
-		ft_rotate_point(dir_x, dir_y, -7.9);
-	data->player_pos[0] = 'O';
+	int	mouse_x;
+	int	mouse_y;
+
+	mouse_x = 0;
+	mouse_y = 0;
+	mlx_get_mouse_pos(data->mlx_ptr, &mouse_x, &mouse_y);
+	if (mouse_x < WIDTH / 2)
+		return (1);
+	if (mouse_x > WIDTH / 2)
+		return (2);
+	return (0);
 }
 
 void	ft_shift_handle(t_data *data, double rotspeed, double speed)
 {
-	static double	dir_x = -1;
-	static double	dir_y = 0;
-
-	player_start(data, &dir_x, &dir_y);
-	ray_view(data, data->player.pos_x, data->player.pos_y, dir_x, dir_y);
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_W))
-		ft_next_pos(data, dir_x, dir_y, speed);
+		ft_next_pos(data, data->player.dir_x, data->player.dir_y, speed);
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_S))
-		ft_next_pos(data, dir_x, dir_y, -speed);
+		ft_next_pos(data, data->player.dir_x, data->player.dir_y, -speed);
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_A))
 	{
-		ft_rotate_point(&dir_x, &dir_y, -7.9);
-		ft_next_pos(data, dir_x, dir_y, speed);
-		ft_rotate_point(&dir_x, &dir_y, 7.9);
+		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, -7.9);
+		ft_next_pos(data, data->player.dir_x, data->player.dir_y, speed);
+		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, 7.9);
 	}
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_D))
 	{
-		ft_rotate_point(&dir_x, &dir_y, 7.9);
-		ft_next_pos(data, dir_x, dir_y, speed);
-		ft_rotate_point(&dir_x, &dir_y, -7.9);
+		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, 7.9);
+		ft_next_pos(data, data->player.dir_x, data->player.dir_y, speed);
+		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, -7.9);
 	}
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_RIGHT))
-		ft_rotate_point(&dir_x, &dir_y, rotspeed);
+		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, rotspeed);
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_LEFT))
-		ft_rotate_point(&dir_x, &dir_y, -rotspeed);
+		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, -rotspeed);
+	ray_view(data, data->player.pos_x, data->player.pos_y, data->player.dir_x,
+		data->player.dir_y);
 }
 
-/*
-void	ft_hook(mlx_key_data_t keydata, void *param)
-{
-	double			speed;
-	double			rotspeed;
-	t_data			*data;
-	static double	dir_x = -1;
-	static double	dir_y = 0;
+// void	ft_shift_handle(t_data *data, double rotspeed, double speed)
+// {
+// 	double	dir_x = data->player.dir_x;
+// 	double	dir_y = data->player.dir_y;
 
-	data = param;
-	(void)keydata;
-	speed = 4.0;
-	rotspeed = 0.1;
-	data->player.pos_x = data->imgs.mp_player->instances[0].x;
-	data->player.pos_y = data->imgs.mp_player->instances[0].y;
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_LEFT_SHIFT))
-		speed = 7;
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_ESCAPE))
-		mlx_close_window(data->mlx_ptr);
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_W))
-		ft_next_pos(data, dir_x, dir_y, speed);
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_S))
-		ft_next_pos(data, dir_x, dir_y, -speed);
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_A))
-	{
-		ft_rotate_point(&dir_x, &dir_y, -7.9);
-		ft_next_pos(data, dir_x, dir_y, speed);
-		ft_rotate_point(&dir_x, &dir_y, 7.9);
-	}
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_D))
-	{
-		ft_rotate_point(&dir_x, &dir_y, 7.9);
-		ft_next_pos(data, dir_x, dir_y, speed);
-		ft_rotate_point(&dir_x, &dir_y, -7.9);
-	}
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_RIGHT))
-		ft_rotate_point(&dir_x, &dir_y, rotspeed);
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_LEFT))
-		ft_rotate_point(&dir_x, &dir_y, -rotspeed);
-	data->imgs.mp_player->instances[0].x = round(data->player.pos_x);
-	data->imgs.mp_player->instances[0].y = round(data->player.pos_y);
-	speed = 4.0;
-}
-*/
+// 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_W))
+// 		ft_next_pos(data, dir_x, dir_y, speed);
+// 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_S))
+// 		ft_next_pos(data, dir_x, dir_y, -speed);
+// 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_A))
+// 	{
+// 		ft_rotate_point(&dir_x, &dir_y, -7.9);
+// 		ft_next_pos(data, dir_x, dir_y, speed);
+// 		ft_rotate_point(&dir_x, &dir_y, 7.9);
+// 	}
+// 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_D))
+// 	{
+// 		ft_rotate_point(&dir_x, &dir_y, 7.9);
+// 		ft_next_pos(data, dir_x, dir_y, speed);
+// 		ft_rotate_point(&dir_x, &dir_y, -7.9);
+// 	}
+// 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_RIGHT))
+// 		ft_rotate_point(&dir_x, &dir_y, rotspeed);
+// 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_LEFT))
+// 		ft_rotate_point(&dir_x, &dir_y, -rotspeed);
+// 	ray_view(data, data->player.pos_x, data->player.pos_y, dir_x, dir_y);
+// 	data->player.dir_x = dir_x;
+// 	data->player.dir_y = dir_y;
+// }
