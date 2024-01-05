@@ -121,17 +121,6 @@ void	ft_loop(void *param)
 	mlx_set_mouse_pos(data->mlx_ptr, WIDTH / 2, HEIGHT / 2);
 }
 
-void	mouse_key(mouse_key_t button, action_t action, modifier_key_t mods, void *param)
-{
-	t_data	*data;
-
-	data = param;
-	(void)button;
-	(void)action;
-	(void)mods;
-	printf("ziz%d\n", data->fov);
-}
-
 void	setup_mlx(t_data *data)
 {
 	data->mlx_ptr = mlx_init(WIDTH, HEIGHT, "Qbe 3D", false);
