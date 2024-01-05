@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:59:32 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/05 11:20:18 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/05 13:36:42 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ void	setup_mlx(t_data *data)
 	data->player.pos_x = data->imgs.mp_player->instances[0].x;
 	data->player.pos_y = data->imgs.mp_player->instances[0].y;
 	mlx_set_mouse_pos(data->mlx_ptr, WIDTH / 2, HEIGHT / 2);
+	ray_view(data);
 	mlx_key_hook(data->mlx_ptr, ft_hook, data);
 	mlx_loop_hook(data->mlx_ptr, ft_loop, data);
 	mlx_loop(data->mlx_ptr);
