@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/05 10:50:46 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/05 13:34:45 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@
 # include "../TheLibft/ft_printf/ft_printf.h"
 # include "../TheLibft/get_next_line/get_next_line.h"
 
-# define MP_PLAYER 20
-# define MP_WALL 50
-# define TEXTURE_H 50
-# define TEXTURE_W 50
+# define MP_PLAYER 5
+# define MP_WALL 15
+# define TEXTURE_H 20
+# define TEXTURE_W 20
 
 # define WIDTH 1680
 # define HEIGHT 1024
