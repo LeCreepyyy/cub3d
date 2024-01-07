@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:02:43 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/05 22:16:52 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/07 14:53:01 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ int	*ray_view(t_data *data)
 	mlx_image_to_window(data->mlx_ptr, data->imgs.mp_ray, 0, 0);
 	pewpewpew(data);
 	graphics(data);
-	printf("%i, %i, %i\n", data->rays[1679], data->rays[0], data->rays[839]);
 	pass = 1;
 	return (NULL);
 }
