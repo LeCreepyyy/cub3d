@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:02:43 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/05 14:13:04 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/07 14:53:01 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,13 @@ int	raygun(t_data *data, double pos_x, double pos_y, double dir_x, double dir_y)
 	return (len);
 }
 
-void	pewpewpew(t_data *data, int *array)
+void	pewpewpew(t_data *data)
 {
 	int		limit;
 	double	dir_x;
 	double	dir_y;
 	int 	index;
 
-	(void)array;
 	limit = -1;
 	index = 0;
 	dir_x = data->player.dir_x;
@@ -62,7 +61,7 @@ void	pewpewpew(t_data *data, int *array)
 	while (++limit < WIDTH / 2)
 	{
 		ft_rotate_point(&dir_x, &dir_y, 0.0009);
-		array[index++] = raygun(data, data->player.pos_x, data->player.pos_y, dir_x, dir_y);
+		data->rays[index++] = raygun(data, data->player.pos_x, data->player.pos_y, dir_x, dir_y);
 	}
 	limit = -1;
 	dir_x = data->player.dir_x;
@@ -70,22 +69,20 @@ void	pewpewpew(t_data *data, int *array)
 	while (++limit < WIDTH / 2)
 	{
 		ft_rotate_point(&dir_x, &dir_y, -0.0009);
-		array[index++] = raygun(data, data->player.pos_x, data->player.pos_y, dir_x, dir_y);
+		data->rays[index++] = raygun(data, data->player.pos_x, data->player.pos_y, dir_x, dir_y);
 	}
 }
 
 int	*ray_view(t_data *data)
 {
-	int			*array;
 	static int	pass = 0;
 
-	array = ft_calloc(sizeof(int), WIDTH);
 	if (pass == 1)
 		mlx_delete_image(data->mlx_ptr, data->imgs.mp_ray);
 	data->imgs.mp_ray = mlx_new_image(data->mlx_ptr, 1680, 1024);
 	mlx_image_to_window(data->mlx_ptr, data->imgs.mp_ray, 0, 0);
-	pewpewpew(data, array);
-	printf("%i, %i, %i\n", array[1679], array[0], array[839]);
+	pewpewpew(data);
+	graphics(data);
 	pass = 1;
 	return (NULL);
 }
