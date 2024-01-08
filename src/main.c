@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:00:10 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/05 22:14:41 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/08 11:23:59 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	init_colors(t_data *data)
 	data->colors.light_blue.g = 234;
 	data->colors.light_blue.b = 254;
 	data->colors.light_blue.a = 255;
+	data->colors.ceilling.a = 255;
+	data->colors.floor.a = 255;
 }
 
 void	ft_exit(char *err, int code)
