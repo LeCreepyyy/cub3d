@@ -2,8 +2,8 @@ NO ./resources/north.png
 SO ./resources/south.png
 EA ./resources/east.png
 WE ./resources/west.png
-C 225,30,0
-F 255,100,0
+C 242,79,209
+F 218,159,23
 
   1111                1111
  110011              110011

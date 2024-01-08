@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/05 22:17:35 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/08 11:35:27 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ struct s_colors
 	struct s_rgba	dark_blue;
 	struct s_rgba	light_blue;
 	struct s_rgba	lime;
+	struct s_rgba	ceilling;
+	struct s_rgba	floor;
 };
 
 struct s_img
@@ -119,5 +121,8 @@ int		*ray_view(t_data *data);
 
 // graphics.c
 void	graphics(t_data *data);
+
+// colors_cf.c
+void	init_colors_cf(t_data *data);
 
 #endif
