@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+         #
+#    By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/14 11:30:00 by vpoirot           #+#    #+#              #
-#    Updated: 2023/12/19 15:03:05 by vpoirot          ###   ########.fr        #
+#    Updated: 2024/01/05 22:17:12 by bgaertne         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS	=	src/main.c\
 			src/setup_mlx.c\
 			src/shift_handler.c\
 			src/raycast.c\
+			src/graphics.c\
 
 OBJS	=	${SRCS:.c=.o}
 
