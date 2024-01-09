@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:17:47 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/08 15:02:04 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/09 14:45:53 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,21 @@
 
 void	graphics(t_data *data)
 {
-	int				i;
-	long long int	distance;
+	int		i;
+	double	distance;
 
 	i = -1;
 	while (++i < WIDTH)
 	{
-		printf("%f, %f\n", pow(data->rays[i], 2), pow(i, 2));
-		if (i == 0)
-			distance = data->rays[i];
+		if (i < 840)
+			distance = sin(90 - ((i * 0.0009) / PI)) * data->rays[i];
 		else
-			distance = sqrt(pow(data->rays[i], 2) - pow(i, 2));
+			distance = sin(90 - (((i - 839) * 0.0009) / PI)) * data->rays[i];
 		if (i == 0)
-			printf("0, %lld\n", distance);
+			printf("0, %f\n", distance);
 		if (i == 839)
-			printf("839, %lld\n", distance);
+			printf("839, %f\n", distance);
 		if (i == 1679)
-			printf("1679, %lld\n", distance);
+			printf("1679, %f\n", distance);
 	}
 }

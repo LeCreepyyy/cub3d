@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/05 22:17:35 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/09 14:36:16 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 
 # define WIDTH 1680
 # define HEIGHT 1024
+
+# define PI 3.141592653589793
 
 struct s_rgba
 {
