@@ -6,43 +6,52 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:17:47 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/09 15:29:41 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:09:34 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void	draw_wall(t_data *data, int wall_height, int map_x, int map_y)
+{
+	int i;
+	int j;
+	int k;
+
+	i = -1;
+	j = 1;
+	k = 0;
+	while (++i < wall_height)
+	{
+		if (i > (wall_height / 2))
+			mlx_put_pixel(data->imgs.graph, map_x, map_y - j++, 2559999999);
+		else
+			mlx_put_pixel(data->imgs.graph, map_x, map_y + k++, 2559999999);
+	}
+}
+
 void	graphics(t_data *data)
 {
-	int		i;
-	double	distance;
-	int		wall_height;
+	int				i;
+	double			distance;
+	unsigned int	wall_height;
 
 	i = -1;
 	while (++i < WIDTH)
 	{
 		if (i < 840)
-			distance = sin(90 - ((i * 0.0009) / PI)) * data->rays[i];
-		else
-			distance = sin(90 - (((i - 839) * 0.0009) / PI)) * data->rays[i];
-		wall_height = HEIGHT - distance;
-		if (i < 840)
 		{
-			draw_wall(data, wall_height);
+			distance = sin(90 - ((i * 0.0009) / PI)) * data->rays[i];
+			wall_height = HEIGHT - 300 - distance * 2;
+			draw_wall(data, wall_height, i + 840, HEIGHT / 2);
 		}
-		(void)wall_height;
+		else
+		{
+			distance = sin(90 - (((i - 839) * 0.0009) / PI)) * data->rays[i];
+			wall_height = HEIGHT - 300 - distance * 2;
+			draw_wall(data, wall_height, 839 + (839 - i), HEIGHT / 2);
+		}
 	}
 }
 
-void	draw_wall(t_data *data, int wall_height)
-{
-	int i;
-	int x;
-	int y;
 
-	i = -1;
-	while (++i > wall_height)
-	{
-		
-	}
-}
