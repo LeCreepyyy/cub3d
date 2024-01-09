@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:17:47 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/09 15:06:52 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/09 15:29:41 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,23 @@ void	graphics(t_data *data)
 		else
 			distance = sin(90 - (((i - 839) * 0.0009) / PI)) * data->rays[i];
 		wall_height = HEIGHT - distance;
+		if (i < 840)
+		{
+			draw_wall(data, wall_height);
+		}
+		(void)wall_height;
+	}
+}
+
+void	draw_wall(t_data *data, int wall_height)
+{
+	int i;
+	int x;
+	int y;
+
+	i = -1;
+	while (++i > wall_height)
+	{
+		
 	}
 }
