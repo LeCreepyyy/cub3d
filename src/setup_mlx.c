@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:59:32 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/08 11:49:27 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/09 15:12:47 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	setup_imgs(t_data *data)
 	px_memset(data->imgs.ceiling->pixels, data->colors.ceilling, WIDTH * (HEIGHT / 2) * sizeof(int));
 	data->imgs.floor = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT / 2);
 	px_memset(data->imgs.floor->pixels, data->colors.floor, WIDTH * (HEIGHT / 2) * sizeof(int));
+	data->imgs.graph = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 	data->imgs.mp_wall = mlx_new_image(data->mlx_ptr, MP_WALL, MP_WALL);
 	px_memset(data->imgs.mp_wall->pixels, data->colors.dark_blue,
 		MP_WALL * MP_WALL * sizeof(int));
