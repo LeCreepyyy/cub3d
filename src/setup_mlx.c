@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:59:32 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/05 13:36:42 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/08 11:49:27 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,10 @@ void	setup_imgs(t_data *data)
 	data->imgs.wall_west_texture = mlx_load_png(get_texture('W', data));
 	data->imgs.wall_west = mlx_texture_to_image(data->mlx_ptr,
 			data->imgs.wall_west_texture);
+	data->imgs.ceiling = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT / 2);
+	px_memset(data->imgs.ceiling->pixels, data->colors.ceilling, WIDTH * (HEIGHT / 2) * sizeof(int));
+	data->imgs.floor = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT / 2);
+	px_memset(data->imgs.floor->pixels, data->colors.floor, WIDTH * (HEIGHT / 2) * sizeof(int));
 	data->imgs.mp_wall = mlx_new_image(data->mlx_ptr, MP_WALL, MP_WALL);
 	px_memset(data->imgs.mp_wall->pixels, data->colors.dark_blue,
 		MP_WALL * MP_WALL * sizeof(int));
@@ -100,7 +104,7 @@ void	setup_imgs(t_data *data)
 	data->imgs.mp_player = mlx_new_image(data->mlx_ptr, MP_PLAYER, MP_PLAYER);
 	px_memset(data->imgs.mp_player->pixels, data->colors.red,
 		MP_PLAYER * MP_PLAYER * sizeof(int));
-	data->imgs.mp_ray = mlx_new_image(data->mlx_ptr, 1680, 1024);
+	data->imgs.mp_ray = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 }
 
 void	ft_loop(void *param)
@@ -124,7 +128,10 @@ void	ft_loop(void *param)
 void	setup_mlx(t_data *data)
 {
 	data->mlx_ptr = mlx_init(WIDTH, HEIGHT, "Qbe 3D", false);
+	init_colors_cf(data);
 	setup_imgs(data);
+	mlx_image_to_window(data->mlx_ptr, data->imgs.ceiling, 0, 0);
+	mlx_image_to_window(data->mlx_ptr, data->imgs.floor, 0, 512);
 	minimap(data);
 	if (data->player_pos[0] == 'N')
 		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, 7.9);
