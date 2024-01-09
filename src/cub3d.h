@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/08 11:35:27 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/09 19:12:22 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 
 # define WIDTH 1680
 # define HEIGHT 1024
+
+# define PI 3.141592653589793
 
 struct s_rgba
 {
@@ -65,6 +67,7 @@ struct s_img
 	mlx_image_t		*mp_wall;
 	mlx_image_t		*mp_floor;
 	mlx_image_t		*mp_ray;
+	mlx_image_t		*graph;
 };
 
 struct s_player

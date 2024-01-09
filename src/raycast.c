@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:02:43 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/07 14:53:01 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/09 15:14:16 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,14 @@ int	*ray_view(t_data *data)
 	static int	pass = 0;
 
 	if (pass == 1)
+	{
+		mlx_delete_image(data->mlx_ptr, data->imgs.graph);
 		mlx_delete_image(data->mlx_ptr, data->imgs.mp_ray);
-	data->imgs.mp_ray = mlx_new_image(data->mlx_ptr, 1680, 1024);
+	}
+	data->imgs.mp_ray = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
+	data->imgs.graph = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 	mlx_image_to_window(data->mlx_ptr, data->imgs.mp_ray, 0, 0);
+	mlx_image_to_window(data->mlx_ptr, data->imgs.graph, 0, 0);
 	pewpewpew(data);
 	graphics(data);
 	pass = 1;
