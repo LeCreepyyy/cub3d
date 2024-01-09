@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:17:47 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/09 18:09:34 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:10:57 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ void	graphics(t_data *data)
 		if (i < 840)
 		{
 			distance = sin(90 - ((i * 0.0009) / PI)) * data->rays[i];
-			wall_height = HEIGHT - 300 - distance * 2;
+			wall_height = HEIGHT - 400 - distance * 2;
 			draw_wall(data, wall_height, i + 840, HEIGHT / 2);
 		}
 		else
 		{
-			distance = sin(90 - (((i - 839) * 0.0009) / PI)) * data->rays[i];
-			wall_height = HEIGHT - 300 - distance * 2;
-			draw_wall(data, wall_height, 839 + (839 - i), HEIGHT / 2);
+			distance = sin(90 - (((i - (WIDTH / 2)) * 0.0009) / PI)) * data->rays[i];
+			wall_height = HEIGHT - 400 - distance * 2;
+			draw_wall(data, wall_height, (WIDTH / 2) + ((WIDTH / 2) - i), HEIGHT / 2);
 		}
 	}
 }
