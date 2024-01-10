@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:02:43 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/09 15:14:16 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/10 11:36:02 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	ray_wall(t_data *data, int y, int x)
 {
-	if (data->map_flat[y / MP_WALL][x / MP_WALL] == '1')
+	if (data->map_flat[y / MP_WALL][x / MP_WALL] == '1'
+		|| data->map_flat[y / MP_WALL][x / MP_WALL] == ' ')
 		return (0);
 	return (1);
 }
