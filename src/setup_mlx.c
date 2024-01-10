@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:59:32 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/09 15:12:47 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/10 11:32:00 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ void	ft_hook(mlx_key_data_t keydata, void *param)
 
 	data = param;
 	(void)keydata;
-	speed = 4.0;
+	speed = 1.5;
 	data->player.pos_x = data->imgs.mp_player->instances[0].x;
 	data->player.pos_y = data->imgs.mp_player->instances[0].y;
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_LEFT_SHIFT))
-		speed = 7;
+		speed = 4.0;
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_ESCAPE))
 		mlx_close_window(data->mlx_ptr);
 	ft_shift_handle(data, 0.1, speed);
 	data->imgs.mp_player->instances[0].x = round(data->player.pos_x);
 	data->imgs.mp_player->instances[0].y = round(data->player.pos_y);
-	speed = 4.0;
+	speed = 1.5;
 }
 
 void	minimap(t_data *data)
