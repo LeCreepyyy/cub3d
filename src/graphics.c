@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:17:47 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/11 14:11:50 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/11 15:17:45 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,20 @@ void	graphics(t_data *data)
 	i = -1;
 	while (++i < WIDTH)
 	{
-		if (i < 840)
+		if (i < WIDTH / 2)
 		{
-			distance = sin(90 - ((i * 0.0009) / PI)) * data->rays[i];
-			wall_height = HEIGHT / 2 - tan(45) * distance;
-			draw_wall(data, wall_height, i + 840, HEIGHT / 2);
+			distance = cos(i * 0.0009) * data->rays[i];
+			wall_height = HEIGHT / (tan(45) * distance * 0.1);
+			if (wall_height > HEIGHT)
+				wall_height = HEIGHT - 1;
+			draw_wall(data, wall_height, i + WIDTH / 2, HEIGHT / 2);
 		}
 		else
 		{
-			distance = sin(90 - (((i - (WIDTH / 2)) * 0.0009) / PI)) * data->rays[i];
-			wall_height = HEIGHT / 2 - tan(45) * distance;
+			distance = cos((i - (WIDTH / 2)) * 0.0009) * data->rays[i];
+			wall_height = HEIGHT / (tan(45) * distance * 0.1);
+			if (wall_height > HEIGHT)
+				wall_height = HEIGHT - 1;
 			draw_wall(data, wall_height, (WIDTH / 2) + ((WIDTH / 2) - i), HEIGHT / 2);
 		}
 	}
