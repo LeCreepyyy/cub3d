@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:17:47 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/10 15:51:40 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/11 14:11:50 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,31 @@ void	draw_wall(t_data *data, int wall_height, int map_x, int map_y)
 	}
 }
 
+uint32_t	stack_pixel(uint8_t *stack)
+{
+    uint8_t		value1 = stack[0];
+    uint8_t		value2 = stack[1];
+    uint8_t		value3 = stack[2];
+    uint8_t		value4 = stack[3];
+	uint32_t	pixels = (uint32_t)value1 << 24 | (uint32_t)value2 << 16 | (uint32_t)value3 << 8 | (uint32_t)value4;
+	return (pixels);
+}
+
 void	draw_img(t_data *data)
 {
-	mlx_image_to_window(data->mlx_ptr, data->imgs.wall_east, WIDTH/3, HEIGHT/3 - 64);
 	int x = WIDTH / 3;
-	int delta_width = data->imgs.wall_east_texture->width;
+	int delta_width = data->imgs.wall_west_texture->width;
 	int i = 0;
 	while (delta_width)
 	{
 		int y = HEIGHT / 3;
-		int delta_height = data->imgs.wall_east_texture->height;
+		int delta_height = data->imgs.wall_west_texture->height;
 		while (delta_height)
 		{
-			printf("%d\n", data->imgs.wall_east->pixels[i]);
-			mlx_put_pixel(data->imgs.graph, x, y, data->imgs.wall_east->pixels[i]);
+			mlx_put_pixel(data->imgs.graph, y, x, stack_pixel(&data->imgs.wall_west->pixels[i]));
 			// La couleur n'est pas bonne.
 			//exit(0);
-			i++;
+			i += 4;
 			y++;;
 			delta_height--;
 		}
@@ -77,7 +85,6 @@ void	graphics(t_data *data)
 			draw_wall(data, wall_height, (WIDTH / 2) + ((WIDTH / 2) - i), HEIGHT / 2);
 		}
 	}
-	draw_img(data);
 }
 
 
