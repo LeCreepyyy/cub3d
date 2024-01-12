@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/09 19:12:22 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/12 13:58:55 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include "../TheLibft/get_next_line/get_next_line.h"
 
 # define MP_PLAYER 5
-# define MP_WALL 15
+# define MP_WALL 20
 # define TEXTURE_H 20
 # define TEXTURE_W 20
 

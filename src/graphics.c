@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:17:47 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/11 15:17:45 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/12 13:58:21 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ void	draw_img(t_data *data)
 		while (delta_height)
 		{
 			mlx_put_pixel(data->imgs.graph, y, x, stack_pixel(&data->imgs.wall_west->pixels[i]));
-			// La couleur n'est pas bonne.
-			//exit(0);
 			i += 4;
 			y++;;
 			delta_height--;
@@ -75,7 +73,7 @@ void	graphics(t_data *data)
 		if (i < WIDTH / 2)
 		{
 			distance = cos(i * 0.0009) * data->rays[i];
-			wall_height = HEIGHT / (tan(45) * distance * 0.1);
+			wall_height = HEIGHT / (distance * 0.1);
 			if (wall_height > HEIGHT)
 				wall_height = HEIGHT - 1;
 			draw_wall(data, wall_height, i + WIDTH / 2, HEIGHT / 2);
@@ -83,7 +81,7 @@ void	graphics(t_data *data)
 		else
 		{
 			distance = cos((i - (WIDTH / 2)) * 0.0009) * data->rays[i];
-			wall_height = HEIGHT / (tan(45) * distance * 0.1);
+			wall_height = HEIGHT / (distance * 0.1);
 			if (wall_height > HEIGHT)
 				wall_height = HEIGHT - 1;
 			draw_wall(data, wall_height, (WIDTH / 2) + ((WIDTH / 2) - i), HEIGHT / 2);
