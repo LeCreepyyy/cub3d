@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/12 13:58:55 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/15 10:54:27 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ typedef struct s_data
 	char			**textures;
 	char			**map_flat;
 	int				*player_pos;
-	int				*rays;
+	double			*rays;
 	mlx_t			*mlx_ptr;
 	struct s_img	imgs;
 	struct s_colors	colors;
@@ -118,9 +118,9 @@ void	ft_rotate_point(double *dir_x, double *dir_y, double rotspeed);
 int		pos_mouse(t_data *data);
 
 // raycast.c
-int		raygun(t_data *data, double pos_x, double pos_y,
+double	raygun(t_data *data, double pos_x, double pos_y,
 			double dir_x, double dir_y);
-int		*ray_view(t_data *data);
+void	ray_view(t_data *data);
 
 // graphics.c
 void	graphics(t_data *data);

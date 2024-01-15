@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:02:43 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/12 12:53:21 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/15 10:54:03 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int	ray_wall(t_data *data, int y, int x)
 
  * @return renvois le nombre de pixel place pour tracer le rayon
 */
-int	raygun(t_data *data, double pos_x, double pos_y, double dir_x, double dir_y)
+double	raygun(t_data *data, double pos_x, double pos_y, double dir_x, double dir_y)
 {
-	int	len;
+	double	len;
 
 	len = 0;
 	while (ray_wall(data, round(pos_y + dir_y) + MP_PLAYER / 2, round(pos_x + dir_x) + MP_PLAYER / 2))
@@ -43,6 +43,7 @@ int	raygun(t_data *data, double pos_x, double pos_y, double dir_x, double dir_y)
 		mlx_put_pixel(data->imgs.mp_ray, round(pos_x) + MP_PLAYER / 2, round(pos_y) + MP_PLAYER / 2, 1436719011);
 		pos_x += dir_x;
 		pos_y += dir_y;
+		len = dir_x + dir_y;
 		len++;
 	}
 	return (len);
@@ -74,7 +75,7 @@ void	pewpewpew(t_data *data)
 	}
 }
 
-int	*ray_view(t_data *data)
+void	ray_view(t_data *data)
 {
 	static int	pass = 0;
 
@@ -90,5 +91,4 @@ int	*ray_view(t_data *data)
 	pewpewpew(data);
 	graphics(data);
 	pass = 1;
-	return (NULL);
 }
