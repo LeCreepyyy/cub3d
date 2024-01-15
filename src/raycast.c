@@ -6,16 +6,16 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:02:43 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/15 12:50:46 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/15 14:17:55 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	ray_wall(t_data *data, int y, int x)
+int	ray_wall(t_data *data, double y, double x)
 {
-	if (data->map_flat[y / MP_WALL][x / MP_WALL] == '1'
-		|| data->map_flat[y / MP_WALL][x / MP_WALL] == ' ')
+	if (data->map_flat[(int)round(y) / MP_WALL][(int)round(x) / MP_WALL] == '1'
+		|| data->map_flat[(int)round(y) / MP_WALL][(int)round(x) / MP_WALL] == ' ')
 		return (0);
 	return (1);
 }
@@ -35,15 +35,14 @@ int	ray_wall(t_data *data, int y, int x)
 */
 int	raygun(t_data *data, double pos_x, double pos_y, double dir_x, double dir_y)
 {
-	double	len;
+	int	len;
 
 	len = 0;
-	while (ray_wall(data, round(pos_y + dir_y) + MP_PLAYER / 2, round(pos_x + dir_x) + MP_PLAYER / 2))
+	while (ray_wall(data, pos_y + dir_y + MP_PLAYER / 2, pos_x + dir_x + MP_PLAYER / 2))
 	{
 		mlx_put_pixel(data->imgs.mp_ray, round(pos_x) + MP_PLAYER / 2, round(pos_y) + MP_PLAYER / 2, 1436719011);
 		pos_x += dir_x;
 		pos_y += dir_y;
-		//len = dir_x + dir_y;
 		len++;
 	}
 	return (len);
