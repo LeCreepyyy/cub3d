@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:17:47 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/12 13:58:21 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/16 10:50:04 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	draw_wall(t_data *data, int wall_height, int map_x, int map_y)
 	while (++i < wall_height)
 	{
 		if (i > (wall_height / 2))
-			mlx_put_pixel(data->imgs.graph, map_x, map_y - j++, 2559999999);
+			mlx_put_pixel(data->imgs.graph, map_x, map_y + j++, 2559999999);
 		else
-			mlx_put_pixel(data->imgs.graph, map_x, map_y + k++, 2559999999);
+			mlx_put_pixel(data->imgs.graph, map_x, map_y - k++, 2559999999);
 	}
 }
 
@@ -72,7 +72,7 @@ void	graphics(t_data *data)
 	{
 		if (i < WIDTH / 2)
 		{
-			distance = cos(i * 0.0009) * data->rays[i];
+			distance = sin(90 - (i * 0.0009)) * data->rays[i];
 			wall_height = HEIGHT / (distance * 0.1);
 			if (wall_height > HEIGHT)
 				wall_height = HEIGHT - 1;
@@ -80,12 +80,13 @@ void	graphics(t_data *data)
 		}
 		else
 		{
-			distance = cos((i - (WIDTH / 2)) * 0.0009) * data->rays[i];
+			distance = sin(90 - ((i - (WIDTH / 2)) * 0.0009)) * data->rays[i];
 			wall_height = HEIGHT / (distance * 0.1);
 			if (wall_height > HEIGHT)
 				wall_height = HEIGHT - 1;
 			draw_wall(data, wall_height, (WIDTH / 2) + ((WIDTH / 2) - i), HEIGHT / 2);
 		}
+		printf("D: %f, Wh: %d\n", distance, wall_height);
 	}
 }
 
