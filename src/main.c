@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:00:10 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/08 11:23:59 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/16 14:38:18 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/**
+ * Data initialization.
+ * @param data Data struct
+ */
 void	init_data(t_data *data)
 {
 	data->map_flat = NULL;
@@ -36,6 +40,10 @@ void	init_data(t_data *data)
 	init_colors(data);
 }
 
+/**
+ * Data initialization.
+ * @param data Data struct
+ */
 void	init_colors(t_data *data)
 {
 	data->colors.red.r = 164;
@@ -58,6 +66,12 @@ void	init_colors(t_data *data)
 	data->colors.floor.a = 255;
 }
 
+
+/**
+ * Prints an error message and exit the program with a given code.
+ * @param err Error message to print.
+ * @param code Exit code of the program.
+ */
 void	ft_exit(char *err, int code)
 {
 	if (err != NULL)
@@ -65,6 +79,11 @@ void	ft_exit(char *err, int code)
 	exit(code);
 }
 
+/**
+ * Cub3d, by vpoirot & bgaertne.
+ * @param argc main-given number of arguments.
+ * @param argv main-given array of arguments.
+ */
 int	main(int argc, char **argv)
 {
 	t_data	data;

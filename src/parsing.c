@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:13:15 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/11/29 14:45:03 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/16 14:20:50 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 /**
- * calculate the number of line in file
- * @param path path of map file
- * @return number of line in file
+ * Calculates the number of line in file
+ * @param path Path of map file
+ * @return Number of line in file
 */
 int	file_len(char *path)
 {
@@ -40,9 +40,9 @@ int	file_len(char *path)
 }
 
 /**
- * set file content in char**
- * @param path path of map file
- * @return file content in char**
+ * Stores file content into a char** representing the game's map.
+ * @param path Path of map file
+ * @return char** representing the game's map.
 */
 char	**file_to_tab(char *path)
 {
@@ -69,6 +69,10 @@ char	**file_to_tab(char *path)
 	return (file);
 }
 
+/**
+ * RGB checking.
+ * @param line Input to check
+ */
 void	checkrgb(char *line)
 {
 	int		i;
@@ -87,6 +91,11 @@ void	checkrgb(char *line)
 	free_tab(rgb);
 }
 
+/**
+ * Checks for map, textures and rgb validity.
+ * @param ftab char** containing the map.
+ * @param data Data struct.
+ */
 void	checkmap(char **ftab, t_data *data)
 {
 	int		y;
@@ -116,6 +125,11 @@ void	checkmap(char **ftab, t_data *data)
 	store_map(ftab, y, data);
 }
 
+/**
+ * Main parsing function.
+ * @param map_path Path of the map file to be parsed.
+ * @param data Data struct.
+ */
 void	parsing(char *map_path, t_data *data)
 {
 	char	**ftab;

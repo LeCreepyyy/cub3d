@@ -3,49 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   setup_mlx.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:59:32 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/12 14:23:46 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/16 15:09:11 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	ft_hook(mlx_key_data_t keydata, void *param)
-{
-	double			speed;
-	t_data			*data;
-
-	data = param;
-	(void)keydata;
-	speed = 1;
-	data->player.pos_x = data->imgs.mp_player->instances[0].x;
-	data->player.pos_y = data->imgs.mp_player->instances[0].y;
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_LEFT_SHIFT))
-		speed = 4.0;
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_ESCAPE))
-		mlx_close_window(data->mlx_ptr);
-	ft_shift_handle(data, 0.1, speed);
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_SPACE))
-	{
-		if (pos_mouse(data) == 2)
-		{
-			ft_rotate_point(&data->player.dir_x, &data->player.dir_y, 0.09);
-			ray_view(data);
-		}
-		if (pos_mouse(data) == 1)
-		{
-			ft_rotate_point(&data->player.dir_x, &data->player.dir_y, -0.09);
-			ray_view(data);
-		}
-		mlx_set_mouse_pos(data->mlx_ptr, WIDTH / 2, HEIGHT / 2);
-	}
-	data->imgs.mp_player->instances[0].x = round(data->player.pos_x);
-	data->imgs.mp_player->instances[0].y = round(data->player.pos_y);
-	speed = 1;
-}
-
+/**
+ * Draws minimap.
+ * @param data Data struct.
+ */
 void	minimap(t_data *data)
 {
 	int		y;
@@ -71,6 +41,13 @@ void	minimap(t_data *data)
 	mlx_image_to_window(data->mlx_ptr, data->imgs.mp_ray, 0, 0);
 }
 
+/**
+ * Sets the values of memory block to the RGBA color provided.
+ * @param str Pointer to memory block.
+ * @param color Struct of RGBA data
+ * @param len Length of the memory block
+ * @return Pointer to memory block
+ */
 void	*px_memset(void *str, struct s_rgba color, size_t len)
 {
 	size_t	i;
@@ -91,6 +68,10 @@ void	*px_memset(void *str, struct s_rgba color, size_t len)
 	return (str);
 }
 
+/**
+ * Images loading, textures creations, pixel memory setting.
+ * @param data Data struct. 
+ */
 void	setup_imgs(t_data *data)
 {
 	data->imgs.wall_north_texture = mlx_load_png(get_texture('N', data));
@@ -105,10 +86,21 @@ void	setup_imgs(t_data *data)
 	data->imgs.wall_west_texture = mlx_load_png(get_texture('W', data));
 	data->imgs.wall_west = mlx_texture_to_image(data->mlx_ptr,
 			data->imgs.wall_west_texture);
+	setup_imgs2(data);
+}
+
+/**
+ * Norm child of setup_imgs()
+ * @param data Data struct. 
+ */
+void	setup_imgs2(t_data *data)
+{
 	data->imgs.ceiling = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT / 2);
-	px_memset(data->imgs.ceiling->pixels, data->colors.ceilling, WIDTH * (HEIGHT / 2) * sizeof(int));
+	px_memset(data->imgs.ceiling->pixels, data->colors.ceilling,
+		WIDTH * (HEIGHT / 2) * sizeof(int));
 	data->imgs.floor = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT / 2);
-	px_memset(data->imgs.floor->pixels, data->colors.floor, WIDTH * (HEIGHT / 2) * sizeof(int));
+	px_memset(data->imgs.floor->pixels, data->colors.floor,
+		WIDTH * (HEIGHT / 2) * sizeof(int));
 	data->imgs.graph = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 	data->imgs.mp_wall = mlx_new_image(data->mlx_ptr, MP_WALL, MP_WALL);
 	px_memset(data->imgs.mp_wall->pixels, data->colors.dark_blue,
@@ -122,25 +114,11 @@ void	setup_imgs(t_data *data)
 	data->imgs.mp_ray = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 }
 
-void	ft_loop(void *param)
-{
-	t_data	*data;
 
-	data = param;
-	(void)data;
-	// if (pos_mouse(data) == 2)
-	// {
-	// 	ft_rotate_point(&data->player.dir_x, &data->player.dir_y, 0.05);
-	// 	ray_view(data);
-	// }
-	// if (pos_mouse(data) == 1)
-	// {
-	// 	ft_rotate_point(&data->player.dir_x, &data->player.dir_y, -0.05);
-	// 	ray_view(data);
-	// }
-	// mlx_set_mouse_pos(data->mlx_ptr, WIDTH / 2, HEIGHT / 2);
-}
-
+/**
+ * Entry points of MLX and graphical functions.
+ * @param data Data struct.
+ */
 void	setup_mlx(t_data *data)
 {
 	data->mlx_ptr = mlx_init(WIDTH, HEIGHT, "Qbe 3D", false);
@@ -162,6 +140,6 @@ void	setup_mlx(t_data *data)
 	mlx_set_mouse_pos(data->mlx_ptr, WIDTH / 2, HEIGHT / 2);
 	ray_view(data);
 	mlx_key_hook(data->mlx_ptr, ft_hook, data);
-	mlx_loop_hook(data->mlx_ptr, ft_loop, data);
+	//mlx_loop_hook(data->mlx_ptr, ft_loop, data);
 	mlx_loop(data->mlx_ptr);
 }

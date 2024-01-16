@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+         #
+#    By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/14 11:30:00 by vpoirot           #+#    #+#              #
-#    Updated: 2024/01/08 11:36:23 by vpoirot          ###   ########.fr        #
+#    Updated: 2024/01/16 15:10:41 by bgaertne         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,10 +26,11 @@ SRCS	=	src/main.c\
 			src/tab_utils.c\
 			src/parsing_utils.c\
 			src/setup_mlx.c\
-			src/shift_handler.c\
+			src/key_handler.c\
 			src/raycast.c\
 			src/graphics.c\
 			src/colors_cf.c\
+			src/hooks.c
 
 OBJS	=	${SRCS:.c=.o}
 

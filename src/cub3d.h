@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/15 12:51:03 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/16 15:08:54 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,38 +94,57 @@ typedef struct s_data
 void	init_data(t_data *data);
 void	init_colors(t_data *data);
 void	ft_exit(char *err, int code);
+int		main(int argc, char **argv);
 
-// utils.c
-void	print_tab(char **tab);
+// tab_utils.c
+char	*get_texture(char c, t_data *data);
 int		tab_len(char **tab);
 void	free_tab(char **tab);
-char	*get_texture(char c, t_data *data);
+void	print_tab(char **tab);
 
 // parsing.c
+int		file_len(char *path);
+char	**file_to_tab(char *path);
+void	checkrgb(char *line);
+void	checkmap(char **ftab, t_data *data);
 void	parsing(char *map_path, t_data *data);
 
 // parsing_utils.c
+int		skip_empty_lines(char **ftab, int y);
+void	check(t_data *data, char **ftab, int y, int x);
 void	parse_map(char **ftab, int y, t_data *data);
 void	store_map(char **ftab, int y, t_data *data);
-int		skip_empty_lines(char **ftab, int y);
 
 // setup_mlx.c
+void	minimap(t_data *data);
+void	*px_memset(void *str, struct s_rgba color, size_t len);
+void	setup_imgs(t_data *data);
+void	setup_imgs2(t_data *data);
 void	setup_mlx(t_data *data);
 
-// shift_handler.c
-void	ft_shift_handle(t_data *data, double rotspeed, double speed);
+// key_handler.c
+int		is_wall(t_data *data, int y, int x);
+void	ft_next_pos(t_data *data, double dir_x, double dir_y, double speed);
 void	ft_rotate_point(double *dir_x, double *dir_y, double rotspeed);
 int		pos_mouse(t_data *data);
+void	ft_key_handler(t_data *data, double rotspeed, double speed);
 
 // raycast.c
+int		ray_wall(t_data *data, double y, double x);
 int		raygun(t_data *data, double pos_x, double pos_y,
 			double dir_x, double dir_y);
+void	pewpewpew(t_data *data);
 void	ray_view(t_data *data);
 
+// hooks.c
+void	ft_hook(mlx_key_data_t keydata, void *param);
+
 // graphics.c
+void	draw_wall(t_data *data, int wall_height, int map_x, int map_y);
 void	graphics(t_data *data);
 
 // colors_cf.c
 void	init_colors_cf(t_data *data);
+void	init_color_cf2(t_data *data, char **res);
 
 #endif

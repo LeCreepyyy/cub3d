@@ -3,15 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 11:20:42 by vpoirot           #+#    #+#             */
-/*   Updated: 2023/12/12 10:31:11 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/16 14:45:19 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/**
+ * Skips empty lines in map. Used for parsing.
+ * @param ftab char** containg the map
+ * @param y Current y index of ftab array.
+ * @return the value of the variable "y".
+ */
 int	skip_empty_lines(char **ftab, int y)
 {
 	while (ftab[y] != NULL && ftab[y][0] == '\n')
@@ -21,6 +27,14 @@ int	skip_empty_lines(char **ftab, int y)
 	return (y);
 }
 
+
+/**
+ * Checks for map validity.
+ * @param data Data struct.
+ * @param ftab char** containing the map.
+ * @param y y-coordinate to check.
+ * @param x x-coordinate to check.
+ */
 void	check(t_data *data, char **ftab, int y, int x)
 {
 	if (ftab[y][x] == ' ' && ((ftab[y -1][x] != '1'
@@ -47,6 +61,12 @@ void	check(t_data *data, char **ftab, int y, int x)
 	}
 }
 
+/**
+ * Map checking function.
+ * @param data Data struct.
+ * @param ftab char** containing the map.
+ * @param y y-coordinate to check.
+ */
 void	parse_map(char **ftab, int y, t_data *data)
 {
 	int	x;
@@ -75,6 +95,12 @@ void	parse_map(char **ftab, int y, t_data *data)
 			ft_exit("File content invalid", EXIT_FAILURE);
 }
 
+/**
+ * Stores map from char** ftab into data struct.
+ * @param data Data struct.
+ * @param ftab char** containing the map.
+ * @param y y-coordinate.
+ */
 void	store_map(char **ftab, int y, t_data *data)
 {
 	int	w;

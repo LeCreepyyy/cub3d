@@ -1,17 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shift_handler.c                                    :+:      :+:    :+:   */
+/*   key_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 10:35:09 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/05 13:36:46 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/16 15:04:49 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/**
+ * Checks if a given position on the map is a wall or not.
+ * @param data Data struct.
+ * @param y y-coordinate of the positions being checked.
+ * @param x x-coordinate of the position being checked.
+ * @return 1 if wall, otherwise 0
+ */
 int	is_wall(t_data *data, int y, int x)
 {
 	if (data->map_flat[y / MP_WALL][x / MP_WALL] == '1'
@@ -23,6 +30,13 @@ int	is_wall(t_data *data, int y, int x)
 	return (1);
 }
 
+/**
+ * Checks for a wall in next position.
+ * @param data Data struct.
+ * @param dir_x The direction in the x-axis that the player is moving in.
+ * @param dir_y The direction in the y-axis that the player is moving in.
+ * @param speed Movement speed.
+ */
 void	ft_next_pos(t_data *data, double dir_x, double dir_y, double speed)
 {
 	if (is_wall(data, data->player.pos_y, data->player.pos_x + dir_x * speed))
@@ -31,6 +45,12 @@ void	ft_next_pos(t_data *data, double dir_x, double dir_y, double speed)
 		data->player.pos_y += dir_y * speed;
 }
 
+/**
+ * Rotates points by a given rotation speed.
+ * @param dir_x x-coordinate of the direction vector to rotate.
+ * @param dir_y y-coordinate of the direction vector to rotate.
+ * @param rotspeed Rotation speed in radians.
+ */
 void	ft_rotate_point(double *dir_x, double *dir_y, double rotspeed)
 {
 	double	old_x;
@@ -40,6 +60,11 @@ void	ft_rotate_point(double *dir_x, double *dir_y, double rotspeed)
 	*dir_y = old_x * sin(rotspeed) + *dir_y * cos(rotspeed);
 }
 
+/**
+ * Checks if mouse is left or right form the middle of the window.
+ * @param data Data struct.
+ * @return 1 if left, 2 if right, 0 otherwise.
+ */
 int	pos_mouse(t_data *data)
 {
 	int	mouse_x;
@@ -55,7 +80,13 @@ int	pos_mouse(t_data *data)
 	return (0);
 }
 
-void	ft_shift_handle(t_data *data, double rotspeed, double speed)
+/**
+ * Movement handling function.
+ * @param data Data struct
+ * @param rotspeed Player's rotation speed
+ * @param speed Player's movement speed
+ */
+void	ft_key_handler(t_data *data, double rotspeed, double speed)
 {
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_W))
 		ft_next_pos(data, data->player.dir_x, data->player.dir_y, speed);

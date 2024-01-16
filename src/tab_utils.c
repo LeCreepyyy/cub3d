@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   tab_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 13:36:29 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/11 11:55:26 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/16 14:58:18 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/**
+ * Looks for the textures associated with the character C in the data->textures array.
+ * 
+ * @param c Character that represents a specific texture.
+ * @param data Data struct.
+ * @return Sting containg both C and the texture's path ("C /path-to-texture")
+ */
 char	*get_texture(char c, t_data *data)
 {
 	int	i;
@@ -33,6 +40,11 @@ char	*get_texture(char c, t_data *data)
 	return (NULL);
 }
 
+/**
+ * Returns the length of an array
+ * @param tab Array
+ * @return Length of the array
+ */
 int	tab_len(char **tab)
 {
 	int	i;
@@ -43,6 +55,10 @@ int	tab_len(char **tab)
 	return (i);
 }
 
+/**
+ * Frees an array
+ * @param tab Array
+ */
 void	free_tab(char **tab)
 {
 	int	i;
@@ -53,6 +69,11 @@ void	free_tab(char **tab)
 	free(tab);
 }
 
+/**
+ * Prints data of array. Debug.
+ * 
+ * @param tab Array to print
+ */
 void	print_tab(char **tab)
 {
 	int	i;
