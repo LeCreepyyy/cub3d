@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:02:43 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/18 13:28:45 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/18 14:34:48 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	raygun(t_data *data, double x1, double y1, double dir_x, double dir_y)
 	double	delta_y = end_point[1] - y1;
 	double	max_delta = (fabs(delta_x) > fabs(delta_y)) ? fabs(delta_x) : fabs(delta_y);
 	int pixel_count = 0;
+	double	res = sqrt(pow(end_point[0] - x1, 2) + pow(end_point[1] - y1, 2));
 	double	t = 0.0;
 	while (t <= 1.0)
 	{
@@ -55,7 +56,7 @@ int	raygun(t_data *data, double x1, double y1, double dir_x, double dir_y)
 		pixel_count++;
 	}
 	free(end_point);
-	return (pixel_count);
+	return ((int)round(res));
 }
 
 void	pewpewpew(t_data *data)
