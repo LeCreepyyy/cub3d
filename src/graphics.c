@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:17:47 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/18 14:33:05 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/18 14:48:56 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	graphics(t_data *data)
 	{
 		if (i < WIDTH / 2)
 		{
-			distance = cos(i * (0.0009 * PI / 180)) * data->rays[i];
+			distance = cos(i * 0.0009) * (double)data->rays[i];
 			wall_height = HEIGHT / (distance * 0.1);
 			if (wall_height > HEIGHT)
 				wall_height = HEIGHT - 1;
@@ -102,7 +102,7 @@ void	graphics(t_data *data)
 		}
 		else
 		{
-			distance = cos((i - (WIDTH / 2)) * (0.0009 * PI / 180)) * data->rays[i];
+			distance = cos((i - (WIDTH / 2)) * 0.0009) * (double)data->rays[i];
 			wall_height = HEIGHT / (distance * 0.1);
 			if (wall_height > HEIGHT)
 				wall_height = HEIGHT - 1;

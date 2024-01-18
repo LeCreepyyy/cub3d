@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:02:43 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/18 14:34:48 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/18 14:45:56 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ double *didier(t_data *data, double start_x, double start_y, double dir_x, doubl
     return (collision_point);
 }
 
-int	raygun(t_data *data, double x1, double y1, double dir_x, double dir_y)
+double	raygun(t_data *data, double x1, double y1, double dir_x, double dir_y)
 {
 	double	*end_point = didier(data, x1, y1, dir_x, dir_y);
 	double	delta_x = end_point[0] - x1;
@@ -56,7 +56,7 @@ int	raygun(t_data *data, double x1, double y1, double dir_x, double dir_y)
 		pixel_count++;
 	}
 	free(end_point);
-	return ((int)round(res));
+	return (res);
 }
 
 void	pewpewpew(t_data *data)

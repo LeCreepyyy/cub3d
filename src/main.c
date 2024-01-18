@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:00:10 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/16 14:38:18 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/18 14:46:10 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	init_data(t_data *data)
 	data->player_pos[0] = 0;
 	data->player_pos[1] = 0;
 	data->player_pos[2] = 0;
-	data->rays = ft_calloc(sizeof(int), WIDTH);
+	data->rays = ft_calloc(sizeof(double), WIDTH);
 	data->imgs.wall_north = NULL;
 	data->imgs.wall_south = NULL;
 	data->imgs.wall_east = NULL;

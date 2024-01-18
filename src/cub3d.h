@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: creepy <creepy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/17 02:07:33 by creepy           ###   ########.fr       */
+/*   Updated: 2024/01/18 14:43:29 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ typedef struct s_data
 	char			**textures;
 	char			**map_flat;
 	int				*player_pos;
-	int				*rays;
+	double			*rays;
 	mlx_t			*mlx_ptr;
 	struct s_img	imgs;
 	struct s_colors	colors;
