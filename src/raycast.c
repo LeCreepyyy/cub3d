@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: creepy <creepy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:02:43 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/17 02:31:11 by creepy           ###   ########.fr       */
+/*   Updated: 2024/01/18 13:28:45 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	pewpewpew(t_data *data)
 	while (++limit < WIDTH / 2)
 	{
 		ft_rotate_point(&dir_x, &dir_y, 0.0009);
-		data->rays[index++] = raygun(data, data->player.pos_x, data->player.pos_y, dir_x, dir_y);
+		data->rays[index++] = raygun(data, data->player.pos_x + (MP_PLAYER / 2), data->player.pos_y + (MP_PLAYER / 2), dir_x, dir_y);
 		//raygun(data, data->player.pos_x, data->player.pos_y, dir_x, dir_y);
 	}
 	limit = -1;
@@ -81,7 +81,7 @@ void	pewpewpew(t_data *data)
 	while (++limit < WIDTH / 2)
 	{
 		ft_rotate_point(&dir_x, &dir_y, -0.0009);
-		data->rays[index++] = raygun(data, data->player.pos_x, data->player.pos_y, dir_x, dir_y);
+		data->rays[index++] = raygun(data, data->player.pos_x + (MP_PLAYER / 2), data->player.pos_y + (MP_PLAYER / 2), dir_x, dir_y);
 		//raygun(data, data->player.pos_x, data->player.pos_y, dir_x, dir_y);
 	}
 }
