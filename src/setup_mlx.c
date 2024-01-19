@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup_mlx.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:59:32 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/19 11:43:39 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/19 14:10:48 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,9 @@ void	setup_imgs(t_data *data)
 	data->imgs.wall_west_texture = mlx_load_png(get_texture('W', data));
 	data->imgs.wall_west = mlx_texture_to_image(data->mlx_ptr,
 			data->imgs.wall_west_texture);
+	data->imgs.flash_txtr = mlx_load_png("resources/hand_texture.png");
+	data->imgs.flash = mlx_texture_to_image(data->mlx_ptr,
+			data->imgs.flash_txtr);
 	setup_imgs2(data);
 }
 
@@ -100,6 +103,7 @@ void	setup_mlx(t_data *data)
 	mlx_set_instance_depth(&data->imgs.ceiling->instances[0], 0);
 	mlx_set_instance_depth(&data->imgs.floor->instances[0], 0);
 	minimap(data);
+	mlx_image_to_window(data->mlx_ptr, data->imgs.flash, 700, 600);
 	if (data->player_pos[0] == 'N')
 		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, 7.9);
 	else if (data->player_pos[0] == 'E')

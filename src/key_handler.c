@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 10:35:09 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/16 15:04:49 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/19 14:11:42 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,15 @@ int	is_wall(t_data *data, int y, int x)
 void	ft_next_pos(t_data *data, double dir_x, double dir_y, double speed)
 {
 	if (is_wall(data, data->player.pos_y, data->player.pos_x + dir_x * speed))
+	{
+		ft_flashlight(data);
 		data->player.pos_x += dir_x * speed;
+	}
 	if (is_wall(data, data->player.pos_y + dir_y * speed, data->player.pos_x))
+	{
+		ft_flashlight(data);
 		data->player.pos_y += dir_y * speed;
+	}
 }
 
 /**

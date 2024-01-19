@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/19 13:15:21 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/19 14:10:40 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ struct s_img
 	int				mpfc;
 	mlx_image_t		*mp_ray;
 	mlx_image_t		*graph;
+	mlx_texture_t	*flash_txtr;
+	mlx_image_t		*flash;
 };
 
 struct s_player
@@ -156,6 +158,7 @@ void	ray_view(t_data *data);
 
 // hooks.c
 void	ft_loop(void *param);
+void	ft_flashlight(t_data *data);
 
 // graphics.c
 void	draw_wall(t_data *data, int wall_height, int map_x, int map_y);

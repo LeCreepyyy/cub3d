@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:28:11 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/19 11:54:46 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/19 14:16:21 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	ft_flashlight(t_data *data)
+{
+	static int		time_diff = 0;
+
+	if (time_diff < 20)
+		data->imgs.flash->instances[0].y -= 1;
+	if (time_diff >= 20 && time_diff < 40)
+		data->imgs.flash->instances[0].y += 1;
+	time_diff++;
+	if (time_diff >= 40)
+		time_diff = 0;
+}
 
 void	ft_loop(void *param)
 {
@@ -24,7 +37,7 @@ void	ft_loop(void *param)
 		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, -0.05);
 	ray_view(data);
 	mlx_set_mouse_pos(data->mlx_ptr, WIDTH / 2, HEIGHT / 2);
-	speed = 0.55;
+	speed = 1.0;
 	data->player.pos_x = data->imgs.mp_player->instances[0].x;
 	data->player.pos_y = data->imgs.mp_player->instances[0].y;
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_LEFT_SHIFT))
