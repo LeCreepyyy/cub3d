@@ -3,44 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:02:43 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/19 10:17:12 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/19 13:06:49 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "cub3d.h"
 
-double *didier(t_data *data, double start_x, double start_y, double dir_x, double dir_y) {
-	double* collision_point = malloc(2 * sizeof(double));
-    double ray_x = start_x;
-    double ray_y = start_y;
-    int step_x = (dir_x < 0) ? -1 : 1;
-    int step_y = (dir_y < 0) ? -1 : 1;
-    double delta_dist_x = (dir_x != 0) ? fabs(1 / dir_x) : INFINITY;
-    double delta_dist_y = (dir_y != 0) ? fabs(1 / dir_y) : INFINITY;
-    double side_dist_x = (dir_x < 0) ? (start_x - ray_x) * delta_dist_x : (ray_x + 1.0 - start_x) * delta_dist_x;
-    double side_dist_y = (dir_y < 0) ? (start_y - ray_y) * delta_dist_y : (ray_y + 1.0 - start_y) * delta_dist_y;
-	while (1) {
-		if (data->map_flat[(int)ray_y / MP_WALL][(int)ray_x / MP_WALL] == '1')
-			break ;
-        if (side_dist_x < side_dist_y) {
-            side_dist_x += delta_dist_x;
-            ray_x += step_x;
-        } else {
-            side_dist_y += delta_dist_y;
-            ray_y += step_y;
-        }
-    }
-    collision_point[0] = ray_x;
-    collision_point[1] = ray_y;
-    return (collision_point);
-}
-
-double	raygun(t_data *data, double x1, double y1, double dir_x, double dir_y)
+double	raygun(t_data *data, double x1, double y1, t_dda *ft_dda)
 {
-	double	*end_point = didier(data, x1, y1, dir_x, dir_y);
+	double	*end_point = dda(data, x1, y1, ft_dda);
 	double	delta_x = end_point[0] - x1;
 	double	delta_y = end_point[1] - y1;
 	double	max_delta = (fabs(delta_x) > fabs(delta_y)) ? fabs(delta_x) : fabs(delta_y);
@@ -62,28 +37,25 @@ double	raygun(t_data *data, double x1, double y1, double dir_x, double dir_y)
 void	pewpewpew(t_data *data)
 {
 	int		limit;
-	double	dir_x;
-	double	dir_y;
-	int 	index;
+	int		index;
+	t_dda	ft_dda;
 
 	limit = -1;
 	index = 0;
-	dir_x = data->player.dir_x;
-	dir_y = data->player.dir_y;
+	ft_dda.dir_x = data->player.dir_x;
+	ft_dda.dir_y = data->player.dir_y;
 	while (++limit < WIDTH / 2)
 	{
-		ft_rotate_point(&dir_x, &dir_y, 0.0007);
-		data->rays[index++] = raygun(data, data->player.pos_x + (MP_PLAYER / 2), data->player.pos_y + (MP_PLAYER / 2), dir_x, dir_y);
-		//raygun(data, data->player.pos_x, data->player.pos_y, dir_x, dir_y);
+		ft_rotate_point(&ft_dda.dir_x, &ft_dda.dir_y, 0.0007);
+		data->rays[index++] = raygun(data, data->player.pos_x + (MP_PLAYER / 2), data->player.pos_y + (MP_PLAYER / 2), &ft_dda);
 	}
 	limit = -1;
-	dir_x = data->player.dir_x;
-	dir_y = data->player.dir_y;
+	ft_dda.dir_x = data->player.dir_x;
+	ft_dda.dir_y = data->player.dir_y;
 	while (++limit < WIDTH / 2)
 	{
-		ft_rotate_point(&dir_x, &dir_y, -0.0007);
-		data->rays[index++] = raygun(data, data->player.pos_x + (MP_PLAYER / 2), data->player.pos_y + (MP_PLAYER / 2), dir_x, dir_y);
-		//raygun(data, data->player.pos_x, data->player.pos_y, dir_x, dir_y);
+		ft_rotate_point(&ft_dda.dir_x, &ft_dda.dir_y, -0.0007);
+		data->rays[index++] = raygun(data, data->player.pos_x + (MP_PLAYER / 2), data->player.pos_y + (MP_PLAYER / 2), &ft_dda);
 	}
 }
 
@@ -99,8 +71,9 @@ void	ray_view(t_data *data)
 	data->imgs.mp_ray = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 	data->imgs.graph = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 	mlx_image_to_window(data->mlx_ptr, data->imgs.mp_ray, 0, 0);
+	mlx_set_instance_depth(&data->imgs.mp_ray->instances[0], 4);
 	mlx_image_to_window(data->mlx_ptr, data->imgs.graph, 0, 0);
-	raygun(data, data->player.pos_x, data->player.pos_y, data->player.dir_x, data->player.dir_y);
+	mlx_set_instance_depth(&data->imgs.graph->instances[0], 1);
 	pewpewpew(data);
 	graphics(data);
 	pass = 1;
