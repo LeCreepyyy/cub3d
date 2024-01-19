@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/18 14:43:29 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/19 13:01:50 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,9 @@ struct s_img
 	mlx_image_t		*ceiling;
 	mlx_image_t		*mp_player;
 	mlx_image_t		*mp_wall;
+	int				mp_wc;
 	mlx_image_t		*mp_floor;
+	int				mpfc;
 	mlx_image_t		*mp_ray;
 	mlx_image_t		*graph;
 };
@@ -77,6 +79,21 @@ struct s_player
 	double	dir_x;
 	double	dir_y;
 };
+
+typedef struct s_dda
+{
+	double	*collision_point;
+	double	ray_x;
+	double	ray_y;
+	int		step_x;
+	int		step_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	dir_x;
+	double	dir_y;
+}			t_dda;
 
 typedef struct s_data
 {
@@ -122,6 +139,11 @@ void	setup_imgs(t_data *data);
 void	setup_imgs2(t_data *data);
 void	setup_mlx(t_data *data);
 
+// minimap.c
+void	minimap(t_data data);
+void	print_minimap_walls_and_floor(t_datadata, int x, int y);
+void	print_minimap_player_and_rays(t_data *data);
+
 // key_handler.c
 int		is_wall(t_data *data, int y, int x);
 void	ft_next_pos(t_data *data, double dir_x, double dir_y, double speed);
@@ -134,7 +156,7 @@ void	pewpewpew(t_data *data);
 void	ray_view(t_data *data);
 
 // hooks.c
-void	ft_hook(mlx_key_data_t keydata, void *param);
+void	ft_loor(void *param);
 
 // graphics.c
 void	draw_wall(t_data *data, int wall_height, int map_x, int map_y);
@@ -143,5 +165,8 @@ void	graphics(t_data *data);
 // colors_cf.c
 void	init_colors_cf(t_data *data);
 void	init_color_cf2(t_data *data, char **res);
+
+// ft_dda.c
+double	*dda(t_data *data, double start_x, double start_y, t_dda *dda);
 
 #endif
