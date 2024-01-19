@@ -6,14 +6,15 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 13:36:29 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/16 14:58:18 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/19 11:53:27 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 /**
- * Looks for the textures associated with the character C in the data->textures array.
+ * Looks for the textures associated with the character C
+ * in the data->textures array.
  * 
  * @param c Character that represents a specific texture.
  * @param data Data struct.

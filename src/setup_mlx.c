@@ -6,40 +6,11 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:59:32 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/16 15:09:11 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/19 11:43:39 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-/**
- * Draws minimap.
- * @param data Data struct.
- */
-void	minimap(t_data *data)
-{
-	int		y;
-	int		x;
-
-	y = -1;
-	while (data->map_flat[++y] != NULL)
-	{
-		x = -1;
-		while (data->map_flat[y][++x] != 0)
-		{
-			if (data->map_flat[y][x] == '1')
-				mlx_image_to_window(data->mlx_ptr, data->imgs.mp_wall,
-					x * MP_WALL, y * MP_WALL);
-			else if (data->map_flat[y][x] != ' '
-				&& data->map_flat[y][x] != '\n')
-				mlx_image_to_window(data->mlx_ptr, data->imgs.mp_floor,
-					x * MP_WALL, y * MP_WALL);
-		}
-	}
-	mlx_image_to_window(data->mlx_ptr, data->imgs.mp_player,
-		data->player_pos[1] * MP_WALL, data->player_pos[2] * MP_WALL);
-	mlx_image_to_window(data->mlx_ptr, data->imgs.mp_ray, 0, 0);
-}
 
 /**
  * Sets the values of memory block to the RGBA color provided.
@@ -114,7 +85,6 @@ void	setup_imgs2(t_data *data)
 	data->imgs.mp_ray = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 }
 
-
 /**
  * Entry points of MLX and graphical functions.
  * @param data Data struct.
@@ -127,6 +97,8 @@ void	setup_mlx(t_data *data)
 	setup_imgs(data);
 	mlx_image_to_window(data->mlx_ptr, data->imgs.ceiling, 0, 0);
 	mlx_image_to_window(data->mlx_ptr, data->imgs.floor, 0, 512);
+	mlx_set_instance_depth(&data->imgs.ceiling->instances[0], 0);
+	mlx_set_instance_depth(&data->imgs.floor->instances[0], 0);
 	minimap(data);
 	if (data->player_pos[0] == 'N')
 		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, 7.9);
@@ -139,7 +111,6 @@ void	setup_mlx(t_data *data)
 	mlx_set_cursor_mode(data->mlx_ptr, MLX_MOUSE_HIDDEN);
 	mlx_set_mouse_pos(data->mlx_ptr, WIDTH / 2, HEIGHT / 2);
 	ray_view(data);
-	mlx_key_hook(data->mlx_ptr, ft_hook, data);
-	//mlx_loop_hook(data->mlx_ptr, ft_loop, data);
+	mlx_loop_hook(data->mlx_ptr, ft_loop, data);
 	mlx_loop(data->mlx_ptr);
 }
