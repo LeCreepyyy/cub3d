@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/19 13:01:50 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/19 13:15:21 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,15 +133,14 @@ void	parse_map(char **ftab, int y, t_data *data);
 void	store_map(char **ftab, int y, t_data *data);
 
 // setup_mlx.c
-void	minimap(t_data *data);
 void	*px_memset(void *str, struct s_rgba color, size_t len);
 void	setup_imgs(t_data *data);
 void	setup_imgs2(t_data *data);
 void	setup_mlx(t_data *data);
 
 // minimap.c
-void	minimap(t_data data);
-void	print_minimap_walls_and_floor(t_datadata, int x, int y);
+void	minimap(t_data *data);
+void	print_minimap_walls_and_floor(t_data *data, int x, int y);
 void	print_minimap_player_and_rays(t_data *data);
 
 // key_handler.c
@@ -156,7 +155,7 @@ void	pewpewpew(t_data *data);
 void	ray_view(t_data *data);
 
 // hooks.c
-void	ft_loor(void *param);
+void	ft_loop(void *param);
 
 // graphics.c
 void	draw_wall(t_data *data, int wall_height, int map_x, int map_y);
