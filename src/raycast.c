@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:02:43 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/18 14:45:56 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/19 10:17:12 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	pewpewpew(t_data *data)
 	dir_y = data->player.dir_y;
 	while (++limit < WIDTH / 2)
 	{
-		ft_rotate_point(&dir_x, &dir_y, 0.0009);
+		ft_rotate_point(&dir_x, &dir_y, 0.0007);
 		data->rays[index++] = raygun(data, data->player.pos_x + (MP_PLAYER / 2), data->player.pos_y + (MP_PLAYER / 2), dir_x, dir_y);
 		//raygun(data, data->player.pos_x, data->player.pos_y, dir_x, dir_y);
 	}
@@ -81,7 +81,7 @@ void	pewpewpew(t_data *data)
 	dir_y = data->player.dir_y;
 	while (++limit < WIDTH / 2)
 	{
-		ft_rotate_point(&dir_x, &dir_y, -0.0009);
+		ft_rotate_point(&dir_x, &dir_y, -0.0007);
 		data->rays[index++] = raygun(data, data->player.pos_x + (MP_PLAYER / 2), data->player.pos_y + (MP_PLAYER / 2), dir_x, dir_y);
 		//raygun(data, data->player.pos_x, data->player.pos_y, dir_x, dir_y);
 	}
