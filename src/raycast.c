@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:02:43 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/19 13:06:49 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/22 09:57:43 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	pewpewpew(t_data *data)
 	while (++limit < WIDTH / 2)
 	{
 		ft_rotate_point(&ft_dda.dir_x, &ft_dda.dir_y, 0.0007);
-		data->rays[index++] = raygun(data, data->player.pos_x + (MP_PLAYER / 2), data->player.pos_y + (MP_PLAYER / 2), &ft_dda);
+		data->rays.length[index++] = raygun(data, data->player.pos_x + (MP_PLAYER / 2), data->player.pos_y + (MP_PLAYER / 2), &ft_dda);
 	}
 	limit = -1;
 	ft_dda.dir_x = data->player.dir_x;
@@ -55,7 +55,7 @@ void	pewpewpew(t_data *data)
 	while (++limit < WIDTH / 2)
 	{
 		ft_rotate_point(&ft_dda.dir_x, &ft_dda.dir_y, -0.0007);
-		data->rays[index++] = raygun(data, data->player.pos_x + (MP_PLAYER / 2), data->player.pos_y + (MP_PLAYER / 2), &ft_dda);
+		data->rays.length[index++] = raygun(data, data->player.pos_x + (MP_PLAYER / 2), data->player.pos_y + (MP_PLAYER / 2), &ft_dda);
 	}
 }
 

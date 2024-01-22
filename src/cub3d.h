@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/19 14:10:40 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/22 09:57:15 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,13 +97,21 @@ typedef struct s_dda
 	double	dir_y;
 }			t_dda;
 
+struct s_ray
+{
+	double		*length;
+	double		*collision_x;
+	double		*collision_y;
+	mlx_image_t	*textures_strip;
+};
+
 typedef struct s_data
 {
 	char			**textures;
 	char			**map_flat;
 	int				*player_pos;
-	double			*rays;
 	mlx_t			*mlx_ptr;
+	struct s_ray	rays;
 	struct s_img	imgs;
 	struct s_colors	colors;
 	struct s_player	player;

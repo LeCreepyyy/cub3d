@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:00:10 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/19 12:47:48 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/22 09:57:55 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	init_data(t_data *data)
 	data->player_pos[0] = 0;
 	data->player_pos[1] = 0;
 	data->player_pos[2] = 0;
-	data->rays = ft_calloc(sizeof(double), WIDTH);
 	data->imgs.wall_north = NULL;
 	data->imgs.wall_south = NULL;
 	data->imgs.wall_east = NULL;
@@ -39,6 +38,9 @@ void	init_data(t_data *data)
 	data->imgs.mpfc = 0;
 	data->player.dir_x = -1;
 	data->player.dir_y = 0;
+	data->rays.length = ft_calloc(sizeof(double), WIDTH);
+	data->rays.collision_x = ft_calloc(sizeof(double), WIDTH);
+	data->rays.collision_y = ft_calloc(sizeof(double), WIDTH);
 	init_colors(data);
 }
 
