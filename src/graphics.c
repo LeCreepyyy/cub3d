@@ -3,15 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:17:47 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/22 12:00:10 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/22 13:00:35 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/* Creer un uint32_t avec 4 uint_8t pour l'utiliser dans mlx_put_pixel() */
+uint32_t	stack_pixel(uint8_t *stack)
+{
+	uint8_t		value1;
+	uint8_t		value2;
+	uint8_t		value3;
+	uint8_t		value4;
+	uint32_t	pixels;
+
+	value1 = stack[0];
+	value2 = stack[1];
+	value3 = stack[2];
+	value4 = stack[3];
+	pixels = (uint32_t)value1 << 24 | (uint32_t)value2 << 16
+		| (uint32_t)value3 << 8 | (uint32_t)value4;
+	return (pixels);
+}
 
 /**
  * Draws wall arround a given center point.
@@ -36,24 +53,6 @@ void	draw_wall(t_data *data, int wall_height, int map_x, int map_y)
 		else
 			mlx_put_pixel(data->imgs.graph, map_x, map_y - k++, 2559999999);
 	}
-}
-
-/* TEST: Creer un uint32_t avec 4 uint_8t pour l'utiliser dans draw_img() */
-uint32_t	stack_pixel(uint8_t *stack)
-{
-	uint8_t		value1;
-	uint8_t		value2;
-	uint8_t		value3;
-	uint8_t		value4;
-	uint32_t	pixels;
-
-	value1 = stack[0];
-	value2 = stack[1];
-	value3 = stack[2];
-	value4 = stack[3];
-	pixels = (uint32_t)value1 << 24 | (uint32_t)value2 << 16
-		| (uint32_t)value3 << 8 | (uint32_t)value4;
-	return (pixels);
 }
 
 /* TEST: fonction qui affiche une image pixel par pixel */
