@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:17:47 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/22 09:57:36 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/22 12:00:10 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	graphics(t_data *data)
 		if (i < WIDTH / 2)
 		{
 			distance = cos(i * 0.0007) * data->rays.length[i];
-			wall_height = HEIGHT / (distance * 0.1);
+			wall_height = HEIGHT / (distance * 0.04);
 			if (wall_height > HEIGHT)
 				wall_height = HEIGHT - 1;
 			draw_wall(data, wall_height, i + WIDTH / 2, HEIGHT / 2);
@@ -103,7 +103,7 @@ void	graphics(t_data *data)
 		else
 		{
 			distance = cos((i - (WIDTH / 2)) * 0.0007) * data->rays.length[i];
-			wall_height = HEIGHT / (distance * 0.1);
+			wall_height = HEIGHT / (distance * 0.04);
 			if (wall_height > HEIGHT)
 				wall_height = HEIGHT - 1;
 			draw_wall(data, wall_height,

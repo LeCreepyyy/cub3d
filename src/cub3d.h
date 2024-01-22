@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/22 09:57:15 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/22 12:38:55 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@
 
 # define MP_PLAYER 5
 # define MP_WALL 20
-# define TEXTURE_H 20
-# define TEXTURE_W 20
+# define WALL 64 
 
 # define WIDTH 1680
 # define HEIGHT 1024
@@ -102,7 +101,8 @@ struct s_ray
 	double		*length;
 	double		*collision_x;
 	double		*collision_y;
-	mlx_image_t	*textures_strip;
+	mlx_image_t	*wall;
+	double		strip_x;
 };
 
 typedef struct s_data
