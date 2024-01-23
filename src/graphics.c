@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:17:47 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/23 10:23:55 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/23 13:29:39 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,18 @@ uint32_t	stack_pixel(uint8_t *stack)
  * @param map_x coordonnees X du point de depart du mur sur la fenetre.
  * @param map_y Coordonnees Y du point de depart du mur sur la fenetre.
  */
-void	draw_wall(t_data *data, int wall_height, int map_x, int map_y)
+void	draw_wall(t_data *data, int i, int map_x, int map_y)
 {
-	int	i;
+	int	l;
 	int	j;
 	int	k;
 
-	i = -1;
+	l = -1;
 	j = 1;
 	k = 0;
-	while (++i < wall_height)
+	while (++l < data->rays[i].wall_height)
 	{
-		if (i > (wall_height / 2))
+		if (l > (data->rays[i].wall_height / 2))
 			mlx_put_pixel(data->imgs.graph, map_x, map_y + j++, 1899999999);
 		else
 			mlx_put_pixel(data->imgs.graph, map_x, map_y - k++, 1899999999);
@@ -86,27 +86,25 @@ void	graphics(t_data *data)
 {
 	int				i;
 	double			distance;
-	unsigned int	wall_height;
 
 	i = -1;
 	while (++i < WIDTH)
 	{
 		if (i < WIDTH / 2)
 		{
-			distance = cos(i * 0.0007) * data->rays.length[i];
-			wall_height = HEIGHT / (distance * 0.04);
-			if (wall_height > HEIGHT)
-				wall_height = HEIGHT - 1;
-			draw_wall(data, wall_height, i + WIDTH / 2, HEIGHT / 2);
+			distance = cos(i * 0.0007) * data->rays[i].length;
+			data->rays[i].wall_height = HEIGHT / (distance * 0.04);
+			if (data->rays[i].wall_height > HEIGHT)
+				data->rays[i].wall_height = HEIGHT - 1;
+			draw_wall(data, i, i + WIDTH / 2, HEIGHT / 2);
 		}
 		else
 		{
-			distance = cos((i - (WIDTH / 2)) * 0.0007) * data->rays.length[i];
-			wall_height = HEIGHT / (distance * 0.04);
-			if (wall_height > HEIGHT)
-				wall_height = HEIGHT - 1;
-			draw_wall(data, wall_height,
-				(WIDTH / 2) + ((WIDTH / 2) - i), HEIGHT / 2);
+			distance = cos((i - (WIDTH / 2)) * 0.0007) * data->rays[i].length;
+			data->rays[i].wall_height = HEIGHT / (distance * 0.04);
+			if (data->rays[i].wall_height > HEIGHT)
+				data->rays[i].wall_height = HEIGHT - 1;
+			draw_wall(data, i, (WIDTH / 2) + ((WIDTH / 2) - i), HEIGHT / 2);
 		}
 	}
 }

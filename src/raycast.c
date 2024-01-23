@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:02:43 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/22 12:30:34 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/23 13:32:26 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,19 @@ double	raygun(t_data *data, double x1, double y1, t_dda *ft_dda)
 void	pewpewpew(t_data *data)
 {
 	int		limit;
-	int		index;
+	int		i;
 	t_dda	ft_dda;
 
 	limit = -1;
-	index = -1;
+	i = -1;
 	ft_dda.dir_x = data->player.dir_x;
 	ft_dda.dir_y = data->player.dir_y;
 	while (++limit < WIDTH / 2)
 	{
 		ft_rotate_point(&ft_dda.dir_x, &ft_dda.dir_y, 0.0007);
-		data->rays.length[++index] = raygun(data, data->player.pos_x, data->player.pos_y + (MP_PLAYER / 2), &ft_dda);
-		data->rays.collision_x[index] = ft_dda.collision_point[0];
-		data->rays.collision_y[index] = ft_dda.collision_point[1];
+		data->rays[++i].length = raygun(data, data->player.pos_x, data->player.pos_y + (MP_PLAYER / 2), &ft_dda);
+		data->rays[i].collision_x = ft_dda.collision_point[0];
+		data->rays[i].collision_y = ft_dda.collision_point[1];
 	}
 	limit = -1;
 	ft_dda.dir_x = data->player.dir_x;
@@ -57,9 +57,9 @@ void	pewpewpew(t_data *data)
 	while (++limit < WIDTH / 2)
 	{
 		ft_rotate_point(&ft_dda.dir_x, &ft_dda.dir_y, -0.0007);
-		data->rays.length[++index] = raygun(data, data->player.pos_x, data->player.pos_y + (MP_PLAYER / 2), &ft_dda);
-		data->rays.collision_x[index] = ft_dda.collision_point[0];
-		data->rays.collision_y[index] = ft_dda.collision_point[1];
+		data->rays[++i].length = raygun(data, data->player.pos_x, data->player.pos_y + (MP_PLAYER / 2), &ft_dda);
+		data->rays[i].collision_x = ft_dda.collision_point[0];
+		data->rays[i].collision_y = ft_dda.collision_point[1];
 	}
 }
 

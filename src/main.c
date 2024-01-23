@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:00:10 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/22 10:36:34 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/23 13:22:46 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,7 @@ void	init_data(t_data *data)
 	data->imgs.mpfc = 0;
 	data->player.dir_x = -1;
 	data->player.dir_y = 0;
-	data->rays.length = ft_calloc(sizeof(double), WIDTH);
-	data->rays.collision_x = ft_calloc(sizeof(double), WIDTH);
-	data->rays.collision_y = ft_calloc(sizeof(double), WIDTH);
+	data->rays = ft_calloc(sizeof(struct s_ray), WIDTH);
 	init_colors(data);
 }
 

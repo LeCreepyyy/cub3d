@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/22 12:38:55 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/23 13:30:41 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,12 @@ typedef struct s_dda
 
 struct s_ray
 {
-	double		*length;
-	double		*collision_x;
-	double		*collision_y;
-	mlx_image_t	*wall;
-	double		strip_x;
+	double			length;
+	double			collision_x;
+	double			collision_y;
+	int				wall_height;
+	mlx_image_t		*wall;
+	double			strip_x;
 };
 
 typedef struct s_data
@@ -111,7 +112,7 @@ typedef struct s_data
 	char			**map_flat;
 	int				*player_pos;
 	mlx_t			*mlx_ptr;
-	struct s_ray	rays;
+	struct s_ray	*rays;
 	struct s_img	imgs;
 	struct s_colors	colors;
 	struct s_player	player;

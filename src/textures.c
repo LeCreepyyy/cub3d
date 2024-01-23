@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 12:37:29 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/22 11:45:51 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/23 13:26:48 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,21 @@
  * @param py Player y-coords
  * @return North South East West
  */
-mlx_image_t	*get_texture_orientation(t_data *data, int i, double px, double py)
+int get_texture_orientation(t_data *data, int i, double px, double py)
 {
-	if (fmod(data->rays.collision_x[i], 1.0) == 0.0)
+	if (fmod(data->rays[i].collision_x, 1.0) == 0.0)
 	{
-		if (px < data->rays.collision_x[i])
-			return (data->imgs.wall_west);
-		if (px > data->rays.collision_x[i])
-			return (data->imgs.wall_east);
+		if (px < data->rays[i].collision_x)
+			return (4);
+		if (px > data->rays[i].collision_x)
+			return (3);
 	}
-	else if (fmod(data->rays.collision_y[i], 1.0) == 0.0)
+	else if (fmod(data->rays[i].collision_y, 1.0) == 0.0)
 	{
-		if (py < data->rays.collision_y[i])
-			return (data->imgs.wall_south);
-		if (py > data->rays.collision_y[i])
-			return (data->imgs.wall_north);
+		if (py < data->rays[i].collision_y)
+			return (2);
+		if (py > data->rays[i].collision_y)
+			return (1);
 	}
 }
 
@@ -46,10 +46,32 @@ mlx_image_t	*get_texture_orientation(t_data *data, int i, double px, double py)
 void	get_texture_strip(t_data *data)
 {
 	int	i;
+	int	orient;
 
 	i = -1;
-	while (data->rays.length[++i])
+
+	while (data->rays[++i].length)
 	{
-		data->rays.wall = get_texture_orientation(data, i, data->player.pos_x, data->player.pos_y);
+		orient = get_texture_orientation(data, i, data->player.pos_x, data->player.pos_y);
+		if (orient == 1)
+		{
+			data->rays[i].wall = data->imgs.wall_north;
+			data->rays[i].strip_x = data->rays[i].collision_x - fmod(data->rays[i].collision_x, 1.0);
+		}
+		if (orient == 2)
+		{
+			data->rays[i].wall = data->imgs.wall_south;
+			data->rays[i].strip_x = data->rays[i].collision_x - fmod(data->rays[i].collision_x, 1.0);
+		}
+		if (orient == 3)
+		{
+			data->rays[i].wall = data->imgs.wall_east;
+			data->rays[i].strip_x = data->rays[i].collision_y - fmod(data->rays[i].collision_y, 1.0);
+		}
+		if (orient == 4)
+		{
+			data->rays[i].wall = data->imgs.wall_west;
+			data->rays[i].strip_x = data->rays[i].collision_y - fmod(data->rays[i].collision_y, 1.0);
+		}
 	}
 }
