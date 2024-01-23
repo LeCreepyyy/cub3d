@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:17:47 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/23 13:29:39 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/23 15:08:44 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	draw_wall(t_data *data, int i, int map_x, int map_y)
 			mlx_put_pixel(data->imgs.graph, map_x, map_y + j++, 1899999999);
 		else
 			mlx_put_pixel(data->imgs.graph, map_x, map_y - k++, 1899999999);
+		//printf("stripx: %f\n", data->rays[i].strip_x);
 	}
 }
 
@@ -88,6 +89,7 @@ void	graphics(t_data *data)
 	double			distance;
 
 	i = -1;
+	get_texture_strip(data);
 	while (++i < WIDTH)
 	{
 		if (i < WIDTH / 2)

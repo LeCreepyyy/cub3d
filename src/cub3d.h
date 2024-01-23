@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/23 13:30:41 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/23 14:46:00 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,10 @@ void	ray_view(t_data *data);
 // hooks.c
 void	ft_loop(void *param);
 void	ft_flashlight(t_data *data);
+
+// textures.c
+int		get_texture_orientation(t_data *data, int i, double px, double py);
+void	get_texture_strip(t_data *data);
 
 // graphics.c
 void	draw_wall(t_data *data, int wall_height, int map_x, int map_y);

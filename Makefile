@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+         #
+#    By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/14 11:30:00 by vpoirot           #+#    #+#              #
-#    Updated: 2024/01/19 13:02:14 by vpoirot          ###   ########.fr        #
+#    Updated: 2024/01/23 14:47:37 by bgaertne         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ SRCS	=	src/main.c\
 			src/colors_cf.c\
 			src/hooks.c\
 			src/ft_dda.c\
-			src/minimap.c
+			src/minimap.c\
+			src/textures.c
 
 OBJS	=	${SRCS:.c=.o}
 
