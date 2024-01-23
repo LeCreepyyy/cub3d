@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:17:47 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/22 13:00:35 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/23 10:23:55 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ void	draw_wall(t_data *data, int wall_height, int map_x, int map_y)
 	while (++i < wall_height)
 	{
 		if (i > (wall_height / 2))
-			mlx_put_pixel(data->imgs.graph, map_x, map_y + j++, 2559999999);
+			mlx_put_pixel(data->imgs.graph, map_x, map_y + j++, 1899999999);
 		else
-			mlx_put_pixel(data->imgs.graph, map_x, map_y - k++, 2559999999);
+			mlx_put_pixel(data->imgs.graph, map_x, map_y - k++, 1899999999);
 	}
 }
 
