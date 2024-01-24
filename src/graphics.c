@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:17:47 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/23 15:08:44 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/24 14:34:55 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,27 @@ void	draw_wall(t_data *data, int i, int map_x, int map_y)
 	int	l;
 	int	j;
 	int	k;
+	uint32_t color;
 
 	l = -1;
 	j = 1;
 	k = 0;
+	if (data->rays[i].orient == NORTH)
+		color = UINT_PURPLE;
+	if (data->rays[i].orient == SOUTH)
+		color = UINT_BLUE;
+	if (data->rays[i].orient == EAST)
+		color = UINT_BEIGE;
+	if (data->rays[i].orient == WEST)
+		color = UINT_ORANGE;
+	if (i < 20)
+		color = UINT_CYAN;
 	while (++l < data->rays[i].wall_height)
 	{
 		if (l > (data->rays[i].wall_height / 2))
-			mlx_put_pixel(data->imgs.graph, map_x, map_y + j++, 1899999999);
+			mlx_put_pixel(data->imgs.graph, map_x, map_y + j++, color);
 		else
-			mlx_put_pixel(data->imgs.graph, map_x, map_y - k++, 1899999999);
+			mlx_put_pixel(data->imgs.graph, map_x, map_y - k++, color);
 		//printf("stripx: %f\n", data->rays[i].strip_x);
 	}
 }

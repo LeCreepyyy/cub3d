@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 12:37:29 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/24 11:34:06 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/24 14:42:20 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,37 @@
  * @param py Player y-coords
  * @return North South East West
  */
-
-// SOUCIS ICI
-
 int	get_texture_orientation(t_data *data, int i, double px, double py)
 {
-	if (fmod(data->rays[i].collision_y, 1.0) == 0.0)
+	if ((int)data->rays[i].collision_x % 20 == 0)
 	{
-		if (px < data->rays[i].collision_x)
-			return (4);
-		if (px > data->rays[i].collision_x)
-			return (3);
+		if (py <= data->rays[i].collision_y)
+		{
+			if (i == 0)
+				printf("SOUTH %i\n", (int)data->rays[i].collision_y % 20);
+			return (SOUTH);
+		}
+		if (py >= data->rays[i].collision_y)
+		{
+			if (i == 0)
+				printf("NORTH %i\n", (int)data->rays[i].collision_y % 20);
+			return (NORTH);
+		}
 	}
-	else if (fmod(data->rays[i].collision_x, 1.0) == 0.0)
+	if ((int)data->rays[i].collision_y % 20 == 0)
 	{
-		if (py < data->rays[i].collision_y)
-			return (2);
-		if (py > data->rays[i].collision_y)
-			return (1);
+		if (px <= data->rays[i].collision_x)
+		{
+			if (i == 0)
+				printf("EAST %i\n", (int)data->rays[i].collision_y % 20);
+			return (EAST);
+		}
+		if (px >= data->rays[i].collision_x)
+		{
+			if (i == 0)
+				printf("WEST %i\n", (int)data->rays[i].collision_y % 20);
+			return (WEST);
+		}
 	}
 	return (0);
 }
@@ -57,24 +70,25 @@ void	get_texture_strip(t_data *data)
 	while (data->rays[++i].length)
 	{
 		orient = get_texture_orientation(data, i, data->player.pos_x, data->player.pos_y);
-		if (i == 0)
-			printf("orient: %i\tx: %f\ty: %f\n", orient, data->rays[i].collision_x, data->rays[i].collision_y);
-		if (orient == 1)
+		//if (i == 0)
+			//printf("orient: %i\n", orient);
+		data->rays[i].orient = orient;
+		if (orient == NORTH)
 		{
 			data->rays[i].wall = data->imgs.wall_north;
 			data->rays[i].strip_x = data->rays[i].collision_x - fmod(data->rays[i].collision_x, 1.0);
 		}
-		if (orient == 2)
+		if (orient == SOUTH)
 		{
 			data->rays[i].wall = data->imgs.wall_south;
 			data->rays[i].strip_x = data->rays[i].collision_x - fmod(data->rays[i].collision_x, 1.0);
 		}
-		if (orient == 3)
+		if (orient == EAST)
 		{
 			data->rays[i].wall = data->imgs.wall_east;
 			data->rays[i].strip_x = data->rays[i].collision_y - fmod(data->rays[i].collision_y, 1.0);
 		}
-		if (orient == 4)
+		if (orient == WEST)
 		{
 			data->rays[i].wall = data->imgs.wall_west;
 			data->rays[i].strip_x = data->rays[i].collision_y - fmod(data->rays[i].collision_y, 1.0);

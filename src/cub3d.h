@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/23 14:46:00 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/24 14:36:07 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,17 @@
 
 # define WIDTH 1680
 # define HEIGHT 1024
+
+# define NORTH 1
+# define SOUTH 2
+# define EAST 3
+# define WEST 4
+
+# define UINT_PURPLE 1899999999
+# define UINT_BLUE 1019999999
+# define UINT_BEIGE 3869999999
+# define UINT_ORANGE 2959999999
+# define UINT_CYAN 9999999
 
 # define PI 3.141592653589793
 
@@ -102,6 +113,7 @@ struct s_ray
 	double			collision_x;
 	double			collision_y;
 	int				wall_height;
+	int				orient;
 	mlx_image_t		*wall;
 	double			strip_x;
 };
