@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 12:37:29 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/23 15:23:46 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/24 11:34:06 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	get_texture_strip(t_data *data)
 	{
 		orient = get_texture_orientation(data, i, data->player.pos_x, data->player.pos_y);
 		if (i == 0)
-			printf("orient: %i\n", orient);
+			printf("orient: %i\tx: %f\ty: %f\n", orient, data->rays[i].collision_x, data->rays[i].collision_y);
 		if (orient == 1)
 		{
 			data->rays[i].wall = data->imgs.wall_north;

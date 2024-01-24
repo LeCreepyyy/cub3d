@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:02:43 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/23 13:32:26 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/24 11:21:47 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 double	raygun(t_data *data, double x1, double y1, t_dda *ft_dda)
 {
-	double	*end_point = dda(data, x1, y1, ft_dda);
-	double	delta_x = end_point[0] - x1;
-	double	delta_y = end_point[1] - y1;
+	dda(data, x1, y1, ft_dda);
+	double	delta_x = ft_dda->collision_point[0] - x1;
+	double	delta_y = ft_dda->collision_point[1] - y1;
 	double	max_delta = (fabs(delta_x) > fabs(delta_y)) ? fabs(delta_x) : fabs(delta_y);
 	int pixel_count = 0;
-	double	res = sqrt(pow(end_point[0] - x1, 2) + pow(end_point[1] - y1, 2));
+	double	res = sqrt(pow(ft_dda->collision_point[0] - x1, 2) + pow(ft_dda->collision_point[1] - y1, 2));
 	double	t = 0.0;
 	while (t <= 1.0)
 	{
@@ -30,7 +30,6 @@ double	raygun(t_data *data, double x1, double y1, t_dda *ft_dda)
 		t += 1.0 / max_delta;
 		pixel_count++;
 	}
-	free(end_point);
 	return (res);
 }
 
@@ -50,6 +49,7 @@ void	pewpewpew(t_data *data)
 		data->rays[++i].length = raygun(data, data->player.pos_x, data->player.pos_y + (MP_PLAYER / 2), &ft_dda);
 		data->rays[i].collision_x = ft_dda.collision_point[0];
 		data->rays[i].collision_y = ft_dda.collision_point[1];
+		free(ft_dda.collision_point);
 	}
 	limit = -1;
 	ft_dda.dir_x = data->player.dir_x;
@@ -60,6 +60,7 @@ void	pewpewpew(t_data *data)
 		data->rays[++i].length = raygun(data, data->player.pos_x, data->player.pos_y + (MP_PLAYER / 2), &ft_dda);
 		data->rays[i].collision_x = ft_dda.collision_point[0];
 		data->rays[i].collision_y = ft_dda.collision_point[1];
+		free(ft_dda.collision_point);
 	}
 }
 
