@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 12:37:29 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/24 14:42:20 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:13:18 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,35 +22,19 @@
  */
 int	get_texture_orientation(t_data *data, int i, double px, double py)
 {
-	if ((int)data->rays[i].collision_x % 20 == 0)
+	if ((int)data->rays[i].collision_x % 20 <= 0)
 	{
 		if (py <= data->rays[i].collision_y)
-		{
-			if (i == 0)
-				printf("SOUTH %i\n", (int)data->rays[i].collision_y % 20);
 			return (SOUTH);
-		}
 		if (py >= data->rays[i].collision_y)
-		{
-			if (i == 0)
-				printf("NORTH %i\n", (int)data->rays[i].collision_y % 20);
 			return (NORTH);
-		}
 	}
-	if ((int)data->rays[i].collision_y % 20 == 0)
+	if ((int)data->rays[i].collision_y % 20 <= 0)
 	{
 		if (px <= data->rays[i].collision_x)
-		{
-			if (i == 0)
-				printf("EAST %i\n", (int)data->rays[i].collision_y % 20);
 			return (EAST);
-		}
 		if (px >= data->rays[i].collision_x)
-		{
-			if (i == 0)
-				printf("WEST %i\n", (int)data->rays[i].collision_y % 20);
 			return (WEST);
-		}
 	}
 	return (0);
 }

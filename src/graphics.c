@@ -6,27 +6,23 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:17:47 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/24 14:34:55 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/25 13:59:40 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 /* Creer un uint32_t avec 4 uint_8t pour l'utiliser dans mlx_put_pixel() */
-uint32_t	stack_pixel(uint8_t *stack)
+uint32_t	stack_pixel(struct s_rgba *color, uint8_t *stack)
 {
-	uint8_t		value1;
-	uint8_t		value2;
-	uint8_t		value3;
-	uint8_t		value4;
 	uint32_t	pixels;
 
-	value1 = stack[0];
-	value2 = stack[1];
-	value3 = stack[2];
-	value4 = stack[3];
-	pixels = (uint32_t)value1 << 24 | (uint32_t)value2 << 16
-		| (uint32_t)value3 << 8 | (uint32_t)value4;
+	if (color != NULL)
+		pixels = (uint32_t)color->r << 24 | (uint32_t)color->g << 16
+			| (uint32_t)color->b << 8 | (uint32_t)color->a;
+	else if (stack != NULL)
+		pixels = (uint32_t)stack[0] << 24 | (uint32_t)stack[1] << 16
+			| (uint32_t)stack[2] << 8 | (uint32_t)stack[3];
 	return (pixels);
 }
 
@@ -48,15 +44,15 @@ void	draw_wall(t_data *data, int i, int map_x, int map_y)
 	j = 1;
 	k = 0;
 	if (data->rays[i].orient == NORTH)
-		color = UINT_PURPLE;
+		color = stack_pixel(&data->colors.red, NULL);
 	if (data->rays[i].orient == SOUTH)
-		color = UINT_BLUE;
+		color = stack_pixel(&data->colors.orange, NULL);
 	if (data->rays[i].orient == EAST)
-		color = UINT_BEIGE;
+		color = stack_pixel(&data->colors.green, NULL);
 	if (data->rays[i].orient == WEST)
-		color = UINT_ORANGE;
+		color = stack_pixel(&data->colors.lime, NULL);
 	if (i < 20)
-		color = UINT_CYAN;
+		color = stack_pixel(&data->colors.white, NULL);
 	while (++l < data->rays[i].wall_height)
 	{
 		if (l > (data->rays[i].wall_height / 2))
@@ -80,7 +76,7 @@ void	draw_img(t_data *data)
 		int delta_height = data->imgs.wall_west_texture->height;
 		while (delta_height)
 		{
-			mlx_put_pixel(data->imgs.graph, y, x, stack_pixel(&data->imgs.wall_west->pixels[i]));
+			mlx_put_pixel(data->imgs.graph, y, x, stack_pixel(NULL, &data->imgs.wall_west->pixels[i]));
 			i += 4;
 			y++;;
 			delta_height--;

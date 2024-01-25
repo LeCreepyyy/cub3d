@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/24 14:36:07 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:08:40 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,6 @@
 # define EAST 3
 # define WEST 4
 
-# define UINT_PURPLE 1899999999
-# define UINT_BLUE 1019999999
-# define UINT_BEIGE 3869999999
-# define UINT_ORANGE 2959999999
-# define UINT_CYAN 9999999
-
 # define PI 3.141592653589793
 
 struct s_rgba
@@ -53,10 +47,14 @@ struct s_rgba
 
 struct s_colors
 {
+	struct s_rgba	white;
+	struct s_rgba	green;
+	struct s_rgba	lime;
+	struct s_rgba	orange;
 	struct s_rgba	red;
+	struct s_rgba	yellow;
 	struct s_rgba	dark_blue;
 	struct s_rgba	light_blue;
-	struct s_rgba	lime;
 	struct s_rgba	ceilling;
 	struct s_rgba	floor;
 };
@@ -188,6 +186,7 @@ void	get_texture_strip(t_data *data);
 // graphics.c
 void	draw_wall(t_data *data, int wall_height, int map_x, int map_y);
 void	graphics(t_data *data);
+uint32_t	stack_pixel(struct s_rgba *color, uint8_t *stack);
 
 // colors_cf.c
 void	init_colors_cf(t_data *data);

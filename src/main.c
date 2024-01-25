@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:00:10 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/23 13:22:46 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:09:03 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,28 +42,29 @@ void	init_data(t_data *data)
 	init_colors(data);
 }
 
+void	rgb_creator(struct s_rgba *color, uint8_t r, uint8_t g, uint8_t b)
+{
+	color->r = r;
+	color->g = g;
+	color->b = b;
+	color->a = 255;
+}
+
+
 /**
  * Data initialization.
  * @param data Data struct
  */
 void	init_colors(t_data *data)
 {
-	data->colors.red.r = 164;
-	data->colors.red.g = 36;
-	data->colors.red.b = 36;
-	data->colors.red.a = 255;
-	data->colors.lime.r = 104;
-	data->colors.lime.g = 255;
-	data->colors.lime.b = 4;
-	data->colors.lime.a = 255;
-	data->colors.dark_blue.r = 16;
-	data->colors.dark_blue.g = 52;
-	data->colors.dark_blue.b = 166;
-	data->colors.dark_blue.a = 255;
-	data->colors.light_blue.r = 169;
-	data->colors.light_blue.g = 234;
-	data->colors.light_blue.b = 254;
-	data->colors.light_blue.a = 255;
+	rgb_creator(&data->colors.red, 255, 0, 0);
+	rgb_creator(&data->colors.orange, 255, 140, 0);
+	rgb_creator(&data->colors.yellow, 255, 255, 0);
+	rgb_creator(&data->colors.lime, 0, 255, 0);
+	rgb_creator(&data->colors.green, 0, 140, 0);
+	rgb_creator(&data->colors.dark_blue, 0, 0, 255);
+	rgb_creator(&data->colors.light_blue, 0, 190, 255);
+	rgb_creator(&data->colors.white, 255, 255, 255);
 	data->colors.ceilling.a = 255;
 	data->colors.floor.a = 255;
 }
