@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dda.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 12:34:40 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/19 12:50:41 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/25 14:56:12 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,13 @@ double	*dda(t_data *data, double start_x, double start_y, t_dda *dda)
 		{
 			dda->side_dist_x += dda->delta_dist_x;
 			dda->ray_x += dda->step_x;
+			dda->collision_axis = 'x';
 		}
 		else
 		{
 			dda->side_dist_y += dda->delta_dist_y;
 			dda->ray_y += dda->step_y;
+			dda->collision_axis = 'y';
 		}
 	}
 	dda->collision_point[0] = dda->ray_x;

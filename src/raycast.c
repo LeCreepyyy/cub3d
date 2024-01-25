@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:02:43 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/25 14:09:11 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:58:29 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	pewpewpew(t_data *data)
 		data->rays[++i].length = raygun(data, data->player.pos_x, data->player.pos_y + (MP_PLAYER / 2), &ft_dda);
 		data->rays[i].collision_x = ft_dda.collision_point[0];
 		data->rays[i].collision_y = ft_dda.collision_point[1];
+		data->rays[i].collision_axis = ft_dda.collision_axis;
 		free(ft_dda.collision_point);
 	}
 }

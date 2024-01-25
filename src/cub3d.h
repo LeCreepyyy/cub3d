@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/25 14:18:12 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:57:56 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ struct s_player
 typedef struct s_dda
 {
 	double	*collision_point;
+	int		collision_axis;
 	double	ray_x;
 	double	ray_y;
 	int		step_x;
@@ -116,6 +117,7 @@ struct s_ray
 	double			length;
 	double			collision_x;
 	double			collision_y;
+	int				collision_axis;
 	int				wall_height;
 	int				orient;
 	mlx_image_t		*wall;

@@ -6,43 +6,30 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 12:37:29 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/25 14:16:30 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/25 15:10:44 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-
-	// if ((int)data->rays[i].collision_x % 20 == 0)
-	// {
-	// 	if (py <= data->rays[i].collision_y)
-	// 	{
-	// 		if (i == 0)
-	// 			printf("SOUTH %i\n", (int)data->rays[i].collision_y % 20);
-	// 		return (SOUTH);
-	// 	}
-	// 	if (py >= data->rays[i].collision_y)
-	// 	{
-	// 		if (i == 0)
-	// 			printf("NORTH %i\n", (int)data->rays[i].collision_y % 20);
-	// 		return (NORTH);
-	// 	}
-	// }
-	// if ((int)data->rays[i].collision_y % 20 == 0)
-	// {
-	// 	if (px <= data->rays[i].collision_x)
-	// 	{
-	// 		if (i == 0)
-	// 			printf("EAST %i\n", (int)data->rays[i].collision_y % 20);
-	// 		return (EAST);
-	// 	}
-	// 	if (px >= data->rays[i].collision_x)
-	// 	{
-	// 		if (i == 0)
-	// 			printf("WEST %i\n", (int)data->rays[i].collision_y % 20);
-	// 		return (WEST);
-	// 	}
-	// }
+	
+int	get_texture_orientation(t_data *data, int i, double px, double py)
+{
+	if (data->rays[i].collision_axis == 'x')
+	{
+		if (py <= data->rays[i].collision_y)
+			return (SOUTH);
+		else
+			return (NORTH);
+	}
+	else if (data->rays[i].collision_axis == 'y')
+	{
+		if (px <= data->rays[i].collision_x)
+			return (EAST);
+		else
+			return (WEST);
+	}
+	return (0);
+}
 
 /**
  * Determines wich texture to display.
@@ -58,21 +45,21 @@
  * 
  * @return North South East West
  */
-int	get_texture_orientation(t_data *data, int i, double px, double py)
-{
-	int	orient_value;
+// int	get_texture_orientation(t_data *data, int i, double px, double py)
+// {
+// 	int	orient_value;
 
-	orient_value = 0;
-	if (data->rays[i].collision_x > px)
-		orient_value += EAST;
-	else
-		orient_value += WEST;
-	if (data->rays[i].collision_y > py)
-		orient_value += SOUTH;
-	else
-		orient_value += NORTH;
-	return (orient_value);
-}
+// 	orient_value = 0;
+// 	if (data->rays[i].collision_x > px)
+// 		orient_value += EAST;
+// 	else
+// 		orient_value += WEST;
+// 	if (data->rays[i].collision_y > py)
+// 		orient_value += SOUTH;
+// 	else
+// 		orient_value += NORTH;
+// 	return (orient_value);
+// }
 
 /**
  * Determines wich texture strip to display.
