@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/25 14:08:40 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:18:12 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,15 @@
 # define HEIGHT 1024
 
 # define NORTH 1
-# define SOUTH 2
-# define EAST 3
-# define WEST 4
+# define EAST 2
+# define WEST 3
+# define SOUTH 4
+
+# define UINT_PURPLE 1899999999
+# define UINT_BLUE 1019999999
+# define UINT_BEIGE 3869999999
+# define UINT_ORANGE 2959999999
+# define UINT_CYAN 9999999
 
 # define PI 3.141592653589793
 
@@ -129,70 +135,70 @@ typedef struct s_data
 }					t_data;
 
 // main.c
-void	init_data(t_data *data);
-void	init_colors(t_data *data);
-void	ft_exit(char *err, int code);
-int		main(int argc, char **argv);
+void		init_data(t_data *data);
+void		init_colors(t_data *data);
+void		ft_exit(char *err, int code);
+int			main(int argc, char **argv);
 
 // tab_utils.c
-char	*get_texture(char c, t_data *data);
-int		tab_len(char **tab);
-void	free_tab(char **tab);
-void	print_tab(char **tab);
+char		*get_texture(char c, t_data *data);
+int			tab_len(char **tab);
+void		free_tab(char **tab);
+void		print_tab(char **tab);
 
 // parsing.c
-int		file_len(char *path);
-char	**file_to_tab(char *path);
-void	checkrgb(char *line);
-void	checkmap(char **ftab, t_data *data);
-void	parsing(char *map_path, t_data *data);
+int			file_len(char *path);
+char		**file_to_tab(char *path);
+void		checkrgb(char *line);
+void		checkmap(char **ftab, t_data *data);
+void		parsing(char *map_path, t_data *data);
 
 // parsing_utils.c
-int		skip_empty_lines(char **ftab, int y);
-void	check(t_data *data, char **ftab, int y, int x);
-void	parse_map(char **ftab, int y, t_data *data);
-void	store_map(char **ftab, int y, t_data *data);
+int			skip_empty_lines(char **ftab, int y);
+void		check(t_data *data, char **ftab, int y, int x);
+void		parse_map(char **ftab, int y, t_data *data);
+void		store_map(char **ftab, int y, t_data *data);
 
 // setup_mlx.c
-void	*px_memset(void *str, struct s_rgba color, size_t len);
-void	setup_imgs(t_data *data);
-void	setup_imgs2(t_data *data);
-void	setup_mlx(t_data *data);
+void		*px_memset(void *str, struct s_rgba color, size_t len);
+void		setup_imgs(t_data *data);
+void		setup_imgs2(t_data *data);
+void		setup_mlx(t_data *data);
 
 // minimap.c
-void	minimap(t_data *data);
-void	print_minimap_walls_and_floor(t_data *data, int x, int y);
-void	print_minimap_player_and_rays(t_data *data);
+void		minimap(t_data *data);
+void		print_minimap_walls_and_floor(t_data *data, int x, int y);
+void		print_minimap_player_and_rays(t_data *data);
 
 // key_handler.c
-int		is_wall(t_data *data, int y, int x);
-void	ft_next_pos(t_data *data, double dir_x, double dir_y, double speed);
-void	ft_rotate_point(double *dir_x, double *dir_y, double rotspeed);
-int		pos_mouse(t_data *data);
-void	ft_key_handler(t_data *data, double rotspeed, double speed);
+int			is_wall(t_data *data, int y, int x);
+void		ft_next_pos(t_data *data, double dir_x, double dir_y, double speed);
+void		ft_rotate_point(double *dir_x, double *dir_y, double rotspeed);
+int			pos_mouse(t_data *data);
+void		ft_key_handler(t_data *data, double rotspeed, double speed);
 
 // raycast.c
-void	pewpewpew(t_data *data);
-void	ray_view(t_data *data);
+void		pewpewpew(t_data *data);
+void		ray_view(t_data *data);
 
 // hooks.c
-void	ft_loop(void *param);
-void	ft_flashlight(t_data *data);
+void		ft_loop(void *param);
+void		ft_flashlight(t_data *data);
 
 // textures.c
-int		get_texture_orientation(t_data *data, int i, double px, double py);
-void	get_texture_strip(t_data *data);
+int			get_texture_orientation(t_data *data, int i, double px, double py);
+void		get_texture_strip(t_data *data);
 
 // graphics.c
-void	draw_wall(t_data *data, int wall_height, int map_x, int map_y);
-void	graphics(t_data *data);
+void		draw_wall(t_data *data, int wall_height, int map_x, int map_y);
+void		graphics(t_data *data);
 uint32_t	stack_pixel(struct s_rgba *color, uint8_t *stack);
 
 // colors_cf.c
-void	init_colors_cf(t_data *data);
-void	init_color_cf2(t_data *data, char **res);
+void		init_colors_cf(t_data *data);
+void		init_color_cf2(t_data *data, char **res);
 
 // ft_dda.c
-double	*dda(t_data *data, double start_x, double start_y, t_dda *dda);
+double		*dda(t_data *data, double start_x, double start_y, t_dda *dda);
 
 #endif
