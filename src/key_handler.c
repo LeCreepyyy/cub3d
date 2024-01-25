@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 10:35:09 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/19 14:11:42 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/25 15:51:06 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,4 @@ void	ft_key_handler(t_data *data, double rotspeed, double speed)
 		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, rotspeed);
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_LEFT))
 		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, -rotspeed);
-	ray_view(data);
 }

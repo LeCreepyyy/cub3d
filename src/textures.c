@@ -3,33 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 12:37:29 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/25 15:10:44 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/25 15:46:07 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-	
-int	get_texture_orientation(t_data *data, int i, double px, double py)
-{
-	if (data->rays[i].collision_axis == 'x')
-	{
-		if (py <= data->rays[i].collision_y)
-			return (SOUTH);
-		else
-			return (NORTH);
-	}
-	else if (data->rays[i].collision_axis == 'y')
-	{
-		if (px <= data->rays[i].collision_x)
-			return (EAST);
-		else
-			return (WEST);
-	}
-	return (0);
-}
+
+// int	get_texture_orientation(t_data *data, int i, double px, double py)
+// {
+// 	if (data->rays[i].collision_axis == 'x')
+// 	{
+// 		if (py <= data->rays[i].collision_y)
+// 			return (SOUTH);
+// 		else
+// 			return (NORTH);
+// 	}
+// 	else if (data->rays[i].collision_axis == 'y')
+// 	{
+// 		if (px <= data->rays[i].collision_x)
+// 			return (EAST);
+// 		else
+// 			return (WEST);
+// 	}
+// 	return (0);
+// }
 
 /**
  * Determines wich texture to display.
@@ -45,21 +45,21 @@ int	get_texture_orientation(t_data *data, int i, double px, double py)
  * 
  * @return North South East West
  */
-// int	get_texture_orientation(t_data *data, int i, double px, double py)
-// {
-// 	int	orient_value;
+int	get_texture_orientation(t_data *data, int i, double px, double py)
+{
+	int	orient_value;
 
-// 	orient_value = 0;
-// 	if (data->rays[i].collision_x > px)
-// 		orient_value += EAST;
-// 	else
-// 		orient_value += WEST;
-// 	if (data->rays[i].collision_y > py)
-// 		orient_value += SOUTH;
-// 	else
-// 		orient_value += NORTH;
-// 	return (orient_value);
-// }
+	orient_value = 0;
+	if (data->rays[i].collision_x > px)
+		orient_value += EAST;
+	else
+		orient_value += WEST;
+	if (data->rays[i].collision_y > py)
+		orient_value += SOUTH;
+	else
+		orient_value += NORTH;
+	return (orient_value);
+}
 
 /**
  * Determines wich texture strip to display.

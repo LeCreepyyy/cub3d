@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:28:11 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/22 12:26:31 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/25 15:51:34 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ void	ft_loop(void *param)
 	double	speed;
 
 	data = param;
+	ray_view(data);
 	if (pos_mouse(data) == 2)
 		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, 0.05);
 	else if (pos_mouse(data) == 1)
 		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, -0.05);
-	ray_view(data);
 	mlx_set_mouse_pos(data->mlx_ptr, WIDTH / 2, HEIGHT / 2);
 	speed = 1.0;
 	data->player.pos_x = data->imgs.mp_player->instances[0].x;
