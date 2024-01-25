@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/24 14:36:07 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/25 10:07:18 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@
 # define HEIGHT 1024
 
 # define NORTH 1
-# define SOUTH 2
-# define EAST 3
-# define WEST 4
+# define EAST 2
+# define WEST 3
+# define SOUTH 4
 
 # define UINT_PURPLE 1899999999
 # define UINT_BLUE 1019999999

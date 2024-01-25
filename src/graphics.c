@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:17:47 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/24 14:34:55 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/25 11:01:35 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	draw_wall(t_data *data, int i, int map_x, int map_y)
 		color = UINT_ORANGE;
 	if (i < 20)
 		color = UINT_CYAN;
+	//color = 255999999;
 	while (++l < data->rays[i].wall_height)
 	{
 		if (l > (data->rays[i].wall_height / 2))
