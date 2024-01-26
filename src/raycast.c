@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:02:43 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/26 10:20:06 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/26 13:42:53 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	pewpewpew(t_data *data)
 		data->rays[++i].length = raygun(data, data->player.pos_x, data->player.pos_y + (MP_PLAYER / 2), &ft_dda);
 		data->rays[i].collision_x = ft_dda.collision_point[0];
 		data->rays[i].collision_y = ft_dda.collision_point[1];
-		data->rays[i].collision_axis = ft_dda.collision_axis;
 		data->rays[i].last_step_x = ft_dda.step_x;
 		data->rays[i].last_step_y = ft_dda.step_y;
 		free(ft_dda.collision_point);
