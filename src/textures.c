@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 12:37:29 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/25 15:46:07 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/26 10:36:28 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,14 @@ int	get_texture_orientation(t_data *data, int i, double px, double py)
 	return (orient_value);
 }
 
+/*
+ X | Y
+-1 | 1 = S,W 
+ 1 | 1 = S,E
+ 1 |-1 = N,E
+-1 |-1 = N,W
+*/
+
 /**
  * Determines wich texture strip to display.
  * 
@@ -69,12 +77,22 @@ int	get_texture_orientation(t_data *data, int i, double px, double py)
 void	get_texture_strip(t_data *data)
 {
 	int	i;
-	int	orient;
 
 	i = -1;
 	while (data->rays[++i].length)
 	{
-		orient = get_texture_orientation(data, i, data->player.pos_x, data->player.pos_y);
+		if (data->rays[i].collision_axis == 'y' && data->rays[i].last_step_y == -1)
+			data->rays[i].orient = NORTH;
+		else if (data->rays[i].collision_axis == 'y')
+			data->rays[i].orient = SOUTH;
+		if (data->rays[i].collision_axis == 'x' && data->rays[i].last_step_x == 1)
+			data->rays[i].orient = EAST;
+		else if (data->rays[i].collision_axis == 'x')
+			data->rays[i].orient = WEST;
+	}
+}
+
+/*		orient = get_texture_orientation(data, i, data->player.pos_x, data->player.pos_y);
 		if (orient == 3 && data->rays[i].collision_x - (int)round(data->rays[i].collision_x)!= 0.0)
 			data->rays[i].orient = EAST;
 		else if (orient == 3)
@@ -90,6 +108,4 @@ void	get_texture_strip(t_data *data)
 		if (orient == 6 && data->rays[i].collision_x - (int)round(data->rays[i].collision_x)!= 0.0)
 			data->rays[i].orient = EAST;
 		else if (orient == 6)
-			data->rays[i].orient = SOUTH;
-	}
-}
+			data->rays[i].orient = SOUTH;*/

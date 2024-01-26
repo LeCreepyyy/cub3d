@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/25 14:57:56 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/26 10:17:54 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,8 @@ struct s_ray
 	double			collision_x;
 	double			collision_y;
 	int				collision_axis;
+	int				last_step_x;
+	int				last_step_y;
 	int				wall_height;
 	int				orient;
 	mlx_image_t		*wall;
