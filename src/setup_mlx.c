@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup_mlx.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:59:32 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/26 13:15:40 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/29 14:03:07 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,8 @@ void	setup_mlx(t_data *data)
 	mlx_set_instance_depth(&data->imgs.ceiling->instances[0], 0);
 	mlx_set_instance_depth(&data->imgs.floor->instances[0], 0);
 	minimap(data);
-	mlx_image_to_window(data->mlx_ptr, data->imgs.flash, 700, 600);
+	mlx_image_to_window(data->mlx_ptr, data->imgs.flash, 400, 600);
+	mlx_set_instance_depth(&data->imgs.flash->instances[0], 6);
 	if (data->player_pos[0] == 'N')
 		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, 7.9);
 	else if (data->player_pos[0] == 'E')

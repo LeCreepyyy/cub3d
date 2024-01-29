@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/29 13:01:32 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/29 14:13:41 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ struct s_img
 	mlx_image_t		*graph;
 	mlx_texture_t	*flash_txtr;
 	mlx_image_t		*flash;
+	mlx_texture_t	*black_txtr;
+	mlx_image_t		*black;
 };
 
 struct s_player
@@ -188,6 +190,7 @@ void		ray_view(t_data *data);
 void		ft_loop(void *param);
 void		ft_flashlight(t_data *data);
 double		compass(double dir_x, double dir_y);
+void		action_flashlight(t_data *data, int code);
 
 // textures.c
 int			get_texture_orientation(t_data *data, int i, double px, double py);
