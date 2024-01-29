@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 12:37:29 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/26 14:48:54 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/29 12:24:05 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,19 @@ int	get_texture_orientation(t_data *data, int i, double px, double py)
 {
 	(void)px;
 	(void)py;
-	if ((int)data->rays[i].collision_x % 20 == 19)
+	if ((int)data->rays[i].collision_x % 20 == 19 && (int)data->rays[i].collision_y % 20 != 19)
 	{
-		return (WEST);
+		if (data->rays[i].compass <= 1.5)
+			return (WEST);
+		else
+			return (EAST);
 	}
-	else //if ((int)data->rays[i].collision_y % 20 == 0)
+	else
 	{
-		return (SOUTH);
+		if (data->rays[i].compass > 0 && data->rays[i].compass < 3.5)
+			return (SOUTH);
+		else
+			return (NORTH);
 	}
 	return (0);
 }
