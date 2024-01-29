@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:00:10 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/29 10:51:18 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/29 13:01:57 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	init_colors(t_data *data)
 	rgb_creator(&data->colors.dark_blue, 0, 0, 255);
 	rgb_creator(&data->colors.light_blue, 0, 190, 255);
 	rgb_creator(&data->colors.white, 255, 255, 255);
+	rgb_creator(&data->colors.black, 0, 0, 0);
 	data->colors.ceilling.a = 255;
 	data->colors.floor.a = 255;
 }

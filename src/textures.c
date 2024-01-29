@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 12:37:29 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/29 12:24:05 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/29 13:15:53 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@ int	get_texture_orientation(t_data *data, int i, double px, double py)
 {
 	(void)px;
 	(void)py;
-	if ((int)data->rays[i].collision_x % 20 == 19 && (int)data->rays[i].collision_y % 20 != 19)
+	if (data->rays[i].collision_x % 20 == 19 && data->rays[i].collision_y % 20 != 19)
 	{
-		if (data->rays[i].compass <= 1.5)
+		if (data->rays[i].compass <= 1.57)
 			return (WEST);
 		else
 			return (EAST);
 	}
-	else
+	else if (data->rays[i].collision_y % 20 == 19 && data->rays[i].collision_x % 20 != 19)
 	{
-		if (data->rays[i].compass > 0 && data->rays[i].compass < 3.5)
+		if (data->rays[i].compass > 0 && data->rays[i].compass < 3.15)
 			return (SOUTH);
 		else
 			return (NORTH);
@@ -84,9 +84,9 @@ void	get_texture_strip(t_data *data)
 	//printf("mapx: %i, mapy %i\n", data->minimap_size[0], data->minimap_size[1]);
 	while (data->rays[++i].length)
 	{
-		/*if (i == 0)
-			printf("x: %f, y: %f, intX: %i, intY %i\n", data->rays[i].collision_x, data->rays[i].collision_y, (int)data->rays[i].collision_x, (int)data->rays[i].collision_y);
-		*/data->rays[i].orient = get_texture_orientation(data, i, data->player.pos_x, data->player.pos_y);
+		if (i == 0)
+			printf("intX: %i, intY %i\n", data->rays[i].collision_x, data->rays[i].collision_y);
+		data->rays[i].orient = get_texture_orientation(data, i, data->player.pos_x, data->player.pos_y);
 	}
 }
 

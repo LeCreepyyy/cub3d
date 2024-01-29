@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:17:47 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/26 13:16:59 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/29 13:01:12 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	draw_wall(t_data *data, int i, int map_x, int map_y)
 	l = -1;
 	j = 1;
 	k = 0;
-	color = stack_pixel(&data->colors.dark_blue, NULL);
+	color = stack_pixel(&data->colors.black, NULL);
 	if (data->rays[i].orient == NORTH)
 		color = stack_pixel(&data->colors.red, NULL);
 	if (data->rays[i].orient == SOUTH)

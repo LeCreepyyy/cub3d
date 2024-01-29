@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/29 10:50:45 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/29 13:01:32 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ struct s_rgba
 struct s_colors
 {
 	struct s_rgba	white;
+	struct s_rgba	black;
 	struct s_rgba	green;
 	struct s_rgba	lime;
 	struct s_rgba	orange;
@@ -97,9 +98,9 @@ struct s_player
 
 typedef struct s_dda
 {
-	double	*collision_point;
-	double	ray_x;
-	double	ray_y;
+	int		*collision_point;
+	int		ray_x;
+	int		ray_y;
 	int		step_x;
 	int		step_y;
 	double	delta_dist_x;
@@ -113,8 +114,8 @@ typedef struct s_dda
 struct s_ray
 {
 	double			length;
-	double			collision_x;
-	double			collision_y;
+	int				collision_x;
+	int				collision_y;
 	double			compass;
 	int				last_step_x;
 	int				last_step_y;
@@ -202,6 +203,6 @@ void		init_colors_cf(t_data *data);
 void		init_color_cf2(t_data *data, char **res);
 
 // ft_dda.c
-double		*dda(t_data *data, double start_x, double start_y, t_dda *dda);
+int		*dda(t_data *data, double start_x, double start_y, t_dda *dda);
 
 #endif
