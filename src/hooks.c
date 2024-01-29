@@ -6,11 +6,23 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:28:11 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/25 15:51:34 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/29 10:32:22 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+double	compass(double dir_x, double dir_y)
+{
+	double	base_x;
+	double	base_y;
+	double	angle;
+
+	base_x = -1;
+	base_y = 0;
+	angle = atan2(dir_x, dir_y) - atan2(base_x, base_y);
+	return (angle);
+}
 
 void	ft_flashlight(t_data *data)
 {

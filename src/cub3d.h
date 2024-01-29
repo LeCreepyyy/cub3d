@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/26 14:42:38 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/29 10:32:37 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,7 @@ void		ray_view(t_data *data);
 // hooks.c
 void		ft_loop(void *param);
 void		ft_flashlight(t_data *data);
+double		compass(double dir_x, double dir_y);
 
 // textures.c
 int			get_texture_orientation(t_data *data, int i, double px, double py);
