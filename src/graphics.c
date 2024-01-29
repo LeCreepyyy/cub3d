@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:17:47 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/26 10:42:34 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/26 13:16:59 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	draw_wall(t_data *data, int i, int map_x, int map_y)
 	l = -1;
 	j = 1;
 	k = 0;
+	color = stack_pixel(&data->colors.dark_blue, NULL);
 	if (data->rays[i].orient == NORTH)
 		color = stack_pixel(&data->colors.red, NULL);
 	if (data->rays[i].orient == SOUTH)
@@ -51,7 +52,7 @@ void	draw_wall(t_data *data, int i, int map_x, int map_y)
 		color = stack_pixel(&data->colors.green, NULL);
 	if (data->rays[i].orient == WEST)
 		color = stack_pixel(&data->colors.lime, NULL);
-	if (i < 20)
+	if (i < 5)
 		color = stack_pixel(&data->colors.white, NULL);
 	while (++l < data->rays[i].wall_height)
 	{

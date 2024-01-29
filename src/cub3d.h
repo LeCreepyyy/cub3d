@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/26 10:17:54 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/26 14:42:38 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 
 # define MP_PLAYER 5
 # define MP_WALL 20
-# define WALL 64 
 
 # define WIDTH 1680
 # define HEIGHT 1024
@@ -99,7 +98,6 @@ struct s_player
 typedef struct s_dda
 {
 	double	*collision_point;
-	int		collision_axis;
 	double	ray_x;
 	double	ray_y;
 	int		step_x;
@@ -117,7 +115,6 @@ struct s_ray
 	double			length;
 	double			collision_x;
 	double			collision_y;
-	int				collision_axis;
 	int				last_step_x;
 	int				last_step_y;
 	int				wall_height;
