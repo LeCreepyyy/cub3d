@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:17:47 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/29 13:01:12 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/30 13:52:16 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ uint32_t	stack_pixel(struct s_rgba *color, uint8_t *stack)
 		pixels = (uint32_t)stack[0] << 24 | (uint32_t)stack[1] << 16
 			| (uint32_t)stack[2] << 8 | (uint32_t)stack[3];
 	return (pixels);
+}
+
+uint32_t	code_pixel(mlx_image_t *img, int pixel_x, int pixel_y)
+{
+	return (stack_pixel(NULL,
+			&img->pixels[((pixel_x + (int)img->width) * pixel_y)]));
 }
 
 /**
@@ -60,29 +66,24 @@ void	draw_wall(t_data *data, int i, int map_x, int map_y)
 			mlx_put_pixel(data->imgs.graph, map_x, map_y + j++, color);
 		else
 			mlx_put_pixel(data->imgs.graph, map_x, map_y - k++, color);
-		//printf("stripx: %f\n", data->rays[i].strip_x);
 	}
 }
 
-/* TEST: fonction qui affiche une image pixel par pixel */
+
+
 void	draw_img(t_data *data)
 {
+	int y = HEIGHT / 3;
 	int	x = WIDTH / 3;
 	int	delta_width = data->imgs.wall_west_texture->width;
-	int	i = 0;
+	int	ix = 17;
+	int	iy = 0;
 
 	while (delta_width)
 	{
-		int y = HEIGHT / 3;
-		int delta_height = data->imgs.wall_west_texture->height;
-		while (delta_height)
-		{
-			mlx_put_pixel(data->imgs.graph, y, x, stack_pixel(NULL, &data->imgs.wall_west->pixels[i]));
-			i += 4;
-			y++;;
-			delta_height--;
-		}
+		mlx_put_pixel(data->imgs.graph, y, x, code_pixel(data->imgs.wall_north, ix, iy));
 		x++;
+		iy += 4;
 		delta_width--;
 	}
 }
