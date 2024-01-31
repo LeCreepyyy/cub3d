@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:02:43 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/29 12:40:20 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/01/31 21:20:33 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ void	pewpewpew(t_data *data)
 		ft_rotate_point(&ft_dda.dir_x, &ft_dda.dir_y, -0.0007);
 		data->rays[++i].length = raygun(data, data->player.pos_x, data->player.pos_y + (MP_PLAYER / 2), &ft_dda);
 		data->rays[i].compass = compass(ft_dda.dir_x, ft_dda.dir_y);
-		//if (i == 1600)
-		//	printf("%f\n", compass(ft_dda.dir_x, ft_dda.dir_y));
 		data->rays[i].collision_x = ft_dda.collision_point[0];
 		data->rays[i].collision_y = ft_dda.collision_point[1];
 		data->rays[i].last_step_x = ft_dda.step_x;
