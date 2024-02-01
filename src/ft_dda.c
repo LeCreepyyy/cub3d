@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dda.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rficht <rficht@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 12:34:40 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/29 12:55:58 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/01 15:10:43 by rficht           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	define_value_dda_y(t_dda *dda)
 	if (dda->dir_y < 0)
 	{
 		dda->step_y = -1;
+		//pourquoi = 0 ??????????????????????
 		dda->side_dist_y = 0;
 	}
 	else
@@ -39,6 +40,7 @@ void	define_value_dda(t_dda *dda)
 	if (dda->dir_x < 0)
 	{
 		dda->step_x = -1;
+		//pourquoi = 0 ??????????????????????
 		dda->side_dist_x = 0;
 	}
 	else
@@ -51,6 +53,7 @@ void	define_value_dda(t_dda *dda)
 
 int	*dda(t_data *data, double start_x, double start_y, t_dda *dda)
 {
+	//pk votre collision point est un int ????
 	dda->collision_point = malloc(2 * sizeof(int));
 	dda->ray_x = (int)start_x;
 	dda->ray_y = (int)start_y;
@@ -71,10 +74,12 @@ int	*dda(t_data *data, double start_x, double start_y, t_dda *dda)
 			dda->ray_y += dda->step_y;
 		}
 	}
+	// mdr c'est quoi ce bricolage les frate
 	if (dda->ray_x % 20 != 19)
 		dda->ray_x += -1;
 	if (dda->ray_y % 20 != 19)
 		dda->ray_y += -1;
+	//alors deja la giga probleme vous recuperez le carreau de colision au lieu du point de collision
 	dda->collision_point[0] = dda->ray_x;
 	dda->collision_point[1] = dda->ray_y;
 	return (dda->collision_point);

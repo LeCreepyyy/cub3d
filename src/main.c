@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rficht <rficht@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:00:10 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/29 13:01:57 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/01 14:41:23 by rficht           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_data(t_data *data)
 	data->textures = ft_calloc(sizeof(char *), 7);
 	if (data->textures == NULL)
 		ft_exit("malloc", EXIT_FAILURE);
+	//player pos en int ????
 	data->player_pos = malloc(sizeof(int) * 3);
 	data->player_pos[0] = 0;
 	data->player_pos[1] = 0;

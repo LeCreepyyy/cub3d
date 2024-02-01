@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rficht <rficht@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 10:35:09 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/25 15:51:06 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/02/01 15:18:04 by rficht           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
  */
 int	is_wall(t_data *data, int y, int x)
 {
+	//je pense que votre detection des murs fout la merde il croit voir un mur alors qu'y
 	if (data->map_flat[y / MP_WALL][x / MP_WALL] == '1'
 		|| data->map_flat[(y + MP_PLAYER) / MP_WALL]
 			[(x + MP_PLAYER) / MP_WALL] == '1'

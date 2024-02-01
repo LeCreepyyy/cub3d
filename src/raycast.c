@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rficht <rficht@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:02:43 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/31 21:20:33 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/01 15:13:09 by rficht           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 double	raygun(t_data *data, double x1, double y1, t_dda *ft_dda)
 {
+	//en fait vous vous faites giga chier pr rien  en plus vous perdez de la precision
 	dda(data, x1, y1, ft_dda);
 	double	delta_x = ft_dda->collision_point[0] - x1;
 	double	delta_y = ft_dda->collision_point[1] - y1;
@@ -41,8 +42,11 @@ void	pewpewpew(t_data *data)
 	i = -1;
 	ft_dda.dir_x = data->player.dir_x;
 	ft_dda.dir_y = data->player.dir_y;
+	// franchement vous auriez pu faire une seule boucle while
+	// limit = -width/2 -> width/2 
 	while (++limit < WIDTH / 2)
 	{
+		//nomenclature un peu chelou mais seems legit si on oublie le 0.0007 aui sort de null part
 		ft_rotate_point(&ft_dda.dir_x, &ft_dda.dir_y, 0.0007);
 		data->rays[++i].length = raygun(data, data->player.pos_x, data->player.pos_y + (MP_PLAYER / 2), &ft_dda);
 		data->rays[i].compass = compass(ft_dda.dir_x, ft_dda.dir_y);
@@ -50,6 +54,7 @@ void	pewpewpew(t_data *data)
 		data->rays[i].collision_y = ft_dda.collision_point[1];
 		free(ft_dda.collision_point);
 	}
+	//limit = 0 ici sinon vs printez 2* la mm ligne linit = 0
 	limit = -1;
 	ft_dda.dir_x = data->player.dir_x;
 	ft_dda.dir_y = data->player.dir_y;
