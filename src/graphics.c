@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:17:47 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/02/01 15:36:22 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/01 15:59:30 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ uint32_t	code_pixel(mlx_image_t *img, int pixel_x, int pixel_y)
  */
 void	draw_wall(t_data *data, int i, int map_x, int map_y)
 {
-	int			delta_width;
+	int			delta_height;
 	int			iy;
 	uint32_t 	color;
 	mlx_image_t	*texture;
@@ -56,17 +56,27 @@ void	draw_wall(t_data *data, int i, int map_x, int map_y)
 		texture = data->imgs.wall_east;
 	if (data->rays[i].orient == WEST)
 		texture = data->imgs.wall_west;
-	delta_width = texture->width;
-	iy = 0;
-	while (delta_width)
+	if (data->rays[i].orient > 0)
 	{
-		if (data->rays[i].chunk == -1)
-			mlx_put_pixel(data->imgs.graph, map_x, map_y, color);
-		else
+		delta_height = texture->height;
+		iy = 0;
+		while (delta_height)
+		{
 			mlx_put_pixel(data->imgs.graph, map_x, map_y, code_pixel(texture, data->rays[i].chunk , iy));
-		map_y++;
-		iy += 4;
-		delta_width--;
+			map_y++;
+			iy += 4;
+			delta_height--;
+		}
+	}
+	else
+	{
+		delta_height = data->rays[i].wall_height;
+		while (delta_height)
+		{
+			mlx_put_pixel(data->imgs.graph, map_x, map_y, color);
+			map_y++;
+			delta_height--;
+		}
 	}
 }
 
