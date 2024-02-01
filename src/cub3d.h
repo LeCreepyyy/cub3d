@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/29 14:13:41 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/31 20:22:40 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,6 @@
 # define EAST 2
 # define WEST 3
 # define SOUTH 4
-
-# define UINT_PURPLE 1899999999
-# define UINT_BLUE 1019999999
-# define UINT_BEIGE 3869999999
-# define UINT_ORANGE 2959999999
-# define UINT_CYAN 9999999
 
 # define PI 3.141592653589793
 
@@ -118,6 +112,8 @@ struct s_ray
 	double			length;
 	int				collision_x;
 	int				collision_y;
+	int				chunk;
+	int				wall_index;
 	double			compass;
 	int				last_step_x;
 	int				last_step_y;
@@ -193,7 +189,7 @@ double		compass(double dir_x, double dir_y);
 void		action_flashlight(t_data *data, int code);
 
 // textures.c
-int			get_texture_orientation(t_data *data, int i, double px, double py);
+int			get_texture_orientation(t_data *data, int i);
 void		get_texture_strip(t_data *data);
 
 // graphics.c

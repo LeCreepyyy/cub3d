@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:17:47 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/30 13:52:16 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/31 23:40:08 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	draw_wall(t_data *data, int i, int map_x, int map_y)
 		color = stack_pixel(&data->colors.green, NULL);
 	if (data->rays[i].orient == WEST)
 		color = stack_pixel(&data->colors.lime, NULL);
-	if (i < 5)
+	if (i > 498 && i < 502)
 		color = stack_pixel(&data->colors.white, NULL);
 	while (++l < data->rays[i].wall_height)
 	{
@@ -95,12 +95,31 @@ void	draw_img(t_data *data)
 void	graphics(t_data *data)
 {
 	int				i;
+	int				prev_chunk;
+	int				ray_wall_index;
 	double			distance;
 
 	i = -1;
 	get_texture_strip(data);
+	prev_chunk = -1;
+	ray_wall_index = 0;
 	while (++i < WIDTH)
 	{
+		if (data->rays[i].chunk != -1)
+		{
+			if (prev_chunk != -1 && prev_chunk > data->rays[i].chunk)
+				ray_wall_index = 0;
+			data->rays[i].wall_index = ray_wall_index;
+			prev_chunk = data->rays[i].chunk;
+			ray_wall_index++;
+		}
+		else
+		{
+			ray_wall_index = -1;
+			data->rays[i].wall_index = ray_wall_index;
+		}
+		if (i == 500)
+				printf("chunk: %i, wIndex: %i\n", data->rays[i].chunk, data->rays[i].wall_index);
 		if (i < WIDTH / 2)
 		{
 			distance = cos(i * 0.0007) * data->rays[i].length;

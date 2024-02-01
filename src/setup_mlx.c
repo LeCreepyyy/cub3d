@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup_mlx.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:59:32 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/29 14:03:07 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/01/30 17:30:30 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	setup_imgs2(t_data *data)
 void	setup_mlx(t_data *data)
 {
 	data->mlx_ptr = mlx_init(WIDTH, HEIGHT, "Qbe 3D", false);
-	mlx_set_window_pos(data->mlx_ptr, 0, 0);
+	mlx_set_window_pos(data->mlx_ptr, 200, 20);
 	init_colors_cf(data);
 	setup_imgs(data);
 	mlx_image_to_window(data->mlx_ptr, data->imgs.ceiling, 0, 0);
