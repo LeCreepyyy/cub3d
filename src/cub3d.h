@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/31 20:22:40 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/01 15:25:51 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ struct s_ray
 	int				collision_x;
 	int				collision_y;
 	int				chunk;
-	int				wall_index;
 	double			compass;
 	int				last_step_x;
 	int				last_step_y;
