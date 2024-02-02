@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:00:10 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/29 13:01:57 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/02 11:38:36 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	init_data(t_data *data)
 	data->imgs.mpfc = 0;
 	data->player.dir_x = -1;
 	data->player.dir_y = 0;
+	data->player.plane_x = 0;
+	data->player.plane_y = 0.66;
 	data->rays = ft_calloc(sizeof(struct s_ray), WIDTH);
 	init_colors(data);
 }

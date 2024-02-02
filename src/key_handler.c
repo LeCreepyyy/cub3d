@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 10:35:09 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/25 15:51:06 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/02/02 11:45:55 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,7 @@
  */
 int	is_wall(t_data *data, int y, int x)
 {
-	if (data->map_flat[y / MP_WALL][x / MP_WALL] == '1'
-		|| data->map_flat[(y + MP_PLAYER) / MP_WALL]
-			[(x + MP_PLAYER) / MP_WALL] == '1'
-		|| data->map_flat[(y + MP_PLAYER) / MP_WALL][x / MP_WALL] == '1'
-		|| data->map_flat[y / MP_WALL][(x + MP_PLAYER) / MP_WALL] == '1')
+	if (data->map_flat[y][x] == '1')
 		return (0);
 	return (1);
 }
@@ -98,20 +94,27 @@ void	ft_key_handler(t_data *data, double rotspeed, double speed)
 		ft_next_pos(data, data->player.dir_x, data->player.dir_y, speed);
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_S))
 		ft_next_pos(data, data->player.dir_x, data->player.dir_y, -speed);
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_A))
-	{
-		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, -7.9);
-		ft_next_pos(data, data->player.dir_x, data->player.dir_y, speed);
-		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, 7.9);
-	}
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_D))
 	{
+		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, -7.9);
+		ft_next_pos(data, data->player.dir_x, data->player.dir_y, speed);
+		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, 7.9);
+	}
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_A))
+	{
+		// c'est de la turbo D espece de faillasse calcul le vecteur et deplace toi au lieu de secouer ton joueur dans tout les sens
 		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, 7.9);
 		ft_next_pos(data, data->player.dir_x, data->player.dir_y, speed);
 		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, -7.9);
 	}
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_RIGHT))
-		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, rotspeed);
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_LEFT))
+	{
+		ft_rotate_point(&data->player.plane_x, &data->player.plane_y, rotspeed);
+		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, rotspeed);
+	}
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_RIGHT))
+	{
+		ft_rotate_point(&data->player.plane_x, &data->player.plane_y, -rotspeed);
 		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, -rotspeed);
+	}
 }

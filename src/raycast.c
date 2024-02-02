@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:02:43 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/31 21:20:33 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/02 11:29:18 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,36 +33,27 @@ double	raygun(t_data *data, double x1, double y1, t_dda *ft_dda)
 
 void	pewpewpew(t_data *data)
 {
-	int		limit;
-	int		i;
 	t_dda	ft_dda;
+	int		pixel_x;
 
-	limit = -1;
-	i = -1;
+	pixel_x = -1;
 	ft_dda.dir_x = data->player.dir_x;
 	ft_dda.dir_y = data->player.dir_y;
-	while (++limit < WIDTH / 2)
+	while (++pixel_x < WIDTH)
 	{
-		ft_rotate_point(&ft_dda.dir_x, &ft_dda.dir_y, 0.0007);
-		data->rays[++i].length = raygun(data, data->player.pos_x, data->player.pos_y + (MP_PLAYER / 2), &ft_dda);
-		data->rays[i].compass = compass(ft_dda.dir_x, ft_dda.dir_y);
-		data->rays[i].collision_x = ft_dda.collision_point[0];
-		data->rays[i].collision_y = ft_dda.collision_point[1];
+		ft_dda.camera_x = 2 * pixel_x / (double)WIDTH - 1;
+		ft_dda.dir_x = data->player.dir_x + data->player.plane_x * ft_dda.camera_x;
+		ft_dda.dir_y = data->player.dir_y + data->player.plane_y * ft_dda.camera_x;
+		raygun(data, data->player.pos_x, data->player.pos_y + (MP_PLAYER / 2), &ft_dda);
 		free(ft_dda.collision_point);
-	}
-	limit = -1;
-	ft_dda.dir_x = data->player.dir_x;
-	ft_dda.dir_y = data->player.dir_y;
-	while (++limit < WIDTH / 2)
-	{
-		ft_rotate_point(&ft_dda.dir_x, &ft_dda.dir_y, -0.0007);
-		data->rays[++i].length = raygun(data, data->player.pos_x, data->player.pos_y + (MP_PLAYER / 2), &ft_dda);
-		data->rays[i].compass = compass(ft_dda.dir_x, ft_dda.dir_y);
-		data->rays[i].collision_x = ft_dda.collision_point[0];
-		data->rays[i].collision_y = ft_dda.collision_point[1];
-		data->rays[i].last_step_x = ft_dda.step_x;
-		data->rays[i].last_step_y = ft_dda.step_y;
-		free(ft_dda.collision_point);
+		draw_wall(data, &ft_dda, pixel_x);
+		if (pixel_x == WIDTH / 2)
+		{
+			printf("x:%f\ty:%f\n", data->player.pos_x, data->player.pos_y);
+			//printf("deltaX: %f\tdeltaY: %f\n", ft_dda.side_dist_x, ft_dda.side_dist_y);
+			//printf("dist: %f\n", ft_dda.wall_dist);
+			//printf("dirX: %f\tdirY: %f\tplayerDirX: %f\t playerDirY: %f\n", ft_dda.dir_x, ft_dda.dir_y, data->player.dir_x, data->player.dir_y);
+		}
 	}
 }
 
@@ -82,6 +73,6 @@ void	ray_view(t_data *data)
 	mlx_image_to_window(data->mlx_ptr, data->imgs.graph, 0, 0);
 	mlx_set_instance_depth(&data->imgs.graph->instances[0], 1);
 	pewpewpew(data);
-	graphics(data);
+	//graphics(data);
 	pass = 1;
 }

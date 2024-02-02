@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/31 20:22:40 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/02 10:41:26 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,13 @@ struct s_player
 	double	pos_y;
 	double	dir_x;
 	double	dir_y;
+	double	plane_x;
+	double	plane_y;
 };
 
 typedef struct s_dda
 {
-	int		*collision_point;
+	double	*collision_point;
 	int		ray_x;
 	int		ray_y;
 	int		step_x;
@@ -103,8 +105,11 @@ typedef struct s_dda
 	double	delta_dist_y;
 	double	side_dist_x;
 	double	side_dist_y;
+	double	camera_x;
 	double	dir_x;
 	double	dir_y;
+	int		side;
+	double	wall_dist;
 }			t_dda;
 
 struct s_ray
@@ -193,7 +198,7 @@ int			get_texture_orientation(t_data *data, int i);
 void		get_texture_strip(t_data *data);
 
 // graphics.c
-void		draw_wall(t_data *data, int wall_height, int map_x, int map_y);
+void		draw_wall(t_data *data, t_dda *dda, int pixel_x);
 void		graphics(t_data *data);
 uint32_t	stack_pixel(struct s_rgba *color, uint8_t *stack);
 
@@ -202,6 +207,6 @@ void		init_colors_cf(t_data *data);
 void		init_color_cf2(t_data *data, char **res);
 
 // ft_dda.c
-int		*dda(t_data *data, double start_x, double start_y, t_dda *dda);
+double		*dda(t_data *data, double start_x, double start_y, t_dda *dda);
 
 #endif

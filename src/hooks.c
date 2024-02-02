@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:28:11 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/29 14:16:42 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/02/02 11:42:46 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,20 @@ void	ft_loop(void *param)
 
 	data = param;
 	ray_view(data);
-	if (pos_mouse(data) == 2)
+	if (pos_mouse(data) == 1)
+	{
+		ft_rotate_point(&data->player.plane_x, &data->player.plane_y, 0.05);
 		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, 0.05);
-	else if (pos_mouse(data) == 1)
+	}
+	else if (pos_mouse(data) == 2)
+	{
+		ft_rotate_point(&data->player.plane_x, &data->player.plane_y, -0.05);
 		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, -0.05);
+	}
 	mlx_set_mouse_pos(data->mlx_ptr, WIDTH / 2, HEIGHT / 2);
 	speed = 1.0;
-	data->player.pos_x = data->imgs.mp_player->instances[0].x;
-	data->player.pos_y = data->imgs.mp_player->instances[0].y;
+	data->player.pos_x = (double)data->player_pos[2];
+	data->player.pos_y = (double)data->player_pos[1];
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_LEFT_SHIFT))
 		speed = 2.0;
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_ESCAPE))
@@ -61,8 +67,8 @@ void	ft_loop(void *param)
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_L))
 		action_flashlight(data, 1);
 	ft_key_handler(data, 0.01, speed);
-	data->imgs.mp_player->instances[0].x = round(data->player.pos_x);
-	data->imgs.mp_player->instances[0].y = round(data->player.pos_y);
+	data->imgs.mp_player->instances[0].x = round(data->player.pos_x) * MP_WALL;
+	data->imgs.mp_player->instances[0].y = round(data->player.pos_y) * MP_WALL;
 	speed = 1;
 }
 
