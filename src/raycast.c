@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:02:43 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/02 11:29:18 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/02/02 13:27:54 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ double	raygun(t_data *data, double x1, double y1, t_dda *ft_dda)
 	{
 		double	x = x1 + t * delta_x;
 		double	y = y1 + t * delta_y;
-		mlx_put_pixel(data->imgs.mp_ray, round(x), round(y), stack_pixel(&data->colors.yellow, NULL));
+		mlx_put_pixel(data->imgs.mp_ray, round(x) * MP_WALL, round(y) * MP_WALL, stack_pixel(&data->colors.yellow, NULL));
 		t += 1.0 / max_delta;
 	}
 	return (res);
@@ -44,16 +44,9 @@ void	pewpewpew(t_data *data)
 		ft_dda.camera_x = 2 * pixel_x / (double)WIDTH - 1;
 		ft_dda.dir_x = data->player.dir_x + data->player.plane_x * ft_dda.camera_x;
 		ft_dda.dir_y = data->player.dir_y + data->player.plane_y * ft_dda.camera_x;
-		raygun(data, data->player.pos_x, data->player.pos_y + (MP_PLAYER / 2), &ft_dda);
+		raygun(data, data->player.pos_x, data->player.pos_y, &ft_dda);
 		free(ft_dda.collision_point);
 		draw_wall(data, &ft_dda, pixel_x);
-		if (pixel_x == WIDTH / 2)
-		{
-			printf("x:%f\ty:%f\n", data->player.pos_x, data->player.pos_y);
-			//printf("deltaX: %f\tdeltaY: %f\n", ft_dda.side_dist_x, ft_dda.side_dist_y);
-			//printf("dist: %f\n", ft_dda.wall_dist);
-			//printf("dirX: %f\tdirY: %f\tplayerDirX: %f\t playerDirY: %f\n", ft_dda.dir_x, ft_dda.dir_y, data->player.dir_x, data->player.dir_y);
-		}
 	}
 }
 
@@ -73,6 +66,5 @@ void	ray_view(t_data *data)
 	mlx_image_to_window(data->mlx_ptr, data->imgs.graph, 0, 0);
 	mlx_set_instance_depth(&data->imgs.graph->instances[0], 1);
 	pewpewpew(data);
-	//graphics(data);
 	pass = 1;
 }

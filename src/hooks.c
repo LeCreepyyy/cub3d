@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:28:11 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/02/02 11:42:46 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/02/02 14:07:47 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,9 @@ void	ft_loop(void *param)
 		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, -0.05);
 	}
 	mlx_set_mouse_pos(data->mlx_ptr, WIDTH / 2, HEIGHT / 2);
-	speed = 1.0;
-	data->player.pos_x = (double)data->player_pos[2];
-	data->player.pos_y = (double)data->player_pos[1];
+	speed = 0.05;
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_LEFT_SHIFT))
-		speed = 2.0;
+		speed = 0.15;
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_ESCAPE))
 		mlx_close_window(data->mlx_ptr);
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_P))

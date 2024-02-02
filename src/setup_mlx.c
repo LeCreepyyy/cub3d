@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:59:32 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/02 11:30:45 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/02/02 13:26:55 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,8 @@ void	setup_mlx(t_data *data)
 	// 	ft_rotate_point(&data->player.dir_x, &data->player.dir_y, 7.9 * 2);
 	// else if (data->player_pos[0] == 'S')
 	// 	ft_rotate_point(&data->player.dir_x, &data->player.dir_y, -7.9);
-	data->player.pos_x = data->imgs.mp_player->instances[0].x;
-	data->player.pos_y = data->imgs.mp_player->instances[0].y;
+	data->player.pos_x = (double)data->player_pos[1];
+	data->player.pos_y = (double)data->player_pos[2];
 	mlx_set_cursor_mode(data->mlx_ptr, MLX_MOUSE_HIDDEN);
 	mlx_set_mouse_pos(data->mlx_ptr, WIDTH / 2, HEIGHT / 2);
 	ray_view(data);

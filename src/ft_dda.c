@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 12:34:40 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/02 11:42:59 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/02/02 13:07:53 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,9 @@ double	*dda(t_data *data, double start_x, double start_y, t_dda *dda)
 			dda->ray_y += dda->step_y;
 			dda->side = 1;
 		}
-		printf("here\n");
 		if (data->map_flat[dda->ray_y]
 			[dda->ray_x] == '1')
 			break ;
-		printf("here2\n");
 	}
 	if (dda->side == 0)
 		dda->wall_dist = (dda->side_dist_x - dda->delta_dist_x);
