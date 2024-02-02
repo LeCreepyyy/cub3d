@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:28:11 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/02/02 14:07:47 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/02/02 14:34:17 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ void	ft_loop(void *param)
 
 	data = param;
 	ray_view(data);
-	if (pos_mouse(data) == 1)
+	if (pos_mouse(data) == 2)
 	{
 		ft_rotate_point(&data->player.plane_x, &data->player.plane_y, 0.05);
 		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, 0.05);
 	}
-	else if (pos_mouse(data) == 2)
+	else if (pos_mouse(data) == 1)
 	{
 		ft_rotate_point(&data->player.plane_x, &data->player.plane_y, -0.05);
 		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, -0.05);
