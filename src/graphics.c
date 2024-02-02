@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:17:47 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/02/02 11:21:19 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/02/02 14:48:28 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,16 @@ void	draw_wall(t_data *data, t_dda *dda, int pixel_x)
 		if (dda->side == 0)
 		{
 			if (dda->dir_x > 0)
-				mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, stack_pixel(&data->colors.red, NULL));
+				mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, stack_pixel(&data->colors.green, NULL));
 			else
-				mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, stack_pixel(&data->colors.orange, NULL));
+				mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, stack_pixel(&data->colors.lime, NULL));
 		}
 		else
 		{
 			if (dda->dir_y > 0)
-				mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, stack_pixel(&data->colors.green, NULL));
+				mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, stack_pixel(&data->colors.red, NULL));
 			else
-				mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, stack_pixel(&data->colors.lime, NULL));
+				mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, stack_pixel(&data->colors.orange, NULL));
 		}
 	}
 	while (++pixel_y < HEIGHT)
