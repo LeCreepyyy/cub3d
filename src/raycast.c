@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:02:43 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/02 14:35:32 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/02/03 13:23:52 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@ void	pewpewpew(t_data *data)
 {
 	t_dda	ft_dda;
 	int		pixel_x;
+	int		i;
 
 	pixel_x = WIDTH;
+	i = 0;
 	ft_dda.dir_x = data->player.dir_x;
 	ft_dda.dir_y = data->player.dir_y;
 	while (--pixel_x > 0)
@@ -46,7 +48,7 @@ void	pewpewpew(t_data *data)
 		ft_dda.dir_y = data->player.dir_y + data->player.plane_y * ft_dda.camera_x;
 		raygun(data, data->player.pos_x, data->player.pos_y, &ft_dda);
 		free(ft_dda.collision_point);
-		draw_wall(data, &ft_dda, pixel_x);
+		draw_wall(data, &ft_dda, i++);
 	}
 }
 
