@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:17:47 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/02/02 14:48:28 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/02/03 13:30:01 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	draw_wall(t_data *data, t_dda *dda, int pixel_x)
 		wall_end = HEIGHT - 1;
 	pixel_y = -1;
 	while (++pixel_y < wall_start)
-		mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, stack_pixel(&data->colors.light_blue, NULL));
+		mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, stack_pixel(&data->colors.ceilling, NULL));
 	while (++pixel_y < wall_end)
 	{
 		if (dda->side == 0)
@@ -67,7 +67,7 @@ void	draw_wall(t_data *data, t_dda *dda, int pixel_x)
 		}
 	}
 	while (++pixel_y < HEIGHT)
-		mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, stack_pixel(&data->colors.black, NULL));
+		mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, stack_pixel(&data->colors.floor, NULL));
 }
 
 /**
