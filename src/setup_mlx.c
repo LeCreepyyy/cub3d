@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup_mlx.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:59:32 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/05 14:10:03 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/02/05 16:04:49 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,21 @@ void	*px_memset(void *str, struct s_rgba color, size_t len)
 	return (str);
 }
 
+void	check_wall_resolution(t_data *data)
+{
+	if (data->imgs.wall_north->width != data->imgs.wall_north->height
+		|| data->imgs.wall_south->width != data->imgs.wall_south->height
+		|| data->imgs.wall_east->width != data->imgs.wall_east->height
+		|| data->imgs.wall_west->width != data->imgs.wall_west->height)
+		return (ft_exit("Textures are not square", 1));
+	if (data->imgs.wall_north->width == data->imgs.wall_south->width
+		&& data->imgs.wall_south->width == data->imgs.wall_east->width
+		&& data->imgs.wall_east->width == data->imgs.wall_west->width)
+		data->imgs.wall_resolution = data->imgs.wall_north->width;
+	else
+		return(ft_exit("Textures needs to be of the same resolution", 1));
+}
+
 /**
  * Images loading, textures creations, pixel memory setting.
  * @param data Data struct. 
@@ -57,6 +72,7 @@ void	setup_imgs(t_data *data)
 	data->imgs.wall_west_texture = mlx_load_png(get_texture('W', data));
 	data->imgs.wall_west = mlx_texture_to_image(data->mlx_ptr,
 			data->imgs.wall_west_texture);
+	check_wall_resolution(data);
 	data->imgs.flash_txtr = mlx_load_png("resources/hand_texture.png");
 	data->imgs.flash = mlx_texture_to_image(data->mlx_ptr,
 			data->imgs.flash_txtr);

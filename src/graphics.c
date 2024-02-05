@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:17:47 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/02/05 14:30:52 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/05 20:20:28 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,29 @@ uint32_t	code_pixel(mlx_image_t *img, int pixel_x, int pixel_y)
 			&img->pixels[((pixel_x + (int)img->width) * pixel_y)]));
 }
 
-void	draw_wall(t_data *data, t_dda *dda, int pixel_x)
+mlx_image_t	*get_texture_orientation(t_data *data, t_dda *dda)
 {
-	int	pixel_y;
-	int	wall_end;
-	int	wall_start;
-	int	line_height;
-	int	texture_x;
+	if (dda->side == 0 && dda->dir_x > 0)
+		return(data->imgs.wall_west);
+	else if (dda->side == 0 && dda->dir_x <= 0)
+		return(data->imgs.wall_east);
+	else if (dda->side != 0 && dda->dir_y > 0)
+		return(data->imgs.wall_north);
+	else if (dda->side != 0 && dda->dir_y <= 0)
+		return(data->imgs.wall_south);
+	return (NULL);
+}
 
+void	draw(t_data *data, t_dda *dda, int pixel_x)
+{
+	int			pixel_y;
+	int			wall_end;
+	int			wall_start;
+	int			line_height;
+	int			i;
+	int			texture_offset;
+	mlx_image_t	*texture;
+	
 	line_height = (int)(HEIGHT / dda->wall_dist);
 	wall_start = (-line_height + HEIGHT) / 2;
 	if (wall_start < 0)
@@ -50,72 +65,47 @@ void	draw_wall(t_data *data, t_dda *dda, int pixel_x)
 	pixel_y = -1;
 	while (++pixel_y < wall_start)
 		mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, stack_pixel(&data->colors.ceilling, NULL));
-	if (dda->side == 0) // Y
+	//////
+	texture = get_texture_orientation(data, dda);
+	texture_offset = 0;
+	if (dda->side == 0)
+		texture_offset = (int)dda->collision_point[1] % data->imgs.wall_resolution;
+	if (dda->side == 1)
+		texture_offset = (int)dda->collision_point[0] % data->imgs.wall_resolution;
+	if (dda->n == WIDTH/2) // Afficher les datas du rayon centre
+		printf("offset: %i, x: %f, y: %f\n", texture_offset, dda->collision_point[0], dda->collision_point[1]);
+	i = texture_offset * 4;
+	while (texture->pixels[i] && ++pixel_y < wall_end)
 	{
-		
-	}
-	else
-	while (++pixel_y < wall_end)
-	{
-		if (dda->side == 0)
-		{
-			if (dda->dir_x > 0)
-				mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, stack_pixel(&data->colors.green, NULL));
-			else
-				mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, stack_pixel(&data->colors.lime, NULL));
-		}
+		if (dda->n == WIDTH/2) // Afficher du rayon centre en rouge
+			mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, stack_pixel(&data->colors.red, NULL));
 		else
-		{
-			if (dda->dir_y > 0)
-				mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, stack_pixel(&data->colors.red, NULL));
-			else
-				mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, stack_pixel(&data->colors.orange, NULL));
-		}
+			mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, stack_pixel(NULL, &texture->pixels[i]));
+		i += data->imgs.wall_resolution * 4;
 	}
+	//////////
 	while (++pixel_y < HEIGHT)
 		mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, stack_pixel(&data->colors.floor, NULL));
 }
 
-/**
- * Draws wall arround a given center point.
- * @param data Structure Data
- * @param wall_height Hauteur de mur a dessiner (en pixel).
- * @param map_x coordonnees X du point de depart du mur sur la fenetre.
- * @param map_y Coordonnees Y du point de depart du mur sur la fenetre.
- */
-// void	draw_wall(t_data *data, int i, int map_x, int map_y)
-// {
-// 	int	l;
-// 	int	j;
-// 	int	k;
-// 	uint32_t color;
+void	draw_img(t_data *data)
+{
+	int	x = WIDTH / 3;
+	int	delta_width = data->imgs.wall_west_texture->width;
+	int	i = 0;
 
-// 	l = -1;
-// 	j = 1;
-// 	k = 0;
-// 	color = stack_pixel(&data->colors.black, NULL);
-// 	if (data->rays[i].orient == NORTH)
-// 		color = stack_pixel(&data->colors.red, NULL);
-// 	if (data->rays[i].orient == SOUTH)
-// 		color = stack_pixel(&data->colors.orange, NULL);
-// 	if (data->rays[i].orient == EAST)
-// 		color = stack_pixel(&data->colors.green, NULL);
-// 	if (data->rays[i].orient == WEST)
-// 		color = stack_pixel(&data->colors.lime, NULL);
-// 	if (i > 498 && i < 502)
-// 		color = stack_pixel(&data->colors.white, NULL);
-// 	while (++l < data->rays[i].wall_height)
-// 	{
-// 		if (l > (data->rays[i].wall_height / 2))
-// 			mlx_put_pixel(data->imgs.graph, map_x, map_y + j++, color);
-// 		else
-// 			mlx_put_pixel(data->imgs.graph, map_x, map_y - k++, color);
-// 	}
-// }
-
-
-
-
-
-
-
+	while (delta_width)
+	{
+		int y = HEIGHT / 3;
+		int delta_height = data->imgs.wall_west_texture->height;
+		while (delta_height)
+		{
+			mlx_put_pixel(data->imgs.graph, y, x, stack_pixel(NULL, &data->imgs.wall_west->pixels[i]));
+			i += 4;
+			y++;;
+			delta_height--;
+		}
+		x++;
+		delta_width--;
+	}
+}

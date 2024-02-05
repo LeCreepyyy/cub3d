@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:02:43 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/05 14:26:52 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/02/05 19:35:21 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,16 @@ int	dtop(double position, int resolution)
 
 void	raygun(t_data *data, double x1, double y1, t_dda *ft_dda)
 {
+	double	delta_x;
+	double	delta_y;
+	double	max_delta;
+	double	t;
+
 	dda(data, x1, y1, ft_dda);
-	double	delta_x = ft_dda->collision_point[0] - x1;
-	double	delta_y = ft_dda->collision_point[1] - y1;
-	double	max_delta = (fabs(delta_x) > fabs(delta_y)) ? fabs(delta_x) : fabs(delta_y);
-	double	t = 0.0;
+	delta_x = ft_dda->collision_point[0] - x1;
+	delta_y = ft_dda->collision_point[1] - y1;
+	max_delta = (fabs(delta_x) > fabs(delta_y)) ? fabs(delta_x) : fabs(delta_y);
+	t = 0.0;
 	while (t <= 1.0)
 	{
 		double	x = x1 + t * delta_x;
@@ -47,17 +52,19 @@ void	pewpewpew(t_data *data)
 	int		i;
 
 	pixel_x = WIDTH;
+	ft_dda.n = -1;
 	i = 0;
 	ft_dda.dir_x = data->player.dir_x;
 	ft_dda.dir_y = data->player.dir_y;
 	while (--pixel_x > 0)
-	{
+	{	
+		ft_dda.n++;
 		ft_dda.camera_x = 2 * pixel_x / (double)WIDTH - 1;
 		ft_dda.dir_x = data->player.dir_x + data->player.plane_x * ft_dda.camera_x;
 		ft_dda.dir_y = data->player.dir_y + data->player.plane_y * ft_dda.camera_x;
 		raygun(data, data->player.pos_x, data->player.pos_y, &ft_dda);
 		free(ft_dda.collision_point);
-		draw_wall(data, &ft_dda, i++);
+		draw(data, &ft_dda, i++);
 	}
 }
 

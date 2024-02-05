@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/05 14:20:59 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/02/05 19:34:02 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ struct s_img
 	mlx_image_t		*wall_east;
 	mlx_texture_t	*wall_west_texture;
 	mlx_image_t		*wall_west;
+	int				wall_resolution;
 	mlx_image_t		*floor;
 	mlx_image_t		*ceiling;
 	mlx_image_t		*mp_player;
@@ -96,6 +97,7 @@ struct s_player
 
 typedef struct s_dda
 {
+	int		n;
 	double	*collision_point;
 	int		ray_x;
 	int		ray_y;
@@ -194,14 +196,11 @@ void		ft_flashlight(t_data *data);
 double		compass(double dir_x, double dir_y);
 void		action_flashlight(t_data *data, int code);
 
-// textures.c
-int			get_texture_orientation(t_data *data, int i);
-void		get_texture_strip(t_data *data);
-
 // graphics.c
-void		draw_wall(t_data *data, t_dda *dda, int pixel_x);
-void		graphics(t_data *data);
+void		draw(t_data *data, t_dda *dda, int pixel_x);
+void		draw_wall();
 uint32_t	stack_pixel(struct s_rgba *color, uint8_t *stack);
+mlx_image_t	*get_texture_orientation(t_data *data, t_dda *dda);
 
 // colors_cf.c
 void		init_colors_cf(t_data *data);
