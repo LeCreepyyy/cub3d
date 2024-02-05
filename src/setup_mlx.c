@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:59:32 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/02 13:26:55 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/02/05 14:08:51 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	setup_mlx(t_data *data)
 	mlx_set_window_pos(data->mlx_ptr, 200, 20);
 	init_colors_cf(data);
 	setup_imgs(data);
+	//mlx_set_icon(data->mlx_ptr, mlx_load_png("resources/cub3dlogo.png"));
 	mlx_image_to_window(data->mlx_ptr, data->imgs.ceiling, 0, 0);
 	mlx_image_to_window(data->mlx_ptr, data->imgs.floor, 0, 512);
 	mlx_set_instance_depth(&data->imgs.ceiling->instances[0], 0);
