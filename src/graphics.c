@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:17:47 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/02/03 13:30:01 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/05 14:30:52 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	draw_wall(t_data *data, t_dda *dda, int pixel_x)
 	int	wall_end;
 	int	wall_start;
 	int	line_height;
+	int	texture_x;
 
 	line_height = (int)(HEIGHT / dda->wall_dist);
 	wall_start = (-line_height + HEIGHT) / 2;
@@ -49,6 +50,11 @@ void	draw_wall(t_data *data, t_dda *dda, int pixel_x)
 	pixel_y = -1;
 	while (++pixel_y < wall_start)
 		mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, stack_pixel(&data->colors.ceilling, NULL));
+	if (dda->side == 0) // Y
+	{
+		
+	}
+	else
 	while (++pixel_y < wall_end)
 	{
 		if (dda->side == 0)
