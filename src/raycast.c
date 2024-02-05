@@ -3,32 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:02:43 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/03 13:23:52 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/05 14:26:52 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "cub3d.h"
 
-double	raygun(t_data *data, double x1, double y1, t_dda *ft_dda)
+
+/**
+ * convert Double Position in Pixel Position (int)
+*/
+int	dtop(double position, int resolution)
+{
+	if (resolution == WIDTH)
+		return ((int)(position * WIDTH));
+	return ((int)(position * HEIGHT));
+}
+
+void	raygun(t_data *data, double x1, double y1, t_dda *ft_dda)
 {
 	dda(data, x1, y1, ft_dda);
 	double	delta_x = ft_dda->collision_point[0] - x1;
 	double	delta_y = ft_dda->collision_point[1] - y1;
 	double	max_delta = (fabs(delta_x) > fabs(delta_y)) ? fabs(delta_x) : fabs(delta_y);
-	double	res = sqrt(pow(ft_dda->collision_point[0] - x1, 2) + pow(ft_dda->collision_point[1] - y1, 2));
 	double	t = 0.0;
 	while (t <= 1.0)
 	{
 		double	x = x1 + t * delta_x;
 		double	y = y1 + t * delta_y;
-		mlx_put_pixel(data->imgs.mp_ray, round(x) * MP_WALL, round(y) * MP_WALL, stack_pixel(&data->colors.yellow, NULL));
+		mlx_put_pixel(data->imgs.mp_ray, x * MP_WALL, y * MP_WALL, stack_pixel(&data->colors.yellow, NULL));
 		t += 1.0 / max_delta;
 	}
-	return (res);
 }
 
 void	pewpewpew(t_data *data)

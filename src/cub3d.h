@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/02 10:41:26 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/02/05 14:20:59 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,7 @@ void		ft_key_handler(t_data *data, double rotspeed, double speed);
 // raycast.c
 void		pewpewpew(t_data *data);
 void		ray_view(t_data *data);
+int			dtop(double position, int resolution);
 
 // hooks.c
 void		ft_loop(void *param);

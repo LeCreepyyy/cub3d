@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:28:11 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/02/02 14:34:17 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/02/05 14:25:02 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ void	ft_loop(void *param)
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_L))
 		action_flashlight(data, 1);
 	ft_key_handler(data, 0.01, speed);
-	data->imgs.mp_player->instances[0].x = round(data->player.pos_x) * MP_WALL;
-	data->imgs.mp_player->instances[0].y = round(data->player.pos_y) * MP_WALL;
+	data->imgs.mp_player->instances[0].x = (data->player.pos_x) * MP_WALL;
+	data->imgs.mp_player->instances[0].y = (data->player.pos_y) * MP_WALL;
 	speed = 1;
 }
 
