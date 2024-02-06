@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:59:32 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/05 16:04:49 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/06 11:43:55 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ void	*px_memset(void *str, struct s_rgba color, size_t len)
 
 void	check_wall_resolution(t_data *data)
 {
+	if (data->imgs.wall_north->width < 42
+		|| data->imgs.wall_south->width < 42
+		|| data->imgs.wall_east->width < 42
+		|| data->imgs.wall_west->width < 42)
+		return (ft_exit("Textures are to small (>42px)", 1));
 	if (data->imgs.wall_north->width != data->imgs.wall_north->height
 		|| data->imgs.wall_south->width != data->imgs.wall_south->height
 		|| data->imgs.wall_east->width != data->imgs.wall_east->height
