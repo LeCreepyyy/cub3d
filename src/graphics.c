@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:17:47 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/02/05 20:20:28 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/06 14:02:32 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,29 +32,38 @@ uint32_t	code_pixel(mlx_image_t *img, int pixel_x, int pixel_y)
 			&img->pixels[((pixel_x + (int)img->width) * pixel_y)]));
 }
 
-mlx_image_t	*get_texture_orientation(t_data *data, t_dda *dda)
+/**
+ * @param img Send North, South, East or West texture.
+ * If orient = 1 is X axis. If orient = 2 is Y axis.
+ * @return Good pixel for mlx_put_pixel.
+*/
+uint32_t	get_pixel_to_draw(mlx_image_t *img, t_dda *dda, int orient, int pixel_y)
 {
-	if (dda->side == 0 && dda->dir_x > 0)
-		return(data->imgs.wall_west);
-	else if (dda->side == 0 && dda->dir_x <= 0)
-		return(data->imgs.wall_east);
-	else if (dda->side != 0 && dda->dir_y > 0)
-		return(data->imgs.wall_north);
-	else if (dda->side != 0 && dda->dir_y <= 0)
-		return(data->imgs.wall_south);
-	return (NULL);
+	double	vecteur_x;
+
+	if (orient == 1)
+		vecteur_x = dda->collision_point[0] - (int)dda->collision_point[0];
+	else
+		vecteur_x = dda->collision_point[1] - (int)dda->collision_point[1];
+	int		ligne_x = (int)round(img->width * vecteur_x);
+	int		line_height = (int)(HEIGHT) / 2;
+	int		ligne_y = img->height * pixel_y / line_height;
+	return (code_pixel(img, ligne_x, ligne_y));
 }
 
-void	draw(t_data *data, t_dda *dda, int pixel_x)
+/**
+ * GREEN  : WEST
+ * LIME   : EAST
+ * RED    : SOUTH
+ * ORANGE : NORTH
+*/
+void	draw_wall(t_data *data, t_dda *dda, int pixel_x)
 {
-	int			pixel_y;
-	int			wall_end;
-	int			wall_start;
-	int			line_height;
-	int			i;
-	int			texture_offset;
-	mlx_image_t	*texture;
-	
+	int	pixel_y;
+	int	wall_end;
+	int	wall_start;
+	int	line_height;
+
 	line_height = (int)(HEIGHT / dda->wall_dist);
 	wall_start = (-line_height + HEIGHT) / 2;
 	if (wall_start < 0)
@@ -65,25 +74,23 @@ void	draw(t_data *data, t_dda *dda, int pixel_x)
 	pixel_y = -1;
 	while (++pixel_y < wall_start)
 		mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, stack_pixel(&data->colors.ceilling, NULL));
-	//////
-	texture = get_texture_orientation(data, dda);
-	texture_offset = 0;
-	if (dda->side == 0)
-		texture_offset = (int)dda->collision_point[1] % data->imgs.wall_resolution;
-	if (dda->side == 1)
-		texture_offset = (int)dda->collision_point[0] % data->imgs.wall_resolution;
-	if (dda->n == WIDTH/2) // Afficher les datas du rayon centre
-		printf("offset: %i, x: %f, y: %f\n", texture_offset, dda->collision_point[0], dda->collision_point[1]);
-	i = texture_offset * 4;
-	while (texture->pixels[i] && ++pixel_y < wall_end)
+	while (++pixel_y < wall_end)
 	{
-		if (dda->n == WIDTH/2) // Afficher du rayon centre en rouge
-			mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, stack_pixel(&data->colors.red, NULL));
+		if (dda->side == 0)
+		{
+			if (dda->dir_x > 0)
+				mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, get_pixel_to_draw(data->imgs.wall_west, dda, 2, pixel_y));
+			else
+				mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, get_pixel_to_draw(data->imgs.wall_east, dda, 2, pixel_y));
+		}
 		else
-			mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, stack_pixel(NULL, &texture->pixels[i]));
-		i += data->imgs.wall_resolution * 4;
+		{
+			if (dda->dir_y > 0)
+				mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, get_pixel_to_draw(data->imgs.wall_south, dda, 1, pixel_y));
+			else
+				mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, get_pixel_to_draw(data->imgs.wall_north, dda, 1, pixel_y));
+		}
 	}
-	//////////
 	while (++pixel_y < HEIGHT)
 		mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, stack_pixel(&data->colors.floor, NULL));
 }
@@ -102,7 +109,7 @@ void	draw_img(t_data *data)
 		{
 			mlx_put_pixel(data->imgs.graph, y, x, stack_pixel(NULL, &data->imgs.wall_west->pixels[i]));
 			i += 4;
-			y++;;
+			y++;
 			delta_height--;
 		}
 		x++;

@@ -3,44 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:02:43 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/05 19:35:21 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/06 10:54:09 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "cub3d.h"
 
-
 /**
- * convert Double Position in Pixel Position (int)
+ * xy[0] = X value & xy[1] = Y value
 */
-int	dtop(double position, int resolution)
-{
-	if (resolution == WIDTH)
-		return ((int)(position * WIDTH));
-	return ((int)(position * HEIGHT));
-}
-
 void	raygun(t_data *data, double x1, double y1, t_dda *ft_dda)
 {
 	double	delta_x;
 	double	delta_y;
 	double	max_delta;
+	double	xy[2];
 	double	t;
 
 	dda(data, x1, y1, ft_dda);
 	delta_x = ft_dda->collision_point[0] - x1;
 	delta_y = ft_dda->collision_point[1] - y1;
-	max_delta = (fabs(delta_x) > fabs(delta_y)) ? fabs(delta_x) : fabs(delta_y);
+	if (fabs(delta_x) > fabs(delta_y))
+		max_delta = fabs(delta_x);
+	else
+		max_delta = fabs(delta_y);
 	t = 0.0;
 	while (t <= 1.0)
 	{
-		double	x = x1 + t * delta_x;
-		double	y = y1 + t * delta_y;
-		mlx_put_pixel(data->imgs.mp_ray, x * MP_WALL, y * MP_WALL, stack_pixel(&data->colors.yellow, NULL));
+		xy[0] = x1 + t * delta_x;
+		xy[1] = y1 + t * delta_y;
+		mlx_put_pixel(data->imgs.mp_ray, xy[0] * MP_WALL, xy[1] * MP_WALL,
+			stack_pixel(&data->colors.yellow, NULL));
 		t += 1.0 / max_delta;
 	}
 }
@@ -63,8 +59,9 @@ void	pewpewpew(t_data *data)
 		ft_dda.dir_x = data->player.dir_x + data->player.plane_x * ft_dda.camera_x;
 		ft_dda.dir_y = data->player.dir_y + data->player.plane_y * ft_dda.camera_x;
 		raygun(data, data->player.pos_x, data->player.pos_y, &ft_dda);
+		//draw(data, &ft_dda, i++);
+		draw_wall(data, &ft_dda, i++);
 		free(ft_dda.collision_point);
-		draw(data, &ft_dda, i++);
 	}
 }
 

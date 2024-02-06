@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/06 14:06:03 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/06 14:07:43 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,6 @@ void		ft_key_handler(t_data *data, double rotspeed, double speed);
 // raycast.c
 void		pewpewpew(t_data *data);
 void		ray_view(t_data *data);
-int			dtop(double position, int resolution);
 
 // hooks.c		NORM_OK
 void		ft_loop(void *param);
@@ -180,9 +179,8 @@ void		ft_flashlight(t_data *data);
 void		action_flashlight(t_data *data, int code);
 
 // graphics.c	NORM_VERIF
-void		draw(t_data *data, t_dda *dda, int pixel_x);
+void		draw_wall(t_data *data, t_dda *dda, int pixel_x);
 uint32_t	stack_pixel(struct s_rgba *color, uint8_t *stack);
-mlx_image_t	*get_texture_orientation(t_data *data, t_dda *dda);
 
 // colors.c		NORM_OK
 void		init_colors_cf(t_data *data);
