@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/05 19:34:02 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/06 14:06:03 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,22 +114,6 @@ typedef struct s_dda
 	double	wall_dist;
 }			t_dda;
 
-struct s_ray
-{
-	double			length;
-	int				collision_x;
-	int				collision_y;
-	int				chunk;
-	int				wall_index;
-	double			compass;
-	int				last_step_x;
-	int				last_step_y;
-	int				wall_height;
-	int				orient;
-	mlx_image_t		*wall;
-	double			strip_x;
-};
-
 typedef struct s_data
 {
 	char			**textures;
@@ -142,9 +126,8 @@ typedef struct s_data
 	struct s_player	player;
 }					t_data;
 
-// main.c
+// main.c		NORM_OK
 void		init_data(t_data *data);
-void		init_colors(t_data *data);
 void		ft_exit(char *err, int code);
 int			main(int argc, char **argv);
 
@@ -190,23 +173,27 @@ void		pewpewpew(t_data *data);
 void		ray_view(t_data *data);
 int			dtop(double position, int resolution);
 
-// hooks.c
+// hooks.c		NORM_OK
 void		ft_loop(void *param);
+void		ft_loop2(t_data *data);
 void		ft_flashlight(t_data *data);
-double		compass(double dir_x, double dir_y);
 void		action_flashlight(t_data *data, int code);
 
-// graphics.c
+// graphics.c	NORM_VERIF
 void		draw(t_data *data, t_dda *dda, int pixel_x);
-void		draw_wall();
 uint32_t	stack_pixel(struct s_rgba *color, uint8_t *stack);
 mlx_image_t	*get_texture_orientation(t_data *data, t_dda *dda);
 
-// colors_cf.c
+// colors.c		NORM_OK
 void		init_colors_cf(t_data *data);
 void		init_color_cf2(t_data *data, char **res);
+void		rgb_creator(struct s_rgba *color, uint8_t r, uint8_t g, uint8_t b);
+void		init_colors(t_data *data);
 
-// ft_dda.c
+// ft_dda.c		NORM_VERIF
 double		*dda(t_data *data, double start_x, double start_y, t_dda *dda);
+void		define_value_dda_y(t_dda *dda, double start_y);
+void		define_value_dda_x(t_dda *dda, double start_x, double start_y);
+
 
 #endif
