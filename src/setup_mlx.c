@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:59:32 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/06 11:43:55 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/06 13:19:59 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,12 +127,21 @@ void	setup_mlx(t_data *data)
 	minimap(data);
 	mlx_image_to_window(data->mlx_ptr, data->imgs.flash, 400, 600);
 	mlx_set_instance_depth(&data->imgs.flash->instances[0], 6);
-	// if (data->player_pos[0] == 'N')
-	// 	ft_rotate_point(&data->player.dir_x, &data->player.dir_y, 7.9);
-	// else if (data->player_pos[0] == 'E')
-	// 	ft_rotate_point(&data->player.dir_x, &data->player.dir_y, 7.9 * 2);
-	// else if (data->player_pos[0] == 'S')
-	// 	ft_rotate_point(&data->player.dir_x, &data->player.dir_y, -7.9);
+	if (data->player_pos[0] == 'N')
+	{
+	 	ft_rotate_point(&data->player.plane_x, &data->player.plane_y, PI/2);
+		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, PI/2);
+	}
+	else if (data->player_pos[0] == 'E')
+	{
+		ft_rotate_point(&data->player.plane_x, &data->player.plane_y, PI);
+		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, PI);
+	}
+	else if (data->player_pos[0] == 'S')
+	{
+	 	ft_rotate_point(&data->player.plane_x, &data->player.plane_y, -(PI/2));
+		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, -(PI/2));
+	}
 	data->player.pos_x = (double)data->player_pos[1];
 	data->player.pos_y = (double)data->player_pos[2];
 	mlx_set_cursor_mode(data->mlx_ptr, MLX_MOUSE_HIDDEN);
