@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 11:20:42 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/01/16 14:45:19 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/06 15:58:55 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	skip_empty_lines(char **ftab, int y)
 		ft_exit("Missing information", EXIT_FAILURE);
 	return (y);
 }
-
 
 /**
  * Checks for map validity.
@@ -112,4 +111,18 @@ void	store_map(char **ftab, int y, t_data *data)
 	w = -1;
 	while (ftab[y])
 		data->map_flat[++w] = ft_strdup(ftab[y++]);
+}
+
+/**
+ * Checks if a given position on the map is a wall or not.
+ * @param data Data struct.
+ * @param y y-coordinate of the positions being checked.
+ * @param x x-coordinate of the position being checked.
+ * @return 1 if wall, otherwise 0
+ */
+int	is_wall(t_data *data, int y, int x)
+{
+	if (data->map_flat[y][x] == '1')
+		return (0);
+	return (1);
 }

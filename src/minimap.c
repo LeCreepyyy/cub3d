@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 11:43:13 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/01/26 14:42:52 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/06 15:53:24 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@ void	minimap(t_data *data)
 	print_minimap_player_and_rays(data);
 }
 
+/**
+ * Draws minimap's walls and floor.
+ * @param data Data struct.
+ */
 void	print_minimap_walls_and_floor(t_data *data, int x, int y)
 {
 	if (data->map_flat[y][x] == '1')
@@ -51,6 +55,10 @@ void	print_minimap_walls_and_floor(t_data *data, int x, int y)
 	}
 }
 
+/**
+ * Draws minimap player and rays.
+ * @param data Data struct.
+ */
 void	print_minimap_player_and_rays(t_data *data)
 {
 	mlx_image_to_window(data->mlx_ptr, data->imgs.mp_player,

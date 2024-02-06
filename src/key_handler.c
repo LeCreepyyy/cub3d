@@ -3,31 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   key_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 10:35:09 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/02 14:34:06 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/02/06 15:59:55 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 /**
- * Checks if a given position on the map is a wall or not.
- * @param data Data struct.
- * @param y y-coordinate of the positions being checked.
- * @param x x-coordinate of the position being checked.
- * @return 1 if wall, otherwise 0
- */
-int	is_wall(t_data *data, int y, int x)
-{
-	if (data->map_flat[y][x] == '1')
-		return (0);
-	return (1);
-}
-
-/**
- * Checks for a wall in next position.
+ * Player movement and walls collision
  * @param data Data struct.
  * @param dir_x The direction in the x-axis that the player is moving in.
  * @param dir_y The direction in the y-axis that the player is moving in.
@@ -102,11 +88,20 @@ void	ft_key_handler(t_data *data, double rotspeed, double speed)
 	}
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_D))
 	{
-		// c'est de la turbo D espece de faillasse calcul le vecteur et deplace toi au lieu de secouer ton joueur dans tout les sens
 		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, 7.9);
 		ft_next_pos(data, data->player.dir_x, data->player.dir_y, speed);
 		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, -7.9);
 	}
+	ft_key_handler2(data, rotspeed);
+}
+
+/**
+ * Norm child of ft_key_handler()
+ * @param data Data struct
+ * @param rotspeed Player's rotation speed
+ */
+void	ft_key_handler2(t_data *data, double rotspeed)
+{
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_RIGHT))
 	{
 		ft_rotate_point(&data->player.plane_x, &data->player.plane_y, rotspeed);

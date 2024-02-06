@@ -6,46 +6,23 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:59:32 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/06 13:19:59 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/06 15:51:47 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 /**
- * Sets the values of memory block to the RGBA color provided.
- * @param str Pointer to memory block.
- * @param color Struct of RGBA data
- * @param len Length of the memory block
- * @return Pointer to memory block
+ * Checks for wall resolutions (>42px, all equals, and all square)
+ * @param data Data struct. 
  */
-void	*px_memset(void *str, struct s_rgba color, size_t len)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < len)
-	{
-		if (i % 4 == 0)
-			((uint8_t *)str)[i] = color.r;
-		if (i % 4 == 1)
-			((uint8_t *)str)[i] = color.g;
-		if (i % 4 == 2)
-			((uint8_t *)str)[i] = color.b;
-		if (i % 4 == 3)
-			((uint8_t *)str)[i] = color.a;
-		i++;
-	}
-	return (str);
-}
-
 void	check_wall_resolution(t_data *data)
 {
 	if (data->imgs.wall_north->width < 42
 		|| data->imgs.wall_south->width < 42
 		|| data->imgs.wall_east->width < 42
 		|| data->imgs.wall_west->width < 42)
-		return (ft_exit("Textures are to small (>42px)", 1));
+		return (ft_exit("Textures are too small (>42px)", 1));
 	if (data->imgs.wall_north->width != data->imgs.wall_north->height
 		|| data->imgs.wall_south->width != data->imgs.wall_south->height
 		|| data->imgs.wall_east->width != data->imgs.wall_east->height
@@ -66,21 +43,28 @@ void	check_wall_resolution(t_data *data)
 void	setup_imgs(t_data *data)
 {
 	data->imgs.wall_north_texture = mlx_load_png(get_texture('N', data));
+	data->imgs.wall_south_texture = mlx_load_png(get_texture('S', data));
+	data->imgs.wall_east_texture = mlx_load_png(get_texture('E', data));
+	data->imgs.wall_west_texture = mlx_load_png(get_texture('W', data));
+	data->imgs.flash_txtr = mlx_load_png("resources/hand_texture.png");
+	data->imgs.black_txtr = mlx_load_png("resources/black.png");
+	if (!data->imgs.wall_north_texture || !data->imgs.wall_south_texture
+		|| !data->imgs.wall_east_texture || !data->imgs.wall_west_texture
+		|| !data->imgs.flash_txtr || !data->imgs.black_txtr)
+		ft_exit("Loading textures failed.", 1);
 	data->imgs.wall_north = mlx_texture_to_image(data->mlx_ptr,
 			data->imgs.wall_north_texture);
-	data->imgs.wall_south_texture = mlx_load_png(get_texture('S', data));
 	data->imgs.wall_south = mlx_texture_to_image(data->mlx_ptr,
 			data->imgs.wall_south_texture);
-	data->imgs.wall_east_texture = mlx_load_png(get_texture('E', data));
 	data->imgs.wall_east = mlx_texture_to_image(data->mlx_ptr,
 			data->imgs.wall_east_texture);
-	data->imgs.wall_west_texture = mlx_load_png(get_texture('W', data));
 	data->imgs.wall_west = mlx_texture_to_image(data->mlx_ptr,
 			data->imgs.wall_west_texture);
 	check_wall_resolution(data);
-	data->imgs.flash_txtr = mlx_load_png("resources/hand_texture.png");
 	data->imgs.flash = mlx_texture_to_image(data->mlx_ptr,
 			data->imgs.flash_txtr);
+	data->imgs.black = mlx_texture_to_image(data->mlx_ptr,
+			data->imgs.black_txtr);
 	setup_imgs2(data);
 }
 
@@ -122,11 +106,29 @@ void	setup_mlx(t_data *data)
 	//mlx_set_icon(data->mlx_ptr, mlx_load_png("resources/cub3dlogo.png"));
 	mlx_image_to_window(data->mlx_ptr, data->imgs.ceiling, 0, 0);
 	mlx_image_to_window(data->mlx_ptr, data->imgs.floor, 0, 512);
+	mlx_image_to_window(data->mlx_ptr, data->imgs.black, 0, -100);
 	mlx_set_instance_depth(&data->imgs.ceiling->instances[0], 0);
 	mlx_set_instance_depth(&data->imgs.floor->instances[0], 0);
+	mlx_set_instance_depth(&data->imgs.black->instances[0], -1);
 	minimap(data);
 	mlx_image_to_window(data->mlx_ptr, data->imgs.flash, 400, 600);
 	mlx_set_instance_depth(&data->imgs.flash->instances[0], 6);
+	player_base_orientation(data);
+	data->player.pos_x = (double)data->player_pos[1];
+	data->player.pos_y = (double)data->player_pos[2];
+	mlx_set_cursor_mode(data->mlx_ptr, MLX_MOUSE_HIDDEN);
+	mlx_set_mouse_pos(data->mlx_ptr, WIDTH / 2, HEIGHT / 2);
+	ray_view(data);
+	mlx_loop_hook(data->mlx_ptr, ft_loop, data);
+	mlx_loop(data->mlx_ptr);
+}
+
+/**
+ * Sets the player's orientation according to the map spawn point.
+ * @param data Data struct.
+ */
+void	player_base_orientation(t_data *data)
+{
 	if (data->player_pos[0] == 'N')
 	{
 	 	ft_rotate_point(&data->player.plane_x, &data->player.plane_y, PI/2);
@@ -142,11 +144,4 @@ void	setup_mlx(t_data *data)
 	 	ft_rotate_point(&data->player.plane_x, &data->player.plane_y, -(PI/2));
 		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, -(PI/2));
 	}
-	data->player.pos_x = (double)data->player_pos[1];
-	data->player.pos_y = (double)data->player_pos[2];
-	mlx_set_cursor_mode(data->mlx_ptr, MLX_MOUSE_HIDDEN);
-	mlx_set_mouse_pos(data->mlx_ptr, WIDTH / 2, HEIGHT / 2);
-	ray_view(data);
-	mlx_loop_hook(data->mlx_ptr, ft_loop, data);
-	mlx_loop(data->mlx_ptr);
 }

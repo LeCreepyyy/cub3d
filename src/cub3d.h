@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/06 14:17:28 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/06 16:01:52 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,44 +131,46 @@ void		init_data(t_data *data);
 void		ft_exit(char *err, int code);
 int			main(int argc, char **argv);
 
-// tab_utils.c
+// tab_utils.c	NORM_VERIF
 char		*get_texture(char c, t_data *data);
 int			tab_len(char **tab);
 void		free_tab(char **tab);
 void		print_tab(char **tab);
+void		*px_memset(void *str, struct s_rgba color, size_t len);
 
-// parsing.c
+// parsing.c	NORM_VERIF
 int			file_len(char *path);
 char		**file_to_tab(char *path);
 void		checkrgb(char *line);
 void		checkmap(char **ftab, t_data *data);
 void		parsing(char *map_path, t_data *data);
 
-// parsing_utils.c
+// parsing_utils.c	NORM_VERIF
 int			skip_empty_lines(char **ftab, int y);
 void		check(t_data *data, char **ftab, int y, int x);
 void		parse_map(char **ftab, int y, t_data *data);
 void		store_map(char **ftab, int y, t_data *data);
+int			is_wall(t_data *data, int y, int x);
 
-// setup_mlx.c
-void		*px_memset(void *str, struct s_rgba color, size_t len);
+// setup_mlx.c	NORM_NO
 void		setup_imgs(t_data *data);
 void		setup_imgs2(t_data *data);
-void		setup_mlx(t_data *data);
+void		setup_mlx(t_data *data); // +25 lines
+void		player_base_orientation(t_data *data);
 
-// minimap.c
+// minimap.c	NORM_VERIF
 void		minimap(t_data *data);
 void		print_minimap_walls_and_floor(t_data *data, int x, int y);
 void		print_minimap_player_and_rays(t_data *data);
 
-// key_handler.c
-int			is_wall(t_data *data, int y, int x);
+// key_handler.c	NORM_VERIF
 void		ft_next_pos(t_data *data, double dir_x, double dir_y, double speed);
 void		ft_rotate_point(double *dir_x, double *dir_y, double rotspeed);
 int			pos_mouse(t_data *data);
 void		ft_key_handler(t_data *data, double rotspeed, double speed);
+void		ft_key_handler2(t_data *data, double rotspeed);
 
-// raycast.c	NORM_VERIF	AJOUTER DOCS
+// raycast.c	UNFINISHED
 void		pewpewpew(t_data *data);
 void		ray_view(t_data *data);
 
@@ -178,7 +180,7 @@ void		ft_loop2(t_data *data);
 void		ft_flashlight(t_data *data);
 void		action_flashlight(t_data *data, int code);
 
-// graphics.c	NORM_VERIF
+// graphics.c	UNFINISHED
 void		draw_wall(t_data *data, t_dda *dda, int pixel_x);
 uint32_t	stack_pixel(struct s_rgba *color, uint8_t *stack);
 
@@ -188,8 +190,8 @@ void		init_color_cf2(t_data *data, char **res);
 void		rgb_creator(struct s_rgba *color, uint8_t r, uint8_t g, uint8_t b);
 void		init_colors(t_data *data);
 
-// ft_dda.c		NORM_VERIF
-double		*dda(t_data *data, double start_x, double start_y, t_dda *dda);
+// ft_dda.c		NORM_NO
+double		*dda(t_data *data, double start_x, double start_y, t_dda *dda);  // +25 lines
 void		define_value_dda_y(t_dda *dda, double start_y);
 void		define_value_dda_x(t_dda *dda, double start_x, double start_y);
 

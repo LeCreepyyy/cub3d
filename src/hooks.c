@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:28:11 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/02/06 14:10:53 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/06 15:41:17 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	ft_flashlight(t_data *data)
 }
 
 /**
- * Make the black veil appear to imitate the flashlight light beam.
+ * Make the black veil appear/disapprear to imitate the flashlight light beam.
  * @param data Data struct.
  * @param code Flashlight status.
  */
@@ -90,8 +90,7 @@ void	action_flashlight(t_data *data, int code)
 	{
 		if (pass == 1)
 			return ;
-		mlx_delete_image(data->mlx_ptr, data->imgs.black);
-		mlx_delete_texture(data->imgs.black_txtr);
+		mlx_set_instance_depth(&data->imgs.black->instances[0], -1);
 		pass = 1;
 	}
 	else if (code == 2)
@@ -99,10 +98,6 @@ void	action_flashlight(t_data *data, int code)
 		if (pass != 1)
 			return ;
 		pass = 0;
-		data->imgs.black_txtr = mlx_load_png("resources/black.png");
-		data->imgs.black = mlx_texture_to_image(data->mlx_ptr,
-				data->imgs.black_txtr);
-		mlx_image_to_window(data->mlx_ptr, data->imgs.black, 0, -100);
 		mlx_set_instance_depth(&data->imgs.black->instances[0], 5);
 	}
 }
