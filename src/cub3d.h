@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/06 14:07:43 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/02/06 14:17:28 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ void		ft_rotate_point(double *dir_x, double *dir_y, double rotspeed);
 int			pos_mouse(t_data *data);
 void		ft_key_handler(t_data *data, double rotspeed, double speed);
 
-// raycast.c
+// raycast.c	NORM_VERIF	AJOUTER DOCS
 void		pewpewpew(t_data *data);
 void		ray_view(t_data *data);
 
