@@ -6,7 +6,7 @@
 #    By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/14 11:30:00 by vpoirot           #+#    #+#              #
-#    Updated: 2024/02/05 15:05:06 by bgaertne         ###   ########.fr        #
+#    Updated: 2024/02/06 13:47:37 by bgaertne         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ SRCS	=	src/main.c\
 			src/key_handler.c\
 			src/raycast.c\
 			src/graphics.c\
-			src/colors_cf.c\
+			src/colors.c\
 			src/hooks.c\
 			src/ft_dda.c\
 			src/minimap.c\

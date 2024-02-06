@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:00:10 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/05 16:05:20 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/06 13:47:40 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,35 +43,6 @@ void	init_data(t_data *data)
 	data->imgs.wall_resolution = 0;
 	init_colors(data);
 }
-
-void	rgb_creator(struct s_rgba *color, uint8_t r, uint8_t g, uint8_t b)
-{
-	color->r = r;
-	color->g = g;
-	color->b = b;
-	color->a = 255;
-}
-
-
-/**
- * Data initialization.
- * @param data Data struct
- */
-void	init_colors(t_data *data)
-{
-	rgb_creator(&data->colors.red, 255, 0, 0);
-	rgb_creator(&data->colors.orange, 255, 140, 0);
-	rgb_creator(&data->colors.yellow, 255, 255, 0);
-	rgb_creator(&data->colors.lime, 0, 255, 0);
-	rgb_creator(&data->colors.green, 0, 140, 0);
-	rgb_creator(&data->colors.dark_blue, 0, 0, 255);
-	rgb_creator(&data->colors.light_blue, 0, 190, 255);
-	rgb_creator(&data->colors.white, 255, 255, 255);
-	rgb_creator(&data->colors.black, 0, 0, 0);
-	data->colors.ceilling.a = 255;
-	data->colors.floor.a = 255;
-}
-
 
 /**
  * Prints an error message and exit the program with a given code.

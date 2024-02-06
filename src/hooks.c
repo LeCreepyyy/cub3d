@@ -3,58 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:28:11 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/02/05 14:25:02 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/02/06 14:10:53 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-double	compass(double dir_x, double dir_y)
-{
-	double	base_x;
-	double	base_y;
-	double	angle;
-
-	base_x = -1;
-	base_y = 0;
-	angle = atan2(dir_x, dir_y) - atan2(base_x, base_y);
-	return (angle);
-}
-
-void	ft_flashlight(t_data *data)
-{
-	static int		time_diff = 0;
-
-	if (time_diff < 20)
-		data->imgs.flash->instances[0].y -= 1;
-	if (time_diff >= 20 && time_diff < 40)
-		data->imgs.flash->instances[0].y += 1;
-	time_diff++;
-	if (time_diff >= 40)
-		time_diff = 0;
-}
-
+/**
+ * Called every frame by mlx function ft_loop_hook().
+ * Mouse and Keyboard handling function. Also handles flashlight.
+ * @param param	void *param, used to pass our Data struct.
+ */
 void	ft_loop(void *param)
 {
 	t_data	*data;
-	double	speed;
 
 	data = param;
 	ray_view(data);
 	if (pos_mouse(data) == 2)
 	{
-		ft_rotate_point(&data->player.plane_x, &data->player.plane_y, 0.05);
-		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, 0.05);
+		ft_rotate_point(&data->player.plane_x, &data->player.plane_y, 0.07);
+		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, 0.07);
 	}
 	else if (pos_mouse(data) == 1)
 	{
-		ft_rotate_point(&data->player.plane_x, &data->player.plane_y, -0.05);
-		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, -0.05);
+		ft_rotate_point(&data->player.plane_x, &data->player.plane_y, -0.07);
+		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, -0.07);
 	}
 	mlx_set_mouse_pos(data->mlx_ptr, WIDTH / 2, HEIGHT / 2);
+	ft_loop2(data);
+}
+
+/**
+ * Norm child of ft_loop()
+ * @param data Data struct.
+ */
+void	ft_loop2(t_data *data)
+{
+	double	speed;
+
 	speed = 0.05;
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_LEFT_SHIFT))
 		speed = 0.15;
@@ -70,6 +60,28 @@ void	ft_loop(void *param)
 	speed = 1;
 }
 
+/**
+ * Animate the flashlight hold by the player when walking.
+ * @param data Data struct.
+ */
+void	ft_flashlight(t_data *data)
+{
+	static int		time_diff = 0;
+
+	if (time_diff < 20)
+		data->imgs.flash->instances[0].y -= 1;
+	if (time_diff >= 20 && time_diff < 40)
+		data->imgs.flash->instances[0].y += 1;
+	time_diff++;
+	if (time_diff >= 40)
+		time_diff = 0;
+}
+
+/**
+ * Make the black veil appear to imitate the flashlight light beam.
+ * @param data Data struct.
+ * @param code Flashlight status.
+ */
 void	action_flashlight(t_data *data, int code)
 {
 	static int	pass = 1;
