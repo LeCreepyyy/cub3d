@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:02:43 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/06 10:54:09 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/02/08 10:45:11 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,11 @@ void	pewpewpew(t_data *data)
 	{	
 		ft_dda.n++;
 		ft_dda.camera_x = 2 * pixel_x / (double)WIDTH - 1;
-		ft_dda.dir_x = data->player.dir_x + data->player.plane_x * ft_dda.camera_x;
-		ft_dda.dir_y = data->player.dir_y + data->player.plane_y * ft_dda.camera_x;
+		ft_dda.dir_x = data->player.dir_x + data->player.plane_x
+			* ft_dda.camera_x;
+		ft_dda.dir_y = data->player.dir_y + data->player.plane_y
+			* ft_dda.camera_x;
 		raygun(data, data->player.pos_x, data->player.pos_y, &ft_dda);
-		//draw(data, &ft_dda, i++);
 		draw_wall(data, &ft_dda, i++);
 		free(ft_dda.collision_point);
 	}

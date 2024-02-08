@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:17:47 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/02/06 14:02:32 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/02/08 14:09:22 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ uint32_t	stack_pixel(struct s_rgba *color, uint8_t *stack)
 uint32_t	code_pixel(mlx_image_t *img, int pixel_x, int pixel_y)
 {
 	return (stack_pixel(NULL,
-			&img->pixels[((pixel_x + (int)img->width) * pixel_y)]));
+			&img->pixels[((pixel_x * 4) + (((int)img->width * 4) * pixel_y))]));
 }
 
 /**
@@ -46,9 +46,35 @@ uint32_t	get_pixel_to_draw(mlx_image_t *img, t_dda *dda, int orient, int pixel_y
 	else
 		vecteur_x = dda->collision_point[1] - (int)dda->collision_point[1];
 	int		ligne_x = (int)round(img->width * vecteur_x);
-	int		line_height = (int)(HEIGHT) / 2;
+	int		line_height = (int)(HEIGHT) / dda->wall_dist;
 	int		ligne_y = img->height * pixel_y / line_height;
 	return (code_pixel(img, ligne_x, ligne_y));
+}
+
+void	draw_img(t_data *data)
+{
+	int	x = WIDTH / 3;
+	int	delta_width = data->imgs.wall_west_texture->width;
+	int	i = 0;
+	int	bx;
+	int	by;
+
+	bx = x;
+	while (delta_width)
+	{
+		int y = HEIGHT / 3;
+		by = y;
+		int delta_height = data->imgs.wall_west_texture->height;
+		while (delta_height)
+		{
+			mlx_put_pixel(data->imgs.graph, y, x, code_pixel(data->imgs.wall_north, x - bx, y - by));
+			i++;
+			y++;
+			delta_height--;
+		}
+		x++;
+		delta_width--;
+	}
 }
 
 /**
@@ -93,26 +119,5 @@ void	draw_wall(t_data *data, t_dda *dda, int pixel_x)
 	}
 	while (++pixel_y < HEIGHT)
 		mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, stack_pixel(&data->colors.floor, NULL));
-}
-
-void	draw_img(t_data *data)
-{
-	int	x = WIDTH / 3;
-	int	delta_width = data->imgs.wall_west_texture->width;
-	int	i = 0;
-
-	while (delta_width)
-	{
-		int y = HEIGHT / 3;
-		int delta_height = data->imgs.wall_west_texture->height;
-		while (delta_height)
-		{
-			mlx_put_pixel(data->imgs.graph, y, x, stack_pixel(NULL, &data->imgs.wall_west->pixels[i]));
-			i += 4;
-			y++;
-			delta_height--;
-		}
-		x++;
-		delta_width--;
-	}
+	//draw_img(data);
 }
