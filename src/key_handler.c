@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 10:35:09 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/06 15:59:55 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/08 10:49:00 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,8 @@ void	ft_key_handler2(t_data *data, double rotspeed)
 	}
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_LEFT))
 	{
-		ft_rotate_point(&data->player.plane_x, &data->player.plane_y, -rotspeed);
+		ft_rotate_point(&data->player.plane_x, &data->player.plane_y,
+			-rotspeed);
 		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, -rotspeed);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/06 16:01:52 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/08 10:52:19 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ struct s_colors
 
 struct s_img
 {
+	mlx_texture_t	*icon_texture;
 	mlx_texture_t	*wall_north_texture;
 	mlx_image_t		*wall_north;
 	mlx_texture_t	*wall_south_texture;
@@ -155,7 +156,7 @@ int			is_wall(t_data *data, int y, int x);
 // setup_mlx.c	NORM_NO
 void		setup_imgs(t_data *data);
 void		setup_imgs2(t_data *data);
-void		setup_mlx(t_data *data); // +25 lines
+void		setup_mlx(t_data *data);
 void		player_base_orientation(t_data *data);
 
 // minimap.c	NORM_VERIF
@@ -191,9 +192,8 @@ void		rgb_creator(struct s_rgba *color, uint8_t r, uint8_t g, uint8_t b);
 void		init_colors(t_data *data);
 
 // ft_dda.c		NORM_NO
-double		*dda(t_data *data, double start_x, double start_y, t_dda *dda);  // +25 lines
+double		*dda(t_data *data, double start_x, double start_y, t_dda *dda);
 void		define_value_dda_y(t_dda *dda, double start_y);
 void		define_value_dda_x(t_dda *dda, double start_x, double start_y);
-
 
 #endif

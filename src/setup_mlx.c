@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:59:32 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/06 15:51:47 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/08 10:54:04 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	check_wall_resolution(t_data *data)
 		&& data->imgs.wall_east->width == data->imgs.wall_west->width)
 		data->imgs.wall_resolution = data->imgs.wall_north->width;
 	else
-		return(ft_exit("Textures needs to be of the same resolution", 1));
+		return (ft_exit("Textures needs to be of the same resolution", 1));
 }
 
 /**
@@ -91,6 +91,8 @@ void	setup_imgs2(t_data *data)
 	px_memset(data->imgs.mp_player->pixels, data->colors.red,
 		MP_PLAYER * MP_PLAYER * sizeof(int));
 	data->imgs.mp_ray = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
+	data->imgs.icon_texture = mlx_load_png("resources/cub3dlogo.png");
+	mlx_set_icon(data->mlx_ptr, data->imgs.icon_texture);
 }
 
 /**
@@ -103,7 +105,6 @@ void	setup_mlx(t_data *data)
 	mlx_set_window_pos(data->mlx_ptr, 200, 20);
 	init_colors_cf(data);
 	setup_imgs(data);
-	//mlx_set_icon(data->mlx_ptr, mlx_load_png("resources/cub3dlogo.png"));
 	mlx_image_to_window(data->mlx_ptr, data->imgs.ceiling, 0, 0);
 	mlx_image_to_window(data->mlx_ptr, data->imgs.floor, 0, 512);
 	mlx_image_to_window(data->mlx_ptr, data->imgs.black, 0, -100);
@@ -131,8 +132,8 @@ void	player_base_orientation(t_data *data)
 {
 	if (data->player_pos[0] == 'N')
 	{
-	 	ft_rotate_point(&data->player.plane_x, &data->player.plane_y, PI/2);
-		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, PI/2);
+		ft_rotate_point(&data->player.plane_x, &data->player.plane_y, PI / 2);
+		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, PI / 2);
 	}
 	else if (data->player_pos[0] == 'E')
 	{
@@ -141,7 +142,8 @@ void	player_base_orientation(t_data *data)
 	}
 	else if (data->player_pos[0] == 'S')
 	{
-	 	ft_rotate_point(&data->player.plane_x, &data->player.plane_y, -(PI/2));
-		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, -(PI/2));
+		ft_rotate_point(&data->player.plane_x, &data->player.plane_y,
+			-(PI / 2));
+		ft_rotate_point(&data->player.dir_x, &data->player.dir_y, -(PI / 2));
 	}
 }
