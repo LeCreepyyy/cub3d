@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:17:47 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/02/09 12:42:33 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/09 13:25:57 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,33 +48,7 @@ uint32_t	get_pixel_to_draw(mlx_image_t *img, t_dda *dda, int orient, int pixel_y
 	int		ligne_x = (int)round(img->width * vecteur_x);
 	int		line_height = (int)(HEIGHT) / dda->wall_dist;
 	int		ligne_y = img->height * pixel_y / line_height;
-	return (code_pixel(img, ligne_y, ligne_x));
-}
-
-void	draw_img(t_data *data)
-{
-	int	x = WIDTH / 3;
-	int	delta_width = data->imgs.wall_west_texture->width;
-	int	i = 0;
-	int	bx;
-	int	by;
-
-	bx = x;
-	while (delta_width)
-	{
-		int y = HEIGHT / 3;
-		by = y;
-		int delta_height = data->imgs.wall_west_texture->height;
-		while (delta_height)
-		{
-			mlx_put_pixel(data->imgs.graph, y, x, code_pixel(data->imgs.wall_north, y - by, x - bx));
-			i++;
-			y++;
-			delta_height--;
-		}
-		x++;
-		delta_width--;
-	}
+	return (code_pixel(img, ligne_x, ligne_y));
 }
 
 /**
