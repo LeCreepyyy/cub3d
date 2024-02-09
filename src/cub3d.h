@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/09 14:16:36 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/02/09 14:34:10 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,74 +125,76 @@ typedef struct s_data
 	struct s_player	player;
 }					t_data;
 
-// main.c		NORM_OK
+// main.c
 void		init_data(t_data *data);
 void		ft_exit(char *err, int code);
 int			main(int argc, char **argv);
 
-// tab_utils.c	NORM_VERIF
+// tab_utils.c
 char		*get_texture(char c, t_data *data);
 int			tab_len(char **tab);
 void		free_tab(char **tab);
 void		print_tab(char **tab);
 void		*px_memset(void *str, struct s_rgba color, size_t len);
 
-// parsing.c	NORM_VERIF
+// parsing.c
 int			file_len(char *path);
 char		**file_to_tab(char *path);
 void		checkrgb(char *line);
 void		checkmap(char **ftab, t_data *data);
 void		parsing(char *map_path, t_data *data);
 
-// parsing_utils.c	NORM_VERIF
+// parsing_utils.c
 int			skip_empty_lines(char **ftab, int y);
 void		check(t_data *data, char **ftab, int y, int x);
 void		parse_map(char **ftab, int y, t_data *data);
 void		store_map(char **ftab, int y, t_data *data);
 int			is_wall(t_data *data, int y, int x);
 
-// setup_mlx.c	NORM_NO
+// setup_mlx.c
 void		setup_imgs(t_data *data);
 void		setup_imgs2(t_data *data);
 void		setup_mlx(t_data *data);
 void		player_base_orientation(t_data *data);
 
-// minimap.c	NORM_VERIF
+// minimap.c
 void		minimap(t_data *data);
 void		print_minimap_walls_and_floor(t_data *data, int x, int y);
 void		print_minimap_player_and_rays(t_data *data);
 
-// key_handler.c	NORM_VERIF
+// key_handler.c
 void		ft_next_pos(t_data *data, double dir_x, double dir_y, double speed);
 void		ft_rotate_point(double *dir_x, double *dir_y, double rotspeed);
 int			pos_mouse(t_data *data);
 void		ft_key_handler(t_data *data, double rotspeed, double speed);
 void		ft_key_handler2(t_data *data, double rotspeed);
 
-// raycast.c	UNFINISHED
+// raycast.c
+void		raygun(t_data *data, double x1, double y1, t_dda *ft_dda);
 void		pewpewpew(t_data *data);
 void		ray_view(t_data *data);
 
-// hooks.c		NORM_OK
+// hooks.c
 void		ft_loop(void *param);
 void		ft_loop2(t_data *data);
 void		ft_flashlight(t_data *data);
 void		action_flashlight(t_data *data, int code);
 
-// graphics.c	UNFINISHED
+// graphics.c
 uint32_t	stack_pixel(struct s_rgba *color, uint8_t *stack);
 uint32_t	code_pixel(mlx_image_t *img, int pixel_x, int pixel_y);
 uint32_t	get_pixel_to_draw(mlx_image_t *img, t_dda *dda, int pixel_y);
 void		draw_wall(t_data *data, t_dda *dda, int pixel_x);
 void		draw_wall2(t_data *data, t_dda *dda, int pixel_x, int pixel_y);
 
-// colors.c		NORM_OK
+// colors.c
 void		init_colors_cf(t_data *data);
 void		init_color_cf2(t_data *data, char **res);
 void		rgb_creator(struct s_rgba *color, uint8_t r, uint8_t g, uint8_t b);
 void		init_colors(t_data *data);
 
 // ft_dda.c		NORM_NO
+void		norm_dda(t_dda *dda);
 double		*dda(t_data *data, double start_x, double start_y, t_dda *dda);
 void		define_value_dda_y(t_dda *dda, double start_y);
 void		define_value_dda_x(t_dda *dda, double start_x, double start_y);

@@ -3,18 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:02:43 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/08 10:45:11 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/02/09 14:33:42 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 /**
- * xy[0] = X value & xy[1] = Y value
-*/
+ * Single ray casting function using dda algorythm
+ * @param data Data struct
+ * @param x1 player X position (start position of ray)
+ * @param y1 player Y position (start position of ray)
+ * @param ft_dda dda struct
+ */
 void	raygun(t_data *data, double x1, double y1, t_dda *ft_dda)
 {
 	double	delta_x;
@@ -41,6 +45,10 @@ void	raygun(t_data *data, double x1, double y1, t_dda *ft_dda)
 	}
 }
 
+/**
+ * Multiple ray casting function, calling raygun() several times
+ * @param data Data struct
+ */
 void	pewpewpew(t_data *data)
 {
 	t_dda	ft_dda;
@@ -66,6 +74,10 @@ void	pewpewpew(t_data *data)
 	}
 }
 
+/**
+ * Casts rays and and draws them on the minimap
+ * @param data Data struct
+ */
 void	ray_view(t_data *data)
 {
 	static int	pass = 0;

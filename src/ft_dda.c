@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dda.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 12:34:40 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/09 13:39:12 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/02/09 14:32:25 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 /**
- * Norm child of dda
+ * Norm child of dda()
+ * @param dda dda struct
 */
 void	norm_dda(t_dda *dda)
 {
@@ -59,6 +60,11 @@ double	*dda(t_data *data, double start_x, double start_y, t_dda *dda)
 	return (dda->collision_point);
 }
 
+/**
+ * Norm child of dda()
+ * @param dda dda struct
+ * @param start_y Value of starting point of ray's Y axis
+*/
 void	define_value_dda_y(t_dda *dda, double start_y)
 {
 	if (dda->dir_y != 0)
@@ -77,6 +83,12 @@ void	define_value_dda_y(t_dda *dda, double start_y)
 	}
 }
 
+/**
+ * Norm child of dda()
+ * @param dda dda struct
+ * @param start_y Value of starting point of ray's Y axis
+ * @param start_x Value of starting point of ray's X axis
+*/
 void	define_value_dda_x(t_dda *dda, double start_x, double start_y)
 {
 	if (dda->dir_x != 0)
