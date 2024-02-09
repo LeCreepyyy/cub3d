@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:17:47 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/02/09 13:59:02 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/09 14:16:22 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,14 @@ uint32_t	code_pixel(mlx_image_t *img, int pixel_x, int pixel_y)
  * @param pixel_y Y position of the pixel to draw (texture position)
  * @return Good pixel for mlx_put_pixel.
 */
-uint32_t	get_pixel_to_draw(mlx_image_t *img, t_dda *dda,
-	int orient, int pixel_y)
+uint32_t	get_pixel_to_draw(mlx_image_t *img, t_dda *dda, int pixel_y)
 {
 	double	vecteur_x;
 	int		line_x;
 	int		line_y;
 	int		line_height;
 
-	if (orient == 1)
+	if (dda->side == 1)
 		vecteur_x = dda->collision_point[0] - (int)dda->collision_point[0];
 	else
 		vecteur_x = dda->collision_point[1] - (int)dda->collision_point[1];
@@ -116,22 +115,22 @@ void	draw_wall2(t_data *data, t_dda *dda, int pixel_x, int pixel_y)
 	{
 		if (dda->dir_x > 0)
 			mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y,
-				get_pixel_to_draw(data->imgs.wall_east, dda, 2,
+				get_pixel_to_draw(data->imgs.wall_east, dda,
 					pixel_y - wall_start));
 		else
 			mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y,
-				get_pixel_to_draw(data->imgs.wall_west, dda, 2,
+				get_pixel_to_draw(data->imgs.wall_west, dda,
 					pixel_y - wall_start));
 	}
 	else
 	{
 		if (dda->dir_y > 0)
 			mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y,
-				get_pixel_to_draw(data->imgs.wall_south, dda, 1,
+				get_pixel_to_draw(data->imgs.wall_south, dda,
 					pixel_y - wall_start));
 		else
 			mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y,
-				get_pixel_to_draw(data->imgs.wall_north, dda, 1,
+				get_pixel_to_draw(data->imgs.wall_north, dda,
 					pixel_y - wall_start));
 	}
 }

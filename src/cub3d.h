@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/09 13:54:21 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/09 14:16:36 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,8 +182,7 @@ void		action_flashlight(t_data *data, int code);
 // graphics.c	UNFINISHED
 uint32_t	stack_pixel(struct s_rgba *color, uint8_t *stack);
 uint32_t	code_pixel(mlx_image_t *img, int pixel_x, int pixel_y);
-uint32_t	get_pixel_to_draw(mlx_image_t *img, t_dda *dda,
-				int orient, int pixel_y);
+uint32_t	get_pixel_to_draw(mlx_image_t *img, t_dda *dda, int pixel_y);
 void		draw_wall(t_data *data, t_dda *dda, int pixel_x);
 void		draw_wall2(t_data *data, t_dda *dda, int pixel_x, int pixel_y);
 
