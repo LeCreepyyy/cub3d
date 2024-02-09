@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:17:47 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/02/08 14:09:22 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/02/09 12:33:01 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ uint32_t	get_pixel_to_draw(mlx_image_t *img, t_dda *dda, int orient, int pixel_y
 {
 	double	vecteur_x;
 
+	printf("%d\n", pixel_y);
 	if (orient == 1)
 		vecteur_x = dda->collision_point[0] - (int)dda->collision_point[0];
 	else
@@ -48,7 +49,7 @@ uint32_t	get_pixel_to_draw(mlx_image_t *img, t_dda *dda, int orient, int pixel_y
 	int		ligne_x = (int)round(img->width * vecteur_x);
 	int		line_height = (int)(HEIGHT) / dda->wall_dist;
 	int		ligne_y = img->height * pixel_y / line_height;
-	return (code_pixel(img, ligne_x, ligne_y));
+	return (code_pixel(img, ligne_y, ligne_x));
 }
 
 void	draw_img(t_data *data)
@@ -67,7 +68,7 @@ void	draw_img(t_data *data)
 		int delta_height = data->imgs.wall_west_texture->height;
 		while (delta_height)
 		{
-			mlx_put_pixel(data->imgs.graph, y, x, code_pixel(data->imgs.wall_north, x - bx, y - by));
+			mlx_put_pixel(data->imgs.graph, y, x, code_pixel(data->imgs.wall_north, y - by, x - bx));
 			i++;
 			y++;
 			delta_height--;
@@ -105,19 +106,18 @@ void	draw_wall(t_data *data, t_dda *dda, int pixel_x)
 		if (dda->side == 0)
 		{
 			if (dda->dir_x > 0)
-				mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, get_pixel_to_draw(data->imgs.wall_west, dda, 2, pixel_y));
+				mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, get_pixel_to_draw(data->imgs.wall_west, dda, 2, pixel_y - wall_start));
 			else
-				mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, get_pixel_to_draw(data->imgs.wall_east, dda, 2, pixel_y));
+				mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, get_pixel_to_draw(data->imgs.wall_east, dda, 2, pixel_y - wall_start));
 		}
 		else
 		{
 			if (dda->dir_y > 0)
-				mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, get_pixel_to_draw(data->imgs.wall_south, dda, 1, pixel_y));
+				mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, get_pixel_to_draw(data->imgs.wall_south, dda, 1, pixel_y - wall_start));
 			else
-				mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, get_pixel_to_draw(data->imgs.wall_north, dda, 1, pixel_y));
+				mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, get_pixel_to_draw(data->imgs.wall_north, dda, 1, pixel_y - wall_start));
 		}
 	}
 	while (++pixel_y < HEIGHT)
 		mlx_put_pixel(data->imgs.graph, pixel_x, pixel_y, stack_pixel(&data->colors.floor, NULL));
-	//draw_img(data);
 }
