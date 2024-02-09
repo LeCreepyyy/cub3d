@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:17:47 by bgaertne          #+#    #+#             */
-/*   Updated: 2024/02/09 12:33:01 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/02/09 12:42:33 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ uint32_t	get_pixel_to_draw(mlx_image_t *img, t_dda *dda, int orient, int pixel_y
 {
 	double	vecteur_x;
 
-	printf("%d\n", pixel_y);
 	if (orient == 1)
 		vecteur_x = dda->collision_point[0] - (int)dda->collision_point[0];
 	else
@@ -93,8 +92,6 @@ void	draw_wall(t_data *data, t_dda *dda, int pixel_x)
 
 	line_height = (int)(HEIGHT / dda->wall_dist);
 	wall_start = (-line_height + HEIGHT) / 2;
-	if (wall_start < 0)
-		wall_start = 0;
 	wall_end = (line_height + HEIGHT) / 2;
 	if (wall_end >= HEIGHT)
 		wall_end = HEIGHT - 1;
