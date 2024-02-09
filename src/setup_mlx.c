@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:59:32 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/08 10:54:04 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:24:06 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,6 @@ void	setup_imgs(t_data *data)
  */
 void	setup_imgs2(t_data *data)
 {
-	data->imgs.ceiling = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT / 2);
-	px_memset(data->imgs.ceiling->pixels, data->colors.ceilling,
-		WIDTH * (HEIGHT / 2) * sizeof(int));
-	data->imgs.floor = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT / 2);
-	px_memset(data->imgs.floor->pixels, data->colors.floor,
-		WIDTH * (HEIGHT / 2) * sizeof(int));
 	data->imgs.graph = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 	data->imgs.mp_wall = mlx_new_image(data->mlx_ptr, MP_WALL, MP_WALL);
 	px_memset(data->imgs.mp_wall->pixels, data->colors.dark_blue,
@@ -105,11 +99,7 @@ void	setup_mlx(t_data *data)
 	mlx_set_window_pos(data->mlx_ptr, 200, 20);
 	init_colors_cf(data);
 	setup_imgs(data);
-	mlx_image_to_window(data->mlx_ptr, data->imgs.ceiling, 0, 0);
-	mlx_image_to_window(data->mlx_ptr, data->imgs.floor, 0, 512);
 	mlx_image_to_window(data->mlx_ptr, data->imgs.black, 0, -100);
-	mlx_set_instance_depth(&data->imgs.ceiling->instances[0], 0);
-	mlx_set_instance_depth(&data->imgs.floor->instances[0], 0);
 	mlx_set_instance_depth(&data->imgs.black->instances[0], -1);
 	minimap(data);
 	mlx_image_to_window(data->mlx_ptr, data->imgs.flash, 400, 600);

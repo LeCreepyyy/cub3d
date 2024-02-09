@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:00:10 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/06 13:47:40 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:24:05 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ void	init_data(t_data *data)
 	data->imgs.wall_south = NULL;
 	data->imgs.wall_east = NULL;
 	data->imgs.wall_west = NULL;
-	data->imgs.floor = NULL;
 	data->imgs.mp_wc = 0;
-	data->imgs.ceiling = NULL;
 	data->imgs.mp_player = NULL;
 	data->imgs.mp_wall = NULL;
 	data->imgs.mpfc = 0;

@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/08 10:52:19 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:24:24 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,6 @@ struct s_img
 	mlx_texture_t	*wall_west_texture;
 	mlx_image_t		*wall_west;
 	int				wall_resolution;
-	mlx_image_t		*floor;
-	mlx_image_t		*ceiling;
 	mlx_image_t		*mp_player;
 	mlx_image_t		*mp_wall;
 	int				mp_wc;
