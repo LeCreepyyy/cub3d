@@ -3,16 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dda.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 12:34:40 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/06 14:05:34 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/09 13:39:12 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// ne pas malloc collision_point
+/**
+ * Norm child of dda
+*/
+void	norm_dda(t_dda *dda)
+{
+	dda->side_dist_x += dda->delta_dist_x;
+	dda->ray_x += dda->step_x;
+	dda->side = 0;
+}
+
+/**
+ * @param start_x Value of starting point of ray's X axis
+ * @param start_y Value of starting point of ray's Y axis
+ * 
+ * Set all of this ray's data, in dda struct
+ * 
+ * @return Array of double, containing X and Y value of ending point
+*/
 double	*dda(t_data *data, double start_x, double start_y, t_dda *dda)
 {
 	dda->collision_point = malloc(2 * sizeof(double));
@@ -22,11 +39,7 @@ double	*dda(t_data *data, double start_x, double start_y, t_dda *dda)
 	while (1)
 	{
 		if (dda->side_dist_x < dda->side_dist_y)
-		{
-			dda->side_dist_x += dda->delta_dist_x;
-			dda->ray_x += dda->step_x;
-			dda->side = 0;
-		}
+			norm_dda(dda);
 		else
 		{
 			dda->side_dist_y += dda->delta_dist_y;
