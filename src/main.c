@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:00:10 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/09 12:24:05 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/12 11:18:30 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,29 @@ int	main(int argc, char **argv)
 		ft_exit("Missing player info", EXIT_FAILURE);
 	setup_mlx(&data);
 	ft_exit(NULL, EXIT_SUCCESS);
+}
+
+int	is_different(char c, char *charlist)
+{
+	int	i;
+
+	i = -1;
+	while (charlist[++i])
+		if (charlist[i] == c)
+			return (0);
+	return (1);
+}
+
+int	check_forbidden_char(char *input, char *excludes)
+{
+	int	i;
+
+	i = 0;
+	while (input[i])
+	{
+		if (is_different(input[i], excludes))
+			return (1);
+		i++;
+	}
+	return (0);
 }

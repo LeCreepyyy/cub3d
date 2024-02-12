@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:01:31 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/09 14:34:10 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/12 11:27:42 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include "../TheLibft/ft_printf/ft_printf.h"
 # include "../TheLibft/get_next_line/get_next_line.h"
 
-# define MP_PLAYER 5
-# define MP_WALL 20
+# define MP_PLAYER 2
+# define MP_WALL 10
 
 # define WIDTH 1680
 # define HEIGHT 1024
@@ -129,6 +129,8 @@ typedef struct s_data
 void		init_data(t_data *data);
 void		ft_exit(char *err, int code);
 int			main(int argc, char **argv);
+int			is_different(char c, char *charlist);
+int			check_forbidden_char(char *input, char *excludes);
 
 // tab_utils.c
 char		*get_texture(char c, t_data *data);

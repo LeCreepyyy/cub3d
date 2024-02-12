@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:13:15 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/12 11:01:48 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/02/12 11:20:28 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,9 @@ void	checkrgb(char *line)
 	rgb = ft_split(&line[i], ',');
 	i = -1;
 	while (rgb[++i] != NULL)
-		if (ft_strlen(rgb[i]) > 3 || !ft_strncmp(rgb[i], "\n", 1)
+		if ((ft_strlen(rgb[i]) > 3 || !ft_strncmp(rgb[i], "\n", 1)
 			|| ft_atoi(rgb[i]) < 0 || ft_atoi(rgb[i]) > 255)
+			&& check_forbidden_char(rgb[i], "0123456789\n"))
 			ft_exit("RGB false", EXIT_FAILURE);
 	free_tab(rgb);
 }
