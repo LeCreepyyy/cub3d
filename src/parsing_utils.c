@@ -6,7 +6,7 @@
 /*   By: bgaertne <bgaertne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 11:20:42 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/06 15:58:55 by bgaertne         ###   ########.fr       */
+/*   Updated: 2024/02/12 12:40:47 by bgaertne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,11 @@ void	store_map(char **ftab, int y, t_data *data)
 	data->map_flat = ft_calloc(sizeof(char *), w + 1);
 	w = -1;
 	while (ftab[y])
+	{
+		if (ftab[y][ft_strlen(ftab[y]) - 2] != '1')
+			ft_exit("File content invalid", EXIT_FAILURE);
 		data->map_flat[++w] = ft_strdup(ftab[y++]);
+	}
 }
 
 /**
