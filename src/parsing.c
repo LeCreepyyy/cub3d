@@ -6,7 +6,7 @@
 /*   By: vpoirot <vpoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:13:15 by vpoirot           #+#    #+#             */
-/*   Updated: 2024/02/12 10:58:41 by vpoirot          ###   ########.fr       */
+/*   Updated: 2024/02/12 11:01:48 by vpoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ void	checkrgb(char *line)
 	rgb = ft_split(&line[i], ',');
 	i = -1;
 	while (rgb[++i] != NULL)
-		if (!ft_strncmp(rgb[i], "\n", 1) ||
-			ft_atoi(rgb[i]) < 0 || ft_atoi(rgb[i]) > 255)
+		if (ft_strlen(rgb[i]) > 3 || !ft_strncmp(rgb[i], "\n", 1)
+			|| ft_atoi(rgb[i]) < 0 || ft_atoi(rgb[i]) > 255)
 			ft_exit("RGB false", EXIT_FAILURE);
 	free_tab(rgb);
 }
